@@ -6,35 +6,42 @@
 </script>
 
 <div
-	class="fixed top-0 left-0 flex h-screen w-16 flex-col
-bg-white shadow-lg dark:bg-black"
+	class="flex h-screen flex-col bg-white
+px-2 shadow-lg dark:bg-black"
 >
-	<SidebarIcon>
-		<svelte:fragment slot="icon">
-			<img class="rounded-xl" src="./pfp.jfif" alt="Profile Avatar ID" /></svelte:fragment
-		>
-		<svelte:fragment slot="text">YOU</svelte:fragment>
-	</SidebarIcon>
-
+	<a href="/app">
+		<SidebarIcon>
+			<svelte:fragment slot="icon">
+				<img class="rounded-xl" src="./pfp.jfif" alt="Profile Avatar ID" /></svelte:fragment
+			>
+			<svelte:fragment slot="text">YOU</svelte:fragment>
+		</SidebarIcon>
+	</a>
 	<Divider />
 
-	<SidebarIcon>
-		<svelte:fragment slot="icon">S</svelte:fragment>
-	</SidebarIcon>
+	<a href="/chat?id=100">
+		<SidebarIcon>
+			<svelte:fragment slot="icon">S</svelte:fragment>
+			<svelte:fragment slot="text">S</svelte:fragment>
+		</SidebarIcon>
+	</a>
 	<SidebarIcon>
 		<svelte:fragment slot="icon">
 			<Fa icon={faPlus} size="32" /></svelte:fragment
 		>
+		<svelte:fragment slot="text">ADD SERVER</svelte:fragment>
 	</SidebarIcon>
 
 	<SidebarIcon>
 		<svelte:fragment slot="icon">
 			<Fa icon={faBoltLightning} size="20" /></svelte:fragment
 		>
+		<svelte:fragment slot="text">DONATE</svelte:fragment>
 	</SidebarIcon>
 	<SidebarIcon>
 		<svelte:fragment slot="icon">
 			<Fa icon={faCompass} size="28" /></svelte:fragment
 		>
+		<svelte:fragment slot="text">ANNOUNCE</svelte:fragment>
 	</SidebarIcon>
 </div>
