@@ -1,7 +1,7 @@
 <script>
 	import SuperChat from '$lib/SuperChat.svelte';
 	import ContentContainer from '$lib/ContentContainer.svelte';
-	import { faContactCard, faList, faPerson, faPersonCircleCheck } from '@fortawesome/free-solid-svg-icons';
+	import { faContactCard, faList } from '@fortawesome/free-solid-svg-icons';
     import Channelbar from '$lib/Channelbar.svelte';
 	import ChannelTemplate from '$lib/ChannelTemplate.svelte';
 

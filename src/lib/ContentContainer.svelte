@@ -1,9 +1,9 @@
 <script>
-	import Locator from '$lib/Locator.svelte';
+	import TipContainer from '$lib/TipContainer.svelte';
 	import TopNav from './TopNav.svelte';
 
 	// Dependencies
-	import { faHome } from '@fortawesome/free-solid-svg-icons';
+	import { faHome, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 	export let icon = faHome;
 	export let title = 'Home';
 </script>
@@ -16,26 +16,16 @@
 		class="content flex h-screen flex-wrap items-center justify-center text-center dark:bg-black dark:text-white"
 	>
 		<slot name="content">
-			<div class="basis-full text-center text-8xl font-bold text-white">Welcome to IRIS</div>
-			<div class="tips-divider flex w-full flex-wrap rounded bg-gray-900">
-				<Locator icon={faHome}>
-					<svelte:fragment slot="header-text">Home</svelte:fragment>
-				</Locator>
-				<Locator icon={faHome}>
-					<svelte:fragment slot="header-text">Home</svelte:fragment>
-				</Locator>
-				<Locator icon={faHome}>
-					<svelte:fragment slot="header-text">Home</svelte:fragment>
-				</Locator>
-				<Locator icon={faHome}>
-					<svelte:fragment slot="header-text">Home</svelte:fragment>
-				</Locator>
-				<Locator icon={faHome}>
-					<svelte:fragment slot="header-text">Home</svelte:fragment>
-				</Locator>
-				<Locator icon={faHome}>
-					<svelte:fragment slot="header-text">Home</svelte:fragment>
-				</Locator>
+			<div class="basis-full text-center text-8xl font-base text-white">
+				Welcome to <div class="font-semibold">IRIS</div>
+			</div>
+			<div class="tips-divider flex w-full flex-wrap rounded bg-red-200">
+				<TipContainer icon={faPlusCircle}>
+					<svelte:fragment slot="title">Create a server</svelte:fragment>
+					<svelte:fragment slot="description"
+						>Create a server to interact with your friends!</svelte:fragment
+					>
+				</TipContainer>
 			</div>
 			<a href="#" class="basis-full" style="color: #f2616c">Turn off homescreen effects</a>
 		</slot>
