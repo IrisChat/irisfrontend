@@ -205,9 +205,12 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-	background-color: transparent;
+	background-color: #2b2b2b;
+	border-left: 1px solid #3e3e3e;
+	width: 0.65rem;
 }
 
 ::-webkit-scrollbar-thumb {
-	@apply bg-gray-500 dark:bg-green-400;
+	background: #6b6b6b;
+	border-radius: 10px;
 }

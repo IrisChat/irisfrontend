@@ -8,7 +8,7 @@
 	// Icons
 	
 	
-	import Fa from 'svelte-fa';
+	// import Fa from 'svelte-fa';
 
 	import { faHome, faAddressCard, faNoteSticky, faPlus } from '@fortawesome/free-solid-svg-icons';
 </script>
