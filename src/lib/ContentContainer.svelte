@@ -3,16 +3,16 @@
 	import TopNav from './TopNav.svelte';
 
 	// Dependencies
-	import { faHome, faAddressCard, faNoteSticky, faPlus } from '@fortawesome/free-solid-svg-icons';
+	import { faHome } from '@fortawesome/free-solid-svg-icons';
 </script>
 
 <div class="content-container">
 	<TopNav />
 	<div
-		class="content flex flex-wrap justify-center items-center text-center h-screen dark:bg-black"
+		class="content flex h-screen flex-wrap items-center justify-center text-center dark:bg-black"
 	>
-		<div class="text-8xl font-bold text-white text-center basis-full">Welcome to IRIS</div>
-		<div class="tips-divider flex flex-wrap rounded bg-gray-900 w-full">
+		<div class="basis-full text-center text-8xl font-bold text-white">Welcome to IRIS</div>
+		<div class="tips-divider flex w-full flex-wrap rounded bg-gray-900">
 			<Locator icon={faHome}>
 				<svelte:fragment slot="header-text">Home</svelte:fragment>
 			</Locator>

@@ -6,8 +6,8 @@
 </script>
 
 <div
-	class="fixed top-0 left-0 h-screen w-16 flex flex-col
-bg-white dark:bg-black shadow-lg"
+	class="fixed top-0 left-0 flex h-screen w-16 flex-col
+bg-white shadow-lg dark:bg-black"
 >
 	<SidebarIcon>
 		<svelte:fragment slot="icon">
@@ -15,13 +15,12 @@ bg-white dark:bg-black shadow-lg"
 		>
 		<svelte:fragment slot="text">YOU</svelte:fragment>
 	</SidebarIcon>
-	<SidebarIcon>
-		<svelte:fragment slot="icon">
-			<Fa icon={faCompass} size="28" /></svelte:fragment
-		>
-	</SidebarIcon>
 
 	<Divider />
+
+	<SidebarIcon>
+		<svelte:fragment slot="icon">S</svelte:fragment>
+	</SidebarIcon>
 	<SidebarIcon>
 		<svelte:fragment slot="icon">
 			<Fa icon={faPlus} size="32" /></svelte:fragment
@@ -31,6 +30,11 @@ bg-white dark:bg-black shadow-lg"
 	<SidebarIcon>
 		<svelte:fragment slot="icon">
 			<Fa icon={faBoltLightning} size="20" /></svelte:fragment
+		>
+	</SidebarIcon>
+	<SidebarIcon>
+		<svelte:fragment slot="icon">
+			<Fa icon={faCompass} size="28" /></svelte:fragment
 		>
 	</SidebarIcon>
 </div>
