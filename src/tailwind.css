@@ -1,6 +1,16 @@
 @import-normalize;
 @tailwind base;
 @tailwind components;
+@layer base {
+	:root {
+	  --color-primary: 0 0 0;
+	  --color-secondary: 45 130 183;
+	  --color-tertiary: 235 138 144;
+	  --color-option: 66 226 184;
+	  --color-text: 255 255 255;
+	}
+  }
+
 *,
 *::before,
 *::after {
@@ -144,7 +154,7 @@
 	}
 
 	.channel-bar {
-		@apply w-96 h-auto m-0 bg-gray-200 dark:bg-black
+		@apply w-96 h-auto m-0 bg-gray-200 dark:bg-primary
      overflow-hidden;
 	}
 

@@ -2,7 +2,7 @@
 	import Hero from '$lib/Hero.svelte';
 	setTimeout(() => {
 		// Some hack I guess
-		location.href = '/app';
+		location = '/app';
 	}, 800);
 </script>
 

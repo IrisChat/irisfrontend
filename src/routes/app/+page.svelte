@@ -2,14 +2,14 @@
 	import Sidebar from '$lib/Sidebar.svelte';
 	import Channelbar from '$lib/Channelbar.svelte';
 	import ChannelTemplate from '$lib/ChannelTemplate.svelte';
-	import ContentContainer from '$lib/ContentContainer.svelte';
+	import ContentContainer from '$lib/content/ContentContainer.svelte';
 	import Locator from '$lib/Locator.svelte';
 	import LocatorConversation from '$lib/Locator__Conversation.svelte';
 	// Icons
 
 	// import Fa from 'svelte-fa';
 
-	import { faHome, faAddressCard, faNoteSticky, faPlus } from '@fortawesome/free-solid-svg-icons';
+	import { faHome, faAddressCard, faNoteSticky, faPlus, faBoltLightning } from '@fortawesome/free-solid-svg-icons';
 </script>
 
 <main>
@@ -27,6 +27,9 @@
 						</Locator>
 						<Locator icon={faAddressCard}>
 							<svelte:fragment slot="header-text">Friends</svelte:fragment>
+						</Locator>
+						<Locator icon={faBoltLightning}>
+							<svelte:fragment slot="header-text">Donate</svelte:fragment>
 						</Locator>
 						<Locator icon={faNoteSticky}>
 							<svelte:fragment slot="header-text">Saved Notes</svelte:fragment>

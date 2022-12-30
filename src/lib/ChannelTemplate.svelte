@@ -1,6 +1,6 @@
 <div class="channel-container">
 	<div class="dropdown">
-		<div class="dropdown-header dark:text-gray-300">
+		<div class="dropdown-header dark:text-option">
             <slot name="dropDownContent">slot=dropDownContent</slot>
         </div>
 	</div>

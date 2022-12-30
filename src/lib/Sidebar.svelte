@@ -6,8 +6,8 @@
 </script>
 
 <div
-	class="flex h-screen flex-col bg-white
-px-2 shadow-lg dark:bg-black"
+	class="flex h-screen flex-col
+px-2 shadow-lg bg-opacity-100 dark:bg-primary"
 >
 	<a href="/app">
 		<SidebarIcon>

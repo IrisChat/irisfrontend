@@ -14,7 +14,7 @@
 	class="locator__conversations w-full flex flex-wrap py-3 px-2 rounded-md hover:bg-gray-700 hover:bg-opacity-40 hover:backdrop-blur-sm"
 >
 	<div class="runner flex w-full basis-full">
-		<h5 class="dropdown-header-text dark:text-white"><slot name="header-text">slot=header-text</slot></h5>
+		<h5 class="dropdown-header-text dark:text-text"><slot name="header-text">slot=header-text</slot></h5>
 		<div
 			class="iconHolder hover:bg-gray-700 hover:bg-opacity-50 hover:backdrop-blur-sm px-1 py-1 rounded-full my-auto ml-auto"
 		>
@@ -23,7 +23,7 @@
 	</div>
 	<div class="converations basis-full">
 		<slot name="conversations">
-			<div class="convo-title basis-full text-sm mb-4 dark:text-gray-300">
+			<div class="convo-title basis-full text-sm mb-4 dark:text-text opacity-35">
 				<slot name="title">This is where you contact your friends.</slot>
 			</div>
 			<Conversation>

@@ -1,6 +1,6 @@
-<div class="sidebar-icon group" style="color: #fd6671">
+<div class="sidebar-icon group text-tertiary">
    <slot name="icon">SLOTICON</slot>
-    <span class="sidebar-tooltip group-hover:scale-100 dark:text-gray-300">
+    <span class="sidebar-tooltip group-hover:scale-100 dark:text-text">
       <slot name="text">SLOTTEXT</slot>
     </span>
   </div>
