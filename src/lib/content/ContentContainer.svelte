@@ -18,7 +18,7 @@
 		<svelte:fragment slot="title-text">{title}</svelte:fragment>
 	</TopNav>
 	<div
-		class="content flex h-screen flex-wrap items-center justify-center text-center dark:bg-primary dark:text-white"
+		class="content flex h-screen flex-wrap items-center justify-center text-center dark:bg-primary dark:text-text"
 	>
 		<slot name="content">
 			<div class="font-base basis-full text-center text-8xl text-white">
