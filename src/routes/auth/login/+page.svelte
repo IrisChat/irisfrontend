@@ -40,6 +40,8 @@
 					});
 				}
 				toast.push('Welcome back!');
+				console.log(json);
+				localStorage.setItem('UID', json.id);
 				localStorage.setItem('token', json.token);
 				window.location.href = "/app";
 			})

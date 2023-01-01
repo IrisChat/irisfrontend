@@ -4,52 +4,101 @@
 	import Fa from 'svelte-fa';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	export let icon = faPlus;
-
 	// Dependencies
 
+	import 'node-localstorage/register';
+	const token = localStorage.getItem('token');
+	const UID = localStorage.getItem('UID');
+	import { host } from '$lib/js/config.json';
+	import { onMount } from 'svelte';
+	//@ts-ignore
+	let conversations = [];
+
 	import Conversation from './Conversation.svelte';
+	onMount(() => {
+		fetch(`${host}/api/v0/conversations/${UID}`, {
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token?.toString()}`
+			},
+			method: 'GET'
+		})
+			.then((res) => res.json())
+			.then(function (json) {
+				console.log(json);
+				// @ts-ignore
+
+				json.forEach((person) => {
+					fetch(`${host}/api/v0/user/${person}`, {
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json'
+						},
+						method: 'POST'
+					})
+						.then((res) => res.json())
+						.then(function (json) {
+							conversations.push(json);
+							conversations = conversations; // Reactivity trigger
+							console.log(conversations); // log out convos
+						})
+						.catch(function (res) {
+							console.log(res);
+						});
+				})();
+			})
+			.catch(function (res) {
+				console.log(res);
+			});
+	});
 </script>
 
 <div
-	class="locator__conversations w-full flex flex-wrap py-3 px-2 rounded-md hover:bg-gray-700 hover:bg-opacity-40 hover:backdrop-blur-sm"
+	class="locator__conversations flex w-full flex-wrap rounded-md py-3 px-2 hover:bg-gray-700 hover:bg-opacity-40 hover:backdrop-blur-sm"
 >
 	<div class="runner flex w-full basis-full">
-		<h5 class="dropdown-header-text dark:text-text"><slot name="header-text">slot=header-text</slot></h5>
+		<h5 class="dropdown-header-text dark:text-text">
+			<slot name="header-text">slot=header-text</slot>
+		</h5>
 		<div
-			class="iconHolder hover:bg-gray-700 hover:bg-opacity-50 hover:backdrop-blur-sm px-1 py-1 rounded-full my-auto ml-auto"
+			class="iconHolder my-auto ml-auto rounded-full px-1 py-1 hover:bg-gray-700 hover:bg-opacity-50 hover:backdrop-blur-sm"
 		>
 			<Fa {icon} size="18" />
 		</div>
 	</div>
 	<div class="converations basis-full">
 		<slot name="conversations">
-			<div class="convo-title basis-full text-sm mb-4 dark:text-text opacity-35">
+			<div class="convo-title opacity-35 mb-4 basis-full text-sm dark:text-text">
 				<slot name="title">This is where you contact your friends.</slot>
 			</div>
-			<Conversation>
-				<svelte:fragment slot="icon">
-					<div class="h-12 w-12 mt-2 mb-2 rounded-full bg-gray-700" />
-				</svelte:fragment>
-				<svelte:fragment slot="header-text"
-					><div class="bg-gray-700 h-8 w-48 rounded-full" /></svelte:fragment
+			{#each conversations as convo, i}
+				<div
+					class="wrap"
+					on:click={() => (window.location.href = `/chat?with=${convo.ID}`)}
+					on:keypress={() => (window.location.href = `/chat?with=${convo.ID}`)}
 				>
-			</Conversation>
-			<Conversation>
-				<svelte:fragment slot="icon">
-					<div class="h-12 w-12 mt-2 mb-2 rounded-full bg-gray-700" />
-				</svelte:fragment>
-				<svelte:fragment slot="header-text"
-					><div class="bg-gray-700 h-8 w-48 rounded-full" /></svelte:fragment
-				>
-			</Conversation>
-			<Conversation>
-				<svelte:fragment slot="icon">
-					<div class="h-12 w-12 mt-2 mb-2 rounded-full bg-gray-700" />
-				</svelte:fragment>
-				<svelte:fragment slot="header-text"
-					><div class="bg-gray-700 h-8 w-48 rounded-full" /></svelte:fragment
-				>
-			</Conversation>
+					<Conversation>
+						<svelte:fragment slot="icon">
+							<img
+								class="mt-2 mb-2 w-12 rounded-full bg-gray-700"
+								src={convo.avatar}
+								alt="Profile Avatar"
+							/>
+						</svelte:fragment>
+						<svelte:fragment slot="header-text"
+							>{convo.username}
+							<div class="aboutme text-sm font-light">
+								{#if convo.about.length > 60}
+									{(convo.about = convo.about.substring(0, 30) + '...')}
+								{:else}
+									{convo.about}
+								{/if}
+							</div></svelte:fragment
+						>
+					</Conversation>
+				</div>
+			{/each}
 		</slot>
 	</div>
 </div>

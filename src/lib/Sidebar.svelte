@@ -19,7 +19,7 @@ px-2 shadow-lg bg-opacity-100 dark:bg-primary"
 	</a>
 	<Divider />
 
-	<a href="/chat?id=100">
+	<a href="/room?id=100">
 		<SidebarIcon>
 			<svelte:fragment slot="icon">S</svelte:fragment>
 			<svelte:fragment slot="text">S</svelte:fragment>
