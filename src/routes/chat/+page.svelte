@@ -37,14 +37,14 @@
 			<svelte:fragment slot="title">Direct Messages</svelte:fragment>
 			<svelte:fragment slot="channels"><MainChannel /></svelte:fragment>
 		</Channelbar>
-		<ContentContainer title={person.username || "Unknown User"} icon={faMessage}>
+		<ContentContainer title={person.username || 'Loading'} icon={faMessage}>
 			<div slot="content" class="h-full w-full">
-			<div class="chat-container">
-			<div class="message-list">
-			
-			</div>
-			</div>
-				<div class="chat-form fixed bottom-0 flex w-full items-center border-t border-white bg-primary pl-2">
+				<div class="chat-container">
+					<div class="message-list h-full" />
+				</div>
+				<div
+					class="chat-form flex w-full items-center border-t border-white bg-primary pl-2"
+				>
 					<Fa icon={faPaperclip} class="mx-4 w-12" />
 					<input
 						type="text"
