@@ -12,6 +12,7 @@
 	let person = $page.url.searchParams.get('with');
 
 	onMount(() => {
+	// Fetch user
 		fetch(`${host}/api/v0/user/${person}`, {
 			headers: {
 				Accept: 'application/json',
@@ -30,6 +31,7 @@
 			.then(function (json) {
 				person = json;
 				person = person;
+				init(); // Initialize client
 			})
 			.catch(function (res) {
 				console.log(res);
