@@ -1,16 +1,16 @@
 <script>
 	import Fa from 'svelte-fa';
 	import { faHome } from '@fortawesome/free-solid-svg-icons';
-	export let icon = faHome
+	export let icon = faHome;
 </script>
 
 <div
-	class="top-navigation flex flex-row items-center dark:bg-primary bg-opacity-60 w-full h-16 m-0 shadow-lg"
+	class="top-navigation m-0 flex h-16 w-full flex-row items-center bg-opacity-60 text-text shadow-lg"
 >
-<div class="titlebar flex w-full px-4">
-	<Fa icon={icon} size="18" class="text-gray-200 mt-1" />
-	<h5 class="title-text text-gray-300">
-	<slot name="title-text">Home</slot>
-	</h5>
-</div>
+	<div class="titlebar flex w-full px-4">
+		<Fa {icon} size="18" class=" mt-1" />
+		<h5 class="title-text">
+			<slot name="title-text">Home</slot>
+		</h5>
+	</div>
 </div>

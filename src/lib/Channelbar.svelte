@@ -4,9 +4,9 @@
 	import { faChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
 </script>
 
-<div class="channel-bar h-full flex-wrap shadow-lg">
+<div class="channel-bar h-full flex-wrap">
 	<!-- ChannelBlock -->
-	<div class="channel-block dark:bg-primary backdrop-opacity-60 shadow-lg">
+	<div class="channel-block backdrop-opacity-60 shadow-lg">
 		<h5 class="channel-block-text font-medium dark:text-text">
 			<slot name="title">slot=title</slot>
 		</h5>

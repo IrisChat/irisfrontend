@@ -19,7 +19,14 @@
 			},
 			method: 'POST'
 		})
-			.then((res) => res.json())
+			.then((res) => {
+				if (res.status != 200) {
+					console.log('Shit happened. Going back...');
+					history.back();
+				}
+
+				return res.json();
+			})
 			.then(function (json) {
 				person = json;
 				person = person;
@@ -42,9 +49,7 @@
 				<div class="chat-container">
 					<div class="message-list h-full" />
 				</div>
-				<div
-					class="chat-form flex w-full items-center border-t border-white bg-primary pl-2"
-				>
+				<div class="chat-form flex w-full items-center border-t border-white bg-primary pl-2">
 					<Fa icon={faPaperclip} class="mx-4 w-12" />
 					<input
 						type="text"

@@ -18,10 +18,11 @@
 		<svelte:fragment slot="title-text">{title}</svelte:fragment>
 	</TopNav>
 	<div
-		class="content flex h-full flex-wrap items-center justify-center text-center dark:bg-primary dark:text-text"
+		class="content flex h-screen flex-wrap items-center justify-center text-center dark:text-text"
+		style="background: url('./pattern-dark.svg');"
 	>
 		<slot name="content">
-			<div class="font-base basis-full text-center text-8xl text-white">
+			<div class="font-base basis-full text-center text-8xl text-text">
 				Welcome to <div class="font-semibold">IRIS</div>
 			</div>
 			<div class="tips-divider flex w-fit flex-wrap items-center justify-center">
