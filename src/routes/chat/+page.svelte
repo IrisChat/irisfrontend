@@ -31,8 +31,7 @@
 	let msgBox;
 	// @ts-ignore
 	let ws;
-
-	let person = $page.url.searchParams.get('with');
+	let person = $page.url.searchParams.get('with') || {};
 	let messages = [];
 	function showMessage(msg) {
 		messages.push(JSON.parse(msg));
@@ -71,6 +70,7 @@
 			const Message = new msgFMT(1, msgBox.value);
 			ws.send(JSON.stringify(Message));
 			// @ts-ignore
+			Message.IAM = true;
 			showMessage(JSON.stringify(Message));
 			// @ts-ignore
 			msgBox.value = null;
@@ -113,6 +113,7 @@
 			<svelte:fragment slot="title">Direct Messages</svelte:fragment>
 			<svelte:fragment slot="channels"><MainChannel /></svelte:fragment>
 		</Channelbar>
+
 		<ContentContainer title={person.username || 'Loading'} icon={faMessage}>
 			<div slot="content" class="h-full w-full">
 				<div class="chat-container">
@@ -120,8 +121,10 @@
 						{#each messages as message}
 							{#if message.type === 0}
 								<ServerMessage>{message.content}</ServerMessage>
+							{:else if message.IAM}
+								<UserMessage icon={person.avatar} floatLeft={true}>{message.content}</UserMessage>
 							{:else}
-								<UserMessage>{message.content}</UserMessage>
+								<UserMessage icon={person.avatar} floatLeft={false}>{message.content}</UserMessage>
 							{/if}
 						{/each}
 

@@ -1,11 +1,36 @@
-<div class="server-message flex flex-wrap items-center justify-center">
-	<div
-		class="smsg-content mx-2 my-2 max-w-md rounded bg-green-900 bg-opacity-60 px-4 py-2 font-medium text-text text-text"
-	>
-		<div class="flex-1">
-			<div class="whitespace-pre-wrap break-words">
-				<slot />
+<script>
+	export let floatLeft = false;
+	export let icon = '';
+</script>
+
+{#if floatLeft}
+	<div class="user-message flex flex-wrap items-center justify-start">
+		<div class="icon-wrap">
+			<img src={icon} class="w-10 rounded-full" alt="Avatar" />
+		</div>
+		<div class="whitespace-pre-wrap break-words">
+			<div
+				class="umsg-content mx-2 my-2 max-w-md rounded bg-option bg-opacity-60 px-4 py-2 font-medium text-primary"
+			>
+				<div class="flex flex-1">
+					<slot />
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+{:else}
+	<div class="user-message flex flex-wrap items-center justify-start">
+		<div class="whitespace-pre-wrap break-words">
+			<div
+				class="umsg-content mx-2 my-2 max-w-md rounded bg-tertiary bg-opacity-60 px-4 py-2 font-medium text-primary"
+			>
+				<div class="flex flex-1">
+					<slot />
+				</div>
+			</div>
+		</div>
+		<div class="icon-wrap">
+			<img src={icon} class="w-10 rounded-full" alt="Avatar" />
+		</div>
+	</div>
+{/if}

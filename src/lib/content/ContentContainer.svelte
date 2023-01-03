@@ -9,8 +9,19 @@
 		faPlusCircle,
 		faBoltLightning
 	} from '@fortawesome/free-solid-svg-icons';
+	import { onMount } from 'svelte';
 	export let icon = faHome;
 	export let title = 'Home';
+
+	// Read storage
+	import 'node-localstorage/register';
+	// Skip server compilation
+	onMount(() => {
+		if (localStorage.getItem('token') == null) {
+			console.log('Shit happened. Redirecting to login...');
+			window.location.href = '/auth';
+		}
+	});
 </script>
 
 <div class="content-container">
