@@ -5,7 +5,7 @@
 	import MainChannel from '$lib/Channels/MainChannel.svelte';
 	import { faMessage, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
-	import { http_host, ws_host } from '$lib/js/config.json';
+	import { http_host, ws_host, API_BASE } from '$lib/js/config.json';
 	import { page } from '$app/stores';
 	import Fa from 'svelte-fa';
 
@@ -79,7 +79,7 @@
 
 	onMount(() => {
 		// Fetch user
-		fetch(`${http_host}/api/v0/user/${person}`, {
+		fetch(`${http_host}${API_BASE}user/${person}`, {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
@@ -109,15 +109,19 @@
 <main>
 	<div class="flex">
 		<Sidebar />
+
 		<Channelbar>
 			<svelte:fragment slot="title">Direct Messages</svelte:fragment>
 			<svelte:fragment slot="channels"><MainChannel /></svelte:fragment>
 		</Channelbar>
 
 		<ContentContainer title={person.username || 'Loading'} icon={faMessage}>
-			<div slot="content" class="h-full w-full">
-				<div class="chat-container">
-					<div class="message-list h-full" style="overflow: overlay; height: 100% ;max-height: 87vh">
+			<div slot="content" class="h-screen w-full">
+				<div class="chat-container h-4/5">
+					<div
+						class="message-list h-full"
+						style="overflow: overlay; height: 100%; max-height: 87vh;"
+					>
 						{#each messages as message}
 							{#if message.type === 0}
 								<ServerMessage>{message.content}</ServerMessage>
@@ -127,11 +131,11 @@
 								<UserMessage icon={person.avatar} floatLeft={false}>{message.content}</UserMessage>
 							{/if}
 						{/each}
-
-						<!-- {messages} -->
 					</div>
 				</div>
-				<div class="chat-form flex w-full items-center border-t border-white bg-primary pl-2">
+				<div
+					class="chat-form relative bottom-0 flex w-full items-center border-t border-white bg-primary pl-2"
+				>
 					<Fa icon={faPaperclip} class="mx-4 w-12" />
 					<input
 						bind:this={msgBox}

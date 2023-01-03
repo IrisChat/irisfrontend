@@ -9,14 +9,14 @@
 	import 'node-localstorage/register';
 	const token = localStorage.getItem('token');
 	const UID = localStorage.getItem('UID');
-	import { http_host } from '$lib/js/config.json';
+	import { http_host ,API_BASE } from '$lib/js/config.json';
 	import { onMount } from 'svelte';
 	//@ts-ignore
 	let conversations = [];
 
 	import Conversation from './Conversation.svelte';
 	onMount(() => {
-		fetch(`${http_host}/api/v0/conversations/${UID}`, {
+		fetch(`${http_host}${API_BASE}conversations/${UID}`, {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
