@@ -12,6 +12,7 @@
 	// Read storage
 	import 'node-localstorage/register';
 	import ServerMessage from '$lib/content/ServerMessage.svelte';
+	import UserMessage from '$lib/content/UserMessage.svelte';
 	const token = localStorage.getItem('token');
 	const UID = localStorage.getItem('UID');
 
@@ -120,7 +121,7 @@
 							{#if message.type === 0}
 								<ServerMessage>{message.content}</ServerMessage>
 							{:else}
-								<ServerMessage>{message.content}</ServerMessage>
+								<UserMessage>{message.content}</UserMessage>
 							{/if}
 						{/each}
 
