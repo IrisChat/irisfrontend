@@ -117,7 +117,7 @@
 		<ContentContainer title={person.username || 'Loading'} icon={faMessage}>
 			<div slot="content" class="h-full w-full">
 				<div class="chat-container">
-					<div class="message-list h-full">
+					<div class="message-list h-full" style="overflow: overlay; height: 100% ;max-height: 87vh">
 						{#each messages as message}
 							{#if message.type === 0}
 								<ServerMessage>{message.content}</ServerMessage>
@@ -145,3 +145,9 @@
 		</ContentContainer>
 	</div>
 </main>
+
+<style>
+	:global(body) {
+		overflow: hidden;
+	}
+</style>
