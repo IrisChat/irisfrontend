@@ -9,14 +9,14 @@
 	import 'node-localstorage/register';
 	const token = localStorage.getItem('token');
 	const UID = localStorage.getItem('UID');
-	import { host } from '$lib/js/config.json';
+	import { http_host } from '$lib/js/config.json';
 	import { onMount } from 'svelte';
 	//@ts-ignore
 	let conversations = [];
 
 	import Conversation from './Conversation.svelte';
 	onMount(() => {
-		fetch(`${host}/api/v0/conversations/${UID}`, {
+		fetch(`${http_host}/api/v0/conversations/${UID}`, {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
@@ -27,26 +27,8 @@
 			.then((res) => res.json())
 			.then(function (json) {
 				console.log(json);
-				// @ts-ignore
-
-				json.forEach((person) => {
-					fetch(`${host}/api/v0/user/${person}`, {
-						headers: {
-							Accept: 'application/json',
-							'Content-Type': 'application/json'
-						},
-						method: 'POST'
-					})
-						.then((res) => res.json())
-						.then(function (json) {
-							conversations.push(json);
-							conversations = conversations; // Reactivity trigger
-							console.log(conversations); // log out convos
-						})
-						.catch(function (res) {
-							console.log(res);
-						});
-				})();
+				conversations = json;
+				conversations = conversations; // Reactivity trigger
 			})
 			.catch(function (res) {
 				console.log(res);

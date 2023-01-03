@@ -1,5 +1,5 @@
 <script>
-	import { host } from '$lib/js/config.json';
+	import { http_host } from '$lib/js/config.json';
 	import { toast } from '@zerodevx/svelte-toast';
 
 	let payload = {
@@ -21,7 +21,7 @@
 	};
 
 	function Login() {
-		fetch(`${host}/api/v0/auth/login`, {
+		fetch(`${http_host}/api/v0/auth/login`, {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'

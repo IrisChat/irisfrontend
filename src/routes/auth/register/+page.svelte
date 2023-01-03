@@ -1,5 +1,5 @@
 <script>
-	import { host } from '$lib/js/config.json';
+	import { http_host } from '$lib/js/config.json';
 	import { toast } from '@zerodevx/svelte-toast';
 
 	let payload = {
@@ -22,7 +22,7 @@
 	};
 
 	function Register() {
-		fetch(`${host}/api/v0/auth/register`, {
+		fetch(`${http_host}/api/v0/auth/register`, {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'

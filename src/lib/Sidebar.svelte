@@ -6,7 +6,7 @@
 	import { defaultAvatar } from '$lib/js/config.json';
 </script>
 
-<div class="sidebar shadow-lg h-screen">
+<div class="sidebar shadow-lg h-screen bg-opacity-75 z-50">
 	<div
 		class="icon-wrapper flex h-fit
 flex-col bg-opacity-100 px-2"
