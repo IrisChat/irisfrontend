@@ -7,14 +7,17 @@
 	import { onMount } from 'svelte';
 	import { http_host, ws_host, API_BASE } from '$lib/js/config.json';
 	import { page } from '$app/stores';
+	import { setUser } from '$lib/js/userData';
 	import Fa from 'svelte-fa';
 
 	// Read storage
 	import 'node-localstorage/register';
 	import ServerMessage from '$lib/content/ServerMessage.svelte';
 	import UserMessage from '$lib/content/UserMessage.svelte';
+	const userData = JSON.parse(localStorage.getItem('userData')) || {};
 	const token = localStorage.getItem('token');
 	const UID = localStorage.getItem('UID');
+	let messageList_UI;
 
 	class msgFMT {
 		// @ts-ignore
@@ -74,10 +77,22 @@
 			showMessage(JSON.stringify(Message));
 			// @ts-ignore
 			msgBox.value = null;
+			// Scroll down
+			messageList_UI.scroll(0, messageList_UI.scrollHeight); // Overflow a bit
+		}
+	}
+	// @ts-ignore
+	function createRID(sender, reciever) {
+		if (sender < reciever) {
+			return parseInt(`${sender}${reciever}`);
+		} else {
+			return parseInt(`${reciever}${sender}`);
 		}
 	}
 
 	onMount(() => {
+		// Set user
+		setUser(UID);
 		// Fetch user
 		fetch(`${http_host}${API_BASE}user/${person}`, {
 			headers: {
@@ -97,7 +112,9 @@
 			.then(function (json) {
 				person = json;
 				person = person;
-				ws = new WebSocket(ws_host); // Get websocket
+				// @ts-ignore
+				ws = new WebSocket(ws_host + `?RID=${person.ID}&guild=false`); // Get websocket and open a connection to a conversation_room.
+				// This is a conversation and not a guild so we hardcode guild as being false
 				init(ws); // Initialize client
 			})
 			.catch(function (res) {
@@ -108,7 +125,7 @@
 
 <main>
 	<div class="flex">
-		<Sidebar />
+		<Sidebar avatar={userData.avatar} />
 
 		<Channelbar>
 			<svelte:fragment slot="title">Direct Messages</svelte:fragment>
@@ -119,6 +136,7 @@
 			<div slot="content" class="h-screen w-full">
 				<div class="chat-container h-4/5">
 					<div
+						bind:this={messageList_UI}
 						class="message-list h-full"
 						style="overflow: overlay; height: 100%; max-height: 87vh;"
 					>

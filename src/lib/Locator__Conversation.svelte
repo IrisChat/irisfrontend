@@ -9,8 +9,9 @@
 	import 'node-localstorage/register';
 	const token = localStorage.getItem('token');
 	const UID = localStorage.getItem('UID');
-	import { http_host ,API_BASE } from '$lib/js/config.json';
+	import { http_host, API_BASE } from '$lib/js/config.json';
 	import { onMount } from 'svelte';
+	import { toast } from '@zerodevx/svelte-toast';
 	//@ts-ignore
 	let conversations = [];
 
@@ -24,6 +25,20 @@
 			},
 			method: 'GET'
 		})
+			.then((res) => {
+				if (res.status === 400) {
+					toast.push('You were signed out from another device. <br/>Redirecting to login screen.', {
+						dismissable: false,
+						theme: {
+							'--toastBarBackground': 'red'
+						}
+					});
+
+					setTimeout(() => {
+						window.location.href = '/auth';
+					}, 3250);
+				}
+			})
 			.then((res) => res.json())
 			.then(function (json) {
 				console.log(json);

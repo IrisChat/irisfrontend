@@ -3,6 +3,7 @@
 	import Divider from '$lib/Divider.svelte';
 	import Fa from 'svelte-fa';
 	import { faCompass, faPlus, faBoltLightning } from '@fortawesome/free-solid-svg-icons';
+	export let avatar = false;
 	import { defaultAvatar } from '$lib/js/config.json';
 </script>
 
@@ -14,7 +15,7 @@ flex-col bg-opacity-100 px-2"
 		<a href="/app">
 			<SidebarIcon>
 				<svelte:fragment slot="icon">
-					<img class="rounded-xl" src={defaultAvatar} alt="Profile Avatar ID" /></svelte:fragment
+					<img class="rounded-xl" src={avatar || defaultAvatar} alt="Profile Avatar ID" /></svelte:fragment
 				>
 				<svelte:fragment slot="text">YOU</svelte:fragment>
 			</SidebarIcon>

@@ -1,6 +1,8 @@
 <script>
 	import { http_host, API_BASE } from '$lib/js/config.json';
 	import { toast } from '@zerodevx/svelte-toast';
+	import 'node-localstorage/register';
+	import { setUser } from '$lib/js/userData';
 
 	let payload = {
 		username: '',
@@ -39,11 +41,15 @@
 						}
 					});
 				}
-				toast.push('Welcome back!');
+
 				console.log(json);
 				localStorage.setItem('UID', json.id);
 				localStorage.setItem('token', json.token);
-				window.location.href = "/app";
+				// Set user info
+				setUser(json.id);
+
+				toast.push('Welcome back!');
+				window.location.href = '/app';
 			})
 			.catch(function (res) {
 				console.log(res);
