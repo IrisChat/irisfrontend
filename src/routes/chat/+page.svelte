@@ -144,7 +144,7 @@
 							{#if message.type === 0}
 								<ServerMessage>{message.content}</ServerMessage>
 							{:else if message.IAM}
-								<UserMessage icon={person.avatar} floatLeft={true}>{message.content}</UserMessage>
+								<UserMessage icon={userData.avatar} floatLeft={true}>{message.content}</UserMessage>
 							{:else}
 								<UserMessage icon={person.avatar} floatLeft={false}>{message.content}</UserMessage>
 							{/if}
