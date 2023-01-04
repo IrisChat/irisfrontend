@@ -12,6 +12,7 @@
 	// import Fa from 'svelte-fa';
 
 	import { faHome, faScroll, faNoteSticky, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
+
 </script>
 
 <main>
