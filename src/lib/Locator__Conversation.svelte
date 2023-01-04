@@ -38,8 +38,8 @@
 						window.location.href = '/auth';
 					}, 3250);
 				}
+				return res.json()
 			})
-			.then((res) => res.json())
 			.then(function (json) {
 				console.log(json);
 				conversations = json;

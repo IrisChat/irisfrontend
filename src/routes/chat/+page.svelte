@@ -17,6 +17,7 @@
 	const userData = JSON.parse(localStorage.getItem('userData')) || {};
 	const token = localStorage.getItem('token');
 	const UID = localStorage.getItem('UID');
+	let title = 'Iris | Chat';
 	let messageList_UI;
 
 	class msgFMT {
@@ -112,6 +113,7 @@
 			.then(function (json) {
 				person = json;
 				person = person;
+				title = `Iris | Chat with ${person.username}`;
 				// @ts-ignore
 				ws = new WebSocket(ws_host + `?RID=${person.ID}&guild=false`); // Get websocket and open a connection to a conversation_room.
 				// This is a conversation and not a guild so we hardcode guild as being false
@@ -123,6 +125,9 @@
 	});
 </script>
 
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
 <main>
 	<div class="flex">
 		<Sidebar avatar={userData.avatar} />
