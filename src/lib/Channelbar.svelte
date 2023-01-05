@@ -7,7 +7,7 @@
 <div class="channel-bar hidden h-full flex-wrap md:block">
 	<!-- ChannelBlock -->
 	<div class="channel-block shadow-lg backdrop-opacity-60">
-		<h5 class="channel-block-text font-medium dark:text-text">
+		<h5 class="channel-block-text font-semibold dark:text-text">
 			<slot name="title">slot=title</slot>
 		</h5>
 	</div>
