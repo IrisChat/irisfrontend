@@ -3,7 +3,8 @@
 	import Channelbar from '$lib/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
 	import MainChannel from '$lib/Channels/MainChannel.svelte';
-	import { faCog } from '@fortawesome/free-solid-svg-icons';
+	import { faCog, faBrush } from '@fortawesome/free-solid-svg-icons';
+	import Fa from "svelte-fa";
 	const userData = JSON.parse(localStorage.getItem('userData')) || {};
 </script>
 
@@ -23,7 +24,9 @@
 							class="message-list h-full"
 							style="overflow: overlay; height: 100%; max-height: 87vh;"
 						>
-							ddf
+							<div class="settings-element bg-red-200 flex">
+							<Fa icon={faBrush} />
+							</div>
 						</div>
 					</div>
 				</div></svelte:fragment

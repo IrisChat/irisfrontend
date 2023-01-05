@@ -5,6 +5,7 @@ module.exports = {
 		extend: {
 			colors: {
 				// Using modern `rgb`
+				main: 'rgb(var(--color-main) / var(--tw-bg-opacity))',
 				primary: 'rgb(var(--color-primary) / var(--tw-bg-opacity))',
 				secondary: 'rgb(var(--color-secondary) / var(--tw-bg-opacity))',
 				tertiary: 'rgb(var(--color-tertiary) / var(--tw-bg-opacity))',

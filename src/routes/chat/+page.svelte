@@ -157,7 +157,7 @@
 					</div>
 				</div>
 				<div
-					class="chat-form relative bottom-0 flex w-full items-center border-t border-white bg-primary pl-2"
+					class="chat-form relative bottom-0 flex w-full items-center border-t border-tertiary bg-main text-text pl-2"
 				>
 					<Fa icon={faPaperclip} class="mx-4 w-12" />
 					<input
@@ -165,7 +165,7 @@
 						on:keydown={(e) => sendMsg(e)}
 						type="text"
 						placeholder="Type a message"
-						class="flex-1 rounded-sm border-2 border-blue-600 p-4 text-primary"
+						class="flex-1 rounded-sm border-2 border-tertiary p-4 text-primary"
 					/>
 				</div>
 			</div>
