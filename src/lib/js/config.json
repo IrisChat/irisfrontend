@@ -1,8 +1,8 @@
 {
     "API_BASE": "/api/v0/",
-    "ws_host__": "ws://127.0.0.1:8080/api/v0/conversations",
-    "ws_host": "wss://iris-api.fly.dev/api/v0/conversations",
-    "http_host__": "http://127.0.0.1:8080",
-    "http_host": "https://iris-api.fly.dev",
+    "ws_host": "ws://127.0.0.1:8080/api/v0/conversations",
+    "ws_host__": "wss://iris-api.fly.dev/api/v0/conversations",
+    "http_host": "http://127.0.0.1:8080",
+    "http_host__": "https://iris-api.fly.dev",
     "defaultAvatar": "https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121233262-stock-illustration-male-default-placeholder-avatar-profile.jpg"
 }
