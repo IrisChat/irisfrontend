@@ -1,6 +1,6 @@
-<script>
+<script lang="ts">
 	export let floatLeft = false;
-	export let icon = '';
+	export let icon: string;
 </script>
 
 {#if floatLeft}

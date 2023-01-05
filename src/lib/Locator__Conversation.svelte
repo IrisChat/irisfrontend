@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	// slot=title
 	// slot=conversations
 	import Fa from 'svelte-fa';
@@ -13,7 +13,7 @@
 	import { onMount } from 'svelte';
 	import { toast } from '@zerodevx/svelte-toast';
 	//@ts-ignore
-	let conversations = [];
+	let conversations: any[] = [];
 
 	import Conversation from './Conversation.svelte';
 	onMount(() => {

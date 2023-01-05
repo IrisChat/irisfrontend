@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
+	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {};
 </script>
 

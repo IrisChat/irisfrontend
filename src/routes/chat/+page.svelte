@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
 	import Channelbar from '$lib/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
@@ -14,15 +14,24 @@
 	import 'node-localstorage/register';
 	import ServerMessage from '$lib/content/ServerMessage.svelte';
 	import UserMessage from '$lib/content/UserMessage.svelte';
+	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {};
 	const token = localStorage.getItem('token');
 	const UID = localStorage.getItem('UID');
 	let title = 'Iris | Chat';
-	let messageList_UI;
+	let messageList_UI: HTMLDivElement;
+	let messages: any[] = [];
+	let msgBox: HTMLInputElement;
+	let person = $page.url.searchParams.get('with') || {};
+	let ws: any;
 
 	class msgFMT {
-		// @ts-ignore
-		constructor(type, content, auth, IAM) {
+		type = 0;
+		IAM = 0;
+		auth = '';
+		content = '';
+		ts = Date.now();
+		constructor(type: number, content: any, auth: string, IAM: any) {
 			this.type = type;
 			this.IAM = IAM;
 			this.auth = auth;
@@ -31,26 +40,21 @@
 		}
 	}
 
-	// @ts-ignore
-	let msgBox;
-	// @ts-ignore
-	let ws;
-	let person = $page.url.searchParams.get('with') || {};
-	let messages = [];
-	function showMessage(msg) {
+	function showMessage(msg: string) {
 		messages.push(JSON.parse(msg));
-		// @ts-ignore
 		messages = messages; // Reactivity trigger
 	}
 
 	// Init
-	// @ts-ignore
-	async function init(ws) {
+
+	async function init(ws: any) {
 		ws.onopen = () => {
 			console.log('Connection opened!');
+			// @ts-ignore
 			const Message = new msgFMT(0, null, token, UID);
 			ws.send(JSON.stringify(Message)); // Login
 		};
+		// @ts-ignore
 		ws.onmessage = ({ data }) => showMessage(data);
 		ws.onclose = function () {
 			ws = null;
@@ -58,32 +62,33 @@
 	}
 
 	// sendMessage
-	// @ts-ignore
-	function sendMsg(event) {
-		// @ts-ignore
+
+	function sendMsg(event: any) {
 		if (!ws) {
 			showMessage('No WebSocket connection :(');
 			return;
 		}
 
 		if (event.keyCode === 13) {
-			// @ts-ignore
 			if (msgBox.value === null || msgBox.value === undefined || msgBox.value === '') {
 				return;
-			} // @ts-ignore
+			}
+			// @ts-ignore
 			const Message = new msgFMT(1, msgBox.value);
 			ws.send(JSON.stringify(Message));
+
 			// @ts-ignore
 			Message.IAM = true;
 			showMessage(JSON.stringify(Message));
-			// @ts-ignore
-			msgBox.value = null;
+
+			// Clear the messagebox
+			msgBox.value = '';
 			// Scroll down
 			messageList_UI.scroll(0, messageList_UI.scrollHeight); // Overflow a bit
 		}
 	}
-	// @ts-ignore
-	function createRID(sender, reciever) {
+
+	function createRID(sender: number, reciever: number) {
 		if (sender < reciever) {
 			return parseInt(`${sender}${reciever}`);
 		} else {
@@ -113,6 +118,7 @@
 			.then(function (json) {
 				person = json;
 				person = person;
+				// @ts-ignore
 				title = `Iris | Chat with ${person.username}`;
 				// @ts-ignore
 				ws = new WebSocket(ws_host + `?RID=${person.ID}&guild=false`); // Get websocket and open a connection to a conversation_room.
@@ -157,7 +163,7 @@
 					</div>
 				</div>
 				<div
-					class="chat-form relative bottom-0 flex w-full items-center border-t border-tertiary bg-main text-text pl-2"
+					class="chat-form relative bottom-0 flex w-full items-center border-t border-tertiary bg-main pl-2 text-text"
 				>
 					<Fa icon={faPaperclip} class="mx-4 w-12" />
 					<input

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { http_host, API_BASE } from '$lib/js/config.json';
 	import { toast } from '@zerodevx/svelte-toast';
 	import 'node-localstorage/register';

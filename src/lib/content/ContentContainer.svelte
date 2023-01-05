@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import TipContainer from '$lib/content/TipContainer.svelte';
 	import TopNav from './TopNav.svelte';
 
@@ -30,7 +30,7 @@
 	</TopNav>
 	<div
 		class="content flex h-screen flex-wrap items-center justify-center text-center dark:text-text"
-		style="background: url('./pattern-dark.svg');"
+		style="background: url('/pattern-dark.svg');"
 	>
 		<slot name="content">
 			<div class="font-base basis-full text-center text-8xl text-text">

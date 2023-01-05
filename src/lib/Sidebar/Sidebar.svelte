@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
 	import SidebarIcon from '$lib/Sidebar/SidebarIcon.svelte';
 	import MetaIcon from '$lib/Sidebar/SidebarIcon__meta.svelte';
 	import Divider from '$lib/Divider.svelte';
 	import Fa from 'svelte-fa';
 	import { faCompass, faPlus, faBoltLightning, faCog } from '@fortawesome/free-solid-svg-icons';
-	export let avatar = false;
+	export let avatar: any = false;
 	import { defaultAvatar } from '$lib/js/config.json';
 </script>
 
