@@ -1,6 +1,6 @@
 <script>
 	import Locator from '$lib/Locator.svelte';
-	import LocatorConversation from '$lib/Locator__Conversation.svelte';
+	import LocatorConversation from '$lib/ChannelBar/Locator__Conversation.svelte';
 	import ChannelTemplate from '$lib/ChannelTemplate.svelte';
 	// Icons
 

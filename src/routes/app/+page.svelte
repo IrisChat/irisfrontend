@@ -2,7 +2,7 @@
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
 	import Channelbar from '$lib/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
-	import MainChannel from '$lib/Channels/MainChannel.svelte';
+	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
 	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {};
 </script>

@@ -15,7 +15,7 @@
 	//@ts-ignore
 	let conversations: any[] = [];
 
-	import Conversation from './Conversation.svelte';
+	import Conversation from '../Conversation.svelte';
 	onMount(() => {
 		fetch(`${http_host}${API_BASE}conversations/${UID}`, {
 			headers: {

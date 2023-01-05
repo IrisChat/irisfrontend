@@ -2,7 +2,7 @@
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
 	import Channelbar from '$lib/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
-	import MainChannel from '$lib/Channels/MainChannel.svelte';
+	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
 	import { faMessage, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
 	import { http_host, ws_host, API_BASE } from '$lib/js/config.json';

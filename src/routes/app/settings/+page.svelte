@@ -2,12 +2,16 @@
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
 	import Channelbar from '$lib/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
-	import MainChannel from '$lib/Channels/MainChannel.svelte';
+	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
 	import SettingsElement from '$lib/content/SettingsElement.svelte';
 	import { faBrush, faCog } from '@fortawesome/free-solid-svg-icons';
 	// @ts-ignore
-	const userData = JSON.parse(localStorage.getItem('userData')) || {};
-	import { http_host } from '$lib/js/config.json';
+	const userData = JSON.parse(localStorage.getItem('userData')) || {}; // @ts-ignore
+	const token = localStorage.getItem('token');
+	import { http_host, API_BASE } from '$lib/js/config.json';
+	import ServerMessage from '$lib/content/ServerMessage.svelte';
+	let errorSplash: HTMLDivElement;
+	let successSplash: HTMLDivElement;
 
 	class Preferences {
 		theme: string = '';
@@ -20,19 +24,27 @@
 	function saveSettings() {
 		// Make a POST request to the API to save the settings
 		const theme = themeElement.value;
-		fetch(`${http_host}user/preferences/${userData.UID}`, {
+		fetch(`${http_host}${API_BASE}user/preferences/${userData.ID}`, {
 			headers: {
 				Accept: 'application/json',
+				Authorization: `Bearer ${token}`,
 				'Content-Type': 'application/json'
 			},
 			method: 'POST',
 			body: JSON.stringify(new Preferences(theme))
 		})
-			.then(function (res) {
+			.then(async (res) => {
 				console.log(res);
+				const json: object = await res.json();
+				// @ts-ignore
+				localStorage.setItem('preferences', JSON.stringify(json.preferences));
+				res.status == 200
+					? successSplash.classList.remove('hidden')
+					: errorSplash.classList.remove('hidden');
 			})
 			.catch(function (res) {
 				console.log(res);
+				errorSplash.classList.remove('hidden');
 			});
 	}
 </script>
@@ -47,6 +59,13 @@
 
 		<ContentContainer icon={faCog} title="Settings">
 			<svelte:fragment slot="content">
+				<div class="imports hidden bg-green-500 text-gray-500" />
+				<div bind:this={errorSplash} class="hidden">
+					<ServerMessage>There was an error</ServerMessage>
+				</div>
+				<div bind:this={successSplash} class="hidden">
+					<ServerMessage background="green-500" text="white">Saved Successfully!</ServerMessage>
+				</div>
 				<div slot="settings" class="h-screen w-full">
 					<SettingsElement icon={faBrush}>
 						<svelte:fragment slot="title">Theme</svelte:fragment>
