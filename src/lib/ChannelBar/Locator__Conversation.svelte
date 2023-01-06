@@ -9,7 +9,7 @@
 	import 'node-localstorage/register';
 	const token = localStorage.getItem('token');
 	const UID = localStorage.getItem('UID');
-	import { http_host, API_BASE } from '$lib/js/config.json';
+	import { http_host, API_BASE, defaultAvatar } from '$lib/js/config.json';
 	import { onMount } from 'svelte';
 	import { toast } from '@zerodevx/svelte-toast';
 	//@ts-ignore
@@ -141,17 +141,17 @@
 								<svelte:fragment slot="icon">
 									<img
 										class="mt-2 mb-2 w-12 rounded-full bg-gray-700"
-										src={convo.avatar}
+										src={convo.avatar || defaultAvatar}
 										alt="Profile Avatar"
 									/>
 								</svelte:fragment>
 								<svelte:fragment slot="header-text"
-									>{convo.username}
+									>{convo.username || 'Deleted User'}
 									<div class="aboutme text-sm font-light">
 										{#if convo.about.length > 60}
 											{(convo.about = convo.about.substring(0, 30) + '...')}
 										{:else}
-											{convo.about}
+											{convo.about || 'This user has been deleted'}
 										{/if}
 									</div></svelte:fragment
 								>
@@ -177,17 +177,21 @@
 						<svelte:fragment slot="icon">
 							<img
 								class="mt-2 mb-2 w-12 rounded-full bg-gray-700"
-								src={convo.avatar}
+								src={convo.avatar || defaultAvatar}
 								alt="Profile Avatar"
 							/>
 						</svelte:fragment>
 						<svelte:fragment slot="header-text"
-							>{convo.username}
+							>{convo.username || 'Deleted User'}
 							<div class="aboutme text-sm font-light">
-								{#if convo.about.length > 60}
-									{(convo.about = convo.about.substring(0, 30) + '...')}
+								{#if convo.about != undefined}
+									{#if convo.about.length > 60}
+										{(convo.about = convo.about.substring(0, 30) + '...')}
+									{:else}
+										{convo.about}
+									{/if}
 								{:else}
-									{convo.about}
+									This user has been deleted
 								{/if}
 							</div></svelte:fragment
 						>
