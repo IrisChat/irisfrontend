@@ -167,37 +167,39 @@
 			<div class="convo-title opacity-35 mb-4 basis-full text-sm dark:text-text">
 				<slot name="title">This is where you contact your friends.</slot>
 			</div>
-			{#each conversations as convo, i}
-				<div
-					class="wrap"
-					on:click={() => (window.location.href = `/chat?with=${convo.ID}`)}
-					on:keypress={() => (window.location.href = `/chat?with=${convo.ID}`)}
-				>
-					<Conversation>
-						<svelte:fragment slot="icon">
-							<img
-								class="mt-2 mb-2 w-12 rounded-full bg-gray-700"
-								src={convo.avatar || defaultAvatar}
-								alt="Profile Avatar"
-							/>
-						</svelte:fragment>
-						<svelte:fragment slot="header-text"
-							>{convo.username || 'Deleted User'}
-							<div class="aboutme text-sm font-light">
-								{#if convo.about != undefined}
-									{#if convo.about.length > 60}
-										{(convo.about = convo.about.substring(0, 30) + '...')}
+			<div class="convo_wrap">
+				{#each conversations as convo, i}
+					<div
+						class="wrap"
+						on:click={() => (window.location.href = `/chat?with=${convo.ID}`)}
+						on:keypress={() => (window.location.href = `/chat?with=${convo.ID}`)}
+					>
+						<Conversation>
+							<svelte:fragment slot="icon">
+								<img
+									class="mt-2 mb-2 w-12 rounded-full bg-gray-700"
+									src={convo.avatar || defaultAvatar}
+									alt="Profile Avatar"
+								/>
+							</svelte:fragment>
+							<svelte:fragment slot="header-text"
+								>{convo.username || 'Deleted User'}
+								<div class="aboutme text-sm font-light">
+									{#if convo.about != undefined}
+										{#if convo.about.length > 60}
+											{(convo.about = convo.about.substring(0, 30) + '...')}
+										{:else}
+											{convo.about}
+										{/if}
 									{:else}
-										{convo.about}
+										This user has been deleted
 									{/if}
-								{:else}
-									This user has been deleted
-								{/if}
-							</div></svelte:fragment
-						>
-					</Conversation>
-				</div>
-			{/each}
+								</div></svelte:fragment
+							>
+						</Conversation>
+					</div>
+				{/each}
+			</div>
 		</slot>
 	</div>
 </div>
