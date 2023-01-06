@@ -158,7 +158,7 @@
 	}
 
 	.channel-bar {
-		@apply m-0 h-auto w-96 overflow-hidden;
+		@apply m-0 h-auto w-96;
 	}
 
 	.channel-container {
