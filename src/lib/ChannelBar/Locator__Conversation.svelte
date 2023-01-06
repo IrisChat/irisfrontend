@@ -17,37 +17,46 @@
 
 	import Conversation from '../Conversation.svelte';
 	onMount(() => {
-		fetch(`${http_host}${API_BASE}conversations/${UID}`, {
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token?.toString()}`
-			},
-			method: 'GET'
-		})
-			.then((res) => {
-				if (res.status === 400) {
-					toast.push('You were signed out from another device. <br/>Redirecting to login screen.', {
-						dismissable: false,
-						theme: {
-							'--toastBarBackground': 'red'
-						}
-					});
+		function pollContacts() {
+			fetch(`${http_host}${API_BASE}conversations/${UID}`, {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token?.toString()}`
+				},
+				method: 'GET'
+			})
+				.then((res) => {
+					if (res.status === 400) {
+						toast.push(
+							'You were signed out from another device. <br/>Redirecting to login screen.',
+							{
+								dismissable: false,
+								theme: {
+									'--toastBarBackground': 'red'
+								}
+							}
+						);
 
-					setTimeout(() => {
-						window.location.href = '/auth';
-					}, 3250);
-				}
-				return res.json()
-			})
-			.then(function (json) {
-				console.log(json);
-				conversations = json;
-				conversations = conversations; // Reactivity trigger
-			})
-			.catch(function (res) {
-				console.log(res);
-			});
+						setTimeout(() => {
+							window.location.href = '/auth';
+						}, 3250);
+					}
+					return res.json();
+				})
+				.then(function (json) {
+					console.log(json);
+					conversations = json;
+					conversations = conversations; // Reactivity trigger
+				})
+				.catch(function (res) {
+					console.log(res);
+				});
+		}
+		pollContacts();
+		setInterval(() => {
+			pollContacts();
+		}, 15000);
 	});
 </script>
 

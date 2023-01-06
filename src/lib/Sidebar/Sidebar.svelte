@@ -6,6 +6,13 @@
 	import { faCompass, faPlus, faBoltLightning, faCog } from '@fortawesome/free-solid-svg-icons';
 	export let avatar: any = false;
 	import { defaultAvatar } from '$lib/js/config.json';
+	// Read storage
+	import 'node-localstorage/register';
+	let __username: any = localStorage.getItem('userData');
+	__username = JSON.parse(__username) || ' ';
+	__username = __username?.username;
+	const username: string = __username;
+	__username = undefined;
 </script>
 
 <div class="sidebar z-50 h-screen bg-opacity-75 shadow-lg">
@@ -22,7 +29,7 @@ flex-col bg-opacity-100 px-2"
 						alt="Profile Avatar ID"
 					/></svelte:fragment
 				>
-				<svelte:fragment slot="text">YOU</svelte:fragment>
+				<svelte:fragment slot="text">YOU {`(${username})` || ' '}</svelte:fragment>
 			</SidebarIcon>
 		</a>
 		<Divider />
