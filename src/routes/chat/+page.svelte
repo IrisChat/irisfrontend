@@ -5,7 +5,7 @@
 	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
 	import { faMessage, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
-	import { http_host, ws_host, API_BASE } from '$lib/js/config.json';
+	import { http_host, ws_host, API_BASE, SOCKET_BASE } from '$lib/js/config.json';
 	import { page } from '$app/stores';
 	import { setUser } from '$lib/js/userData';
 	import Fa from 'svelte-fa';
@@ -14,6 +14,9 @@
 	import 'node-localstorage/register';
 	import ServerMessage from '$lib/content/ServerMessage.svelte';
 	import UserMessage from '$lib/content/UserMessage.svelte';
+	// Socket.io
+	import { io } from 'socket.io-client';
+
 	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {};
 	const token = localStorage.getItem('token');
@@ -40,25 +43,57 @@
 		}
 	}
 
-	function showMessage(msg: string) {
-		messages.push(JSON.parse(msg));
-		messages = messages; // Reactivity trigger
+	function showMessage(msg: any) {
+		try {
+			messages.push(msg);
+			messages = messages; // Reactivity trigger
+		} catch (error) {
+			console.log(error, msg);
+		}
 	}
 
 	// Init
 
 	async function init(ws: any) {
-		ws.onopen = () => {
-			console.log('Connection opened!');
+		ws.on('connect', () => {
+			console.log(`Connection opened with id ${ws.id}!`);
 			// @ts-ignore
 			const Message = new msgFMT(0, null, token, UID);
-			ws.send(JSON.stringify(Message)); // Login
-		};
+			ws.emit('join-room', JSON.stringify(Message)); // Login
+		});
 		// @ts-ignore
-		ws.onmessage = ({ data }) => showMessage(data);
-		ws.onclose = function () {
-			ws = null;
-		};
+		ws.on('message', async (data: any) => {
+			try {
+				console.log(JSON.parse(data));
+				showMessage(JSON.parse(data));
+			} catch (error) {
+				console.warn('BAD_MESSAGE FROM SERVER. WILL WAIT TILL NEXT MESSAGE TO RETRY');
+			}
+		});
+
+		ws.on('server-message', async (data: any) => {
+			try {
+				showMessage(JSON.parse(data));
+			} catch (error) {
+				console.warn('BAD_MESSAGE FROM SERVER. WILL WAIT TILL NEXT MESSAGE TO RETRY');
+			}
+		});
+
+		ws.on('context-message', async (data: any) => {
+			try {
+				messages = [];
+				data = JSON.parse(data);
+				data.forEach((message: any) => {
+					messages.push(message);
+					messages = messages;
+				});
+			} catch (error) {
+				console.warn('BAD_MESSAGE FROM SERVER. WILL WAIT TILL NEXT MESSAGE TO RETRY');
+			}
+		});
+		// ws.onclose = function () {
+		// 	ws = null;
+		// };
 	}
 
 	// sendMessage
@@ -74,12 +109,10 @@
 				return;
 			}
 			// @ts-ignore
-			const Message = new msgFMT(1, msgBox.value);
-			ws.send(JSON.stringify(Message));
+			const Message = new msgFMT(1, msgBox.value, null, UID);
+			ws.emit('message', JSON.stringify(Message));
 
-			// @ts-ignore
-			Message.IAM = true;
-			showMessage(JSON.stringify(Message));
+			showMessage(Message);
 
 			// Clear the messagebox
 			msgBox.value = '';
@@ -121,7 +154,11 @@
 				// @ts-ignore
 				title = `Iris | Chat with ${person.username}`;
 				// @ts-ignore
-				ws = new WebSocket(ws_host + `?RID=${person.ID}&guild=false`); // Get websocket and open a connection to a conversation_room.
+				// ws = io(ws_host + `?RID=${person.ID}&guild=false`); // Get websocket and open a connection to a conversation_room.
+				ws = io(ws_host, {
+					path: SOCKET_BASE,
+					query: { RID: person.ID }
+				}); // Get websocket and open a connection to a conversation_room.
 				// This is a conversation and not a guild so we hardcode guild as being false
 				init(ws); // Initialize client
 			})
@@ -149,12 +186,12 @@
 					<div
 						bind:this={messageList_UI}
 						class="message-list h-full"
-						style="overflow: overlay; height: 100%; max-height: 87vh;"
+						style="overflow: overlay; max-height: 87vh;"
 					>
 						{#each messages as message}
 							{#if message.type === 0}
 								<ServerMessage>{message.content}</ServerMessage>
-							{:else if message.IAM}
+							{:else if message.IAM == UID}
 								<UserMessage icon={userData.avatar} floatLeft={true}>{message.content}</UserMessage>
 							{:else}
 								<UserMessage icon={person.avatar} floatLeft={false}>{message.content}</UserMessage>
