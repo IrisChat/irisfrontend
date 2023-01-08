@@ -5,19 +5,59 @@
 	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
 	import SettingsElement from '$lib/content/SettingsElement.svelte';
 	import { faBrush, faCog } from '@fortawesome/free-solid-svg-icons';
+	import { defaultAvatar } from '$lib/js/config.json';
 	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {}; // @ts-ignore
 	const token = localStorage.getItem('token');
 	import { http_host, API_BASE } from '$lib/js/config.json';
 	import ServerMessage from '$lib/content/ServerMessage.svelte';
+	import ActionComponent from '$lib/ActionView/ActionComponent.svelte';
+	import { onMount } from 'svelte';
 	let errorSplash: HTMLDivElement;
 	let successSplash: HTMLDivElement;
+	let refreshAvatar_input: HTMLInputElement;
+	let ActionOverlay: HTMLDivElement;
+	let userName_input: HTMLInputElement;
+	let aboutme_input: HTMLInputElement;
 
 	class Preferences {
 		theme: string = '';
 		constructor(theme: string) {
 			this.theme = theme;
 		}
+	}
+
+	function refreshData(URL: string, body: object, data: string, input_selector: HTMLInputElement) {
+		fetch(URL, {
+			headers: {
+				Accept: 'application/json',
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			},
+			method: 'POST',
+			body: JSON.stringify(body)
+		})
+			.then(async (res) => {
+				console.log(res);
+				const json: object = await res.json();
+				res.status == 200
+					? (() => {
+							ActionOverlay.classList.add('hidden');
+							// @ts-ignore
+							userData[data] = input_selector.value;
+							// Commit
+							localStorage.setItem('userData', JSON.stringify(userData));
+					  })()
+					: (() => {
+							errorSplash.classList.remove('hidden');
+							ActionOverlay.classList.add('hidden');
+					  })();
+			})
+			.catch(function (res) {
+				console.log(res);
+				errorSplash.classList.remove('hidden');
+				ActionOverlay.classList.add('hidden');
+			});
 	}
 
 	let themeElement: any;
@@ -47,7 +87,44 @@
 				errorSplash.classList.remove('hidden');
 			});
 	}
+	onMount(() => {
+		refreshAvatar_input.value = userData.avatar;
+		userName_input.value = userData.username;
+		userName_input.placeholder = 'Username';
+		aboutme_input.value = userData.about;
+	});
 </script>
+
+<div class="action_overlay hidden select-none" bind:this={ActionOverlay}>
+	<ActionComponent title="Set Your Avatar" description="Type in the URL of your avatar">
+		<div class="inline">
+			<input
+				type="text"
+				class="creator_input rounded border-2 border-text bg-transparent px-2 py-2 text-sm font-light text-text"
+				bind:this={refreshAvatar_input}
+				placeholder="Avatar URL"
+			/>
+			<button
+				class="rounded-md bg-option px-4 py-2 text-text"
+				on:click={() =>
+					refreshData(
+						`${http_host}${API_BASE}user/avatar/${userData.ID}`,
+						{
+							avatar: refreshAvatar_input.value
+						},
+						'avatar',
+						refreshAvatar_input
+					)}>Set</button
+			>
+			<div class="block py-2">
+				<button
+					class="rounded-md bg-red-800 px-4 py-2 text-text"
+					on:click={() => ActionOverlay.classList.add('hidden')}>Close</button
+				>
+			</div>
+		</div>
+	</ActionComponent>
+</div>
 
 <main>
 	<div class="flex">
@@ -67,6 +144,70 @@
 					<ServerMessage background="green-500" text="white">Saved Successfully!</ServerMessage>
 				</div>
 				<div slot="settings" class="h-screen w-full">
+					<!-- ProfileEditor -->
+					<div
+						class="ProfileEditor settings-element my-4 mr-4 flex w-full items-center justify-center rounded-md bg-secondary bg-opacity-10 py-4 pl-2 pr-4 text-left hover:bg-opacity-20"
+					>
+						<div
+							class="icon flex flex-1 cursor-pointer items-center justify-center px-4 py-2 text-center"
+						>
+							<div
+								class="pfpcircle h-52 w-52 rounded-full bg-blue-500 hover:opacity-90"
+								on:click={() => ActionOverlay.classList.remove('hidden')}
+								on:keydown={() => ActionOverlay.classList.remove('hidden')}
+							>
+								<img
+									src={userData.avatar || defaultAvatar}
+									alt="{userData.username + "'s" || 'User'} Avatar"
+									class="rounded-full"
+								/>
+								<div class="remove_avatar py-2">
+									<a
+										href="#"
+										on:click={() => {
+											refreshAvatar_input.value = '';
+											refreshData(
+												`${http_host}${API_BASE}user/avatar/${userData.ID}`,
+												{
+													avatar: refreshAvatar_input.value
+												},
+												'avatar',
+												refreshAvatar_input
+											);
+										}}
+										class="font-light text-option underline">Remove Avatar</a
+									>
+								</div>
+							</div>
+						</div>
+
+						<div class="body flex flex-1 flex-wrap">
+							<div class="w-fit basis-full text-6xl font-bold">
+								<input
+									bind:this={userName_input}
+									type="text"
+									class="username bg-transparent"
+									placeholder="Loading"
+								/>
+							</div>
+							<div class="max-w-52 w-fit text-sm font-light">
+								<input
+									bind:this={aboutme_input}
+									on:change={() =>
+										refreshData(
+											`${http_host}${API_BASE}user/about/${userData.ID}`,
+											{ aboutme: aboutme_input.value },
+											'about',
+											aboutme_input
+										)}
+									type="text"
+									class="aboutme bg-transparent"
+									placeholder="Hey there! I am using Iris."
+								/>
+							</div>
+						</div>
+					</div>
+					<!-- ProfileEditor ENDS -->
 					<SettingsElement icon={faBrush}>
 						<svelte:fragment slot="title">Theme</svelte:fragment>
 						<svelte:fragment slot="description">Choose between dark and light theme</svelte:fragment
