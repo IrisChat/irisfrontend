@@ -17,7 +17,7 @@ WORKDIR /app
 # to install all modules: "npm install --production=false".
 # Ref: https://docs.npmjs.com/cli/v9/commands/npm-install#description
 
-ENV NODE_ENV production
+# ENV NODE_ENV production
 
 COPY . .
 
@@ -33,5 +33,4 @@ COPY --from=builder /app /app
 WORKDIR /app
 ENV NODE_ENV production
 ENV PATH /root/.volta/bin:$PATH
-
 CMD [ "npm", "run", "start" ]
