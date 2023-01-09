@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"start": "node build/index.js",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -32,6 +33,7 @@
 	"dependencies": {
 		"@fortawesome/free-brands-svg-icons": "^6.2.1",
 		"@fortawesome/free-solid-svg-icons": "^6.2.1",
+		"@sveltejs/adapter-node": "^1.1.0",
 		"@zerodevx/svelte-toast": "^0.8.2",
 		"node-localstorage": "^2.2.1",
 		"socket.io-client": "^4.5.4",
