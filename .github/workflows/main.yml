@@ -21,9 +21,8 @@ jobs:
       # uses: smoll/setup-flyctl@595e90c3776f063fcaa8865d51c9de449e8042cb
       uses: smoll/setup-flyctl@1.1.1
       with:
-        fly_token: ${{ secrets.FLYIO_ACCESS }}
         # Version of the flyctl CLI to install. If unspecified or set to "latest",
         # the latest version for the target platform will be installed. Example: "0.0.306".
         version: latest
     - run: |
-        flyctl deploy -t ${{ fly_token }}
+        flyctl deploy -t ${{ secrets.FLYIO_ACCESS }}
