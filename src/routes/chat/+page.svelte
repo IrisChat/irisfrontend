@@ -156,7 +156,7 @@
 				// @ts-ignore
 				// ws = io(ws_host + `?RID=${person.ID}&guild=false`); // Get websocket and open a connection to a conversation_room.
 				ws = io(ws_host, {
-					path: SOCKET_BASE,
+					path: SOCKET_BASE, // @ts-ignore
 					query: { RID: person.ID }
 				}); // Get websocket and open a connection to a conversation_room.
 				// This is a conversation and not a guild so we hardcode guild as being false

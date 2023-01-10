@@ -1,6 +1,9 @@
 import { http_host, API_BASE } from '$lib/js/config.json';
 import { toast } from '@zerodevx/svelte-toast';
 
+/**
+ * @param {any} person
+ */
 export function setUser(person) {
 	fetch(`${http_host}${API_BASE}user/${person}`, {
 		headers: {

@@ -8,7 +8,6 @@
 
 	import 'node-localstorage/register';
 	const token = localStorage.getItem('token');
-	const UID = localStorage.getItem('UID');
 	import { http_host, API_BASE, defaultAvatar } from '$lib/js/config.json';
 	import { onMount } from 'svelte';
 	import { toast } from '@zerodevx/svelte-toast';
