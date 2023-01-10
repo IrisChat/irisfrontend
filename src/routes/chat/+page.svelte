@@ -16,6 +16,7 @@
 	import UserMessage from '$lib/content/UserMessage.svelte';
 	// Socket.io
 	import { io } from 'socket.io-client';
+	import InputContainer from '$lib/chat/InputContainer.svelte';
 
 	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {};
@@ -24,7 +25,7 @@
 	let title = 'Iris | Chat';
 	let messageList_UI: HTMLDivElement;
 	let messages: any[] = [];
-	let msgBox: HTMLInputElement;
+	let msgBox: HTMLDivElement;
 	let person = $page.url.searchParams.get('with') || {};
 	let ws: any;
 
@@ -104,7 +105,7 @@
 			return;
 		}
 
-		if (event.keyCode === 13) {
+		if (event.key == 'Enter') {
 			if (msgBox.value === null || msgBox.value === undefined || msgBox.value === '') {
 				return;
 			}
@@ -199,17 +200,32 @@
 						{/each}
 					</div>
 				</div>
+
 				<div
-					class="chat-form relative bottom-0 flex w-full items-center border-t border-tertiary bg-main pl-2 text-text"
+					class="chat-form relative bottom-0 flex w-full items-center border-t border-tertiary bg-main pl-2 text-left text-text outline-none focus:outline-none"
 				>
-					<Fa icon={faPaperclip} class="mx-4 w-12" />
-					<input
-						bind:this={msgBox}
-						on:keydown={(e) => sendMsg(e)}
-						type="text"
-						placeholder="Type a message"
-						class="flex-1 rounded-sm border-2 border-tertiary p-4 text-primary"
-					/>
+					<InputContainer>
+						<div
+							class="input_container select-text overflow-y-auto overflow-x-hidden break-words"
+							contenteditable="true"
+							role="textbox"
+							spellcheck="true"
+							title="Type a message"
+							data-testid="conversation-compose-box-input"
+							data-tab="10"
+							data-lexical-editor="true"
+							style="user-select: text; white-space: pre-wrap; word-break: break-word; max-height: 100px"
+						>
+							<input
+								bind:this={msgBox}
+								class="focus-zero h-full w-full bg-transparent text-xl font-semibold text-text"
+								on:keydown={(e) => {
+									sendMsg(e);
+									input_placeholder.innerHTML = '';
+								}}
+							/>
+						</div>
+					</InputContainer>
 				</div>
 			</div>
 		</ContentContainer>
@@ -219,5 +235,8 @@
 <style>
 	:global(body) {
 		overflow: hidden;
+	}
+	.focus-zero:focus {
+		outline: none;
 	}
 </style>

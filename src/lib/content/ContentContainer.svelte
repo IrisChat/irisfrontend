@@ -44,19 +44,23 @@
 					>
 				</TipContainer>
 
-				<TipContainer icon={faBullhorn}>
-					<svelte:fragment slot="title">Give feedback on Iris</svelte:fragment>
-					<svelte:fragment slot="description"
-						>Join the Community Server to chat & ask questions.</svelte:fragment
-					>
-				</TipContainer>
+				<a href="https://github.com/IrisChat/Iris/issues" target="_blank">
+					<TipContainer icon={faBullhorn}>
+						<svelte:fragment slot="title">Give feedback on Iris</svelte:fragment>
+						<svelte:fragment slot="description"
+							>Join the Community Server to chat & ask questions.</svelte:fragment
+						>
+					</TipContainer></a
+				>
 
-				<TipContainer icon={faBoltLightning}>
-					<svelte:fragment slot="title">Donate!</svelte:fragment>
-					<svelte:fragment slot="description"
-						>Support the project by donating via our Patreon page! Thanks in advance!</svelte:fragment
-					>
-				</TipContainer>
+				<a href="https://patreon.com/IrisChat" target="_blank">
+					<TipContainer icon={faBoltLightning}>
+						<svelte:fragment slot="title">Donate!</svelte:fragment>
+						<svelte:fragment slot="description"
+							>Support the project by donating via our Patreon page! Thanks in advance!</svelte:fragment
+						>
+					</TipContainer></a
+				>
 
 				<TipContainer icon={faPlusCircle}>
 					<svelte:fragment slot="title">Create a server</svelte:fragment>
