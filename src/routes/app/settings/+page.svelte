@@ -64,7 +64,7 @@
 	function saveSettings() {
 		// Make a POST request to the API to save the settings
 		const theme = themeElement.value;
-		fetch(`${http_host}${API_BASE}user/preferences/${userData.ID}`, {
+		fetch(`${http_host}${API_BASE}user/preferences/`, {
 			headers: {
 				Accept: 'application/json',
 				Authorization: `Bearer ${token}`,
@@ -108,7 +108,7 @@
 				class="rounded-md bg-option px-4 py-2 text-text"
 				on:click={() =>
 					refreshData(
-						`${http_host}${API_BASE}user/avatar/${userData.ID}`,
+						`${http_host}${API_BASE}user/avatar/`,
 						{
 							avatar: refreshAvatar_input.value
 						},
@@ -167,7 +167,7 @@
 										on:click={() => {
 											refreshAvatar_input.value = '';
 											refreshData(
-												`${http_host}${API_BASE}user/avatar/${userData.ID}`,
+												`${http_host}${API_BASE}user/avatar/`,
 												{
 													avatar: refreshAvatar_input.value
 												},
@@ -195,7 +195,7 @@
 									bind:this={aboutme_input}
 									on:change={() =>
 										refreshData(
-											`${http_host}${API_BASE}user/about/${userData.ID}`,
+											`${http_host}${API_BASE}user/about/`,
 											{ aboutme: aboutme_input.value },
 											'about',
 											aboutme_input

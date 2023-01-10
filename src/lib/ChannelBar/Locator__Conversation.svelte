@@ -20,7 +20,7 @@
 	import Conversation from '../Conversation.svelte';
 	onMount(() => {
 		function pollContacts() {
-			fetch(`${http_host}${API_BASE}conversations/${UID}`, {
+			fetch(`${http_host}${API_BASE}conversations/`, {
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
@@ -64,7 +64,7 @@
 	});
 
 	function findUsers() {
-		fetch(`${http_host}${API_BASE}user/find/one`, {
+		fetch(`${http_host}${API_BASE}user/global/find/`, {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
