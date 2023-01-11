@@ -3,11 +3,12 @@
 	import Channelbar from '$lib/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
 	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
-	import { faMessage, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+	import { faMessage } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
-	import { http_host, ws_host, API_BASE, SOCKET_BASE } from '$lib/js/config.json';
+	import { http_host, ws_host, API_BASE, SOCKET_BASE } from '$lib/xs/config.json';
 	import { page } from '$app/stores';
-	import { setUser } from '$lib/js/userData';
+	import { setUser } from '$lib/xs/userData';
+	import { drop } from '$lib/xs/dropZone';
 	import Fa from 'svelte-fa';
 
 	// Read storage
@@ -99,9 +100,21 @@
 
 	// sendMessage
 
-	function sendMsg(event: any) {
+	async function sendMsg(event: any, file: Boolean) {
 		if (!ws) {
 			showMessage('No WebSocket connection :(');
+			return;
+		}
+
+		if (file) {
+			event.stopPropagation();
+			event.preventDefault();
+			await drop(event)?.then((after) => ws.emit('message', JSON.stringify(after)));
+
+			// Clear the messagebox
+			msgBox.value = '';
+			// Scroll down
+			messageList_UI.scroll(0, messageList_UI.scrollHeight); // Overflow a bit
 			return;
 		}
 
@@ -206,21 +219,20 @@
 				>
 					<InputContainer>
 						<div
-							class="input_container select-text overflow-y-auto overflow-x-hidden break-words"
+							class="input_container flex select-text items-center overflow-y-auto  overflow-x-hidden break-words"
 							contenteditable="true"
 							role="textbox"
 							spellcheck="true"
 							title="Type a message"
-							data-testid="conversation-compose-box-input"
-							data-tab="10"
-							data-lexical-editor="true"
 							style="user-select: text; white-space: pre-wrap; word-break: break-word; max-height: 100px"
 						>
 							<input
 								bind:this={msgBox}
-								class="focus-zero h-full w-full bg-transparent text-xl font-semibold text-text"
+								class="focus-zero z-20 h-full w-full rounded-sm bg-transparent px-2 py-2 text-xl font-semibold text-text "
+								on:dragover={(e) => e.preventDefault}
+								on:drop={(e) => sendMsg(e, true)}
 								on:keydown={(e) => {
-									sendMsg(e);
+									sendMsg(e, false);
 									input_placeholder.innerHTML = '';
 								}}
 							/>

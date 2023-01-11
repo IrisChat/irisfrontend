@@ -5,11 +5,11 @@
 	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
 	import SettingsElement from '$lib/content/SettingsElement.svelte';
 	import { faBrush, faCog } from '@fortawesome/free-solid-svg-icons';
-	import { defaultAvatar } from '$lib/js/config.json';
+	import { defaultAvatar } from '$lib/xs/config.json';
 	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {}; // @ts-ignore
 	const token = localStorage.getItem('token');
-	import { http_host, API_BASE } from '$lib/js/config.json';
+	import { http_host, API_BASE } from '$lib/xs/config.json';
 	import ServerMessage from '$lib/content/ServerMessage.svelte';
 	import ActionComponent from '$lib/ActionView/ActionComponent.svelte';
 	import { onMount } from 'svelte';

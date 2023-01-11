@@ -8,7 +8,7 @@
 
 	import 'node-localstorage/register';
 	const token = localStorage.getItem('token');
-	import { http_host, API_BASE, defaultAvatar } from '$lib/js/config.json';
+	import { http_host, API_BASE, defaultAvatar } from '$lib/xs/config.json';
 	import { onMount } from 'svelte';
 	import { toast } from '@zerodevx/svelte-toast';
 	//@ts-ignore

@@ -5,7 +5,7 @@
 	import Fa from 'svelte-fa';
 	import { faCompass, faPlus, faBoltLightning, faCog } from '@fortawesome/free-solid-svg-icons';
 	export let avatar: any = false;
-	import { defaultAvatar } from '$lib/js/config.json';
+	import { defaultAvatar } from '$lib/xs/config.json';
 	// Read storage
 	import 'node-localstorage/register';
 	let __username: any = localStorage.getItem('userData');

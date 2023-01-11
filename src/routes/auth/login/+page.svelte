@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { http_host, API_BASE } from '$lib/js/config.json';
+	import { http_host, API_BASE } from '$lib/xs/config.json';
 	import { toast } from '@zerodevx/svelte-toast';
 	import 'node-localstorage/register';
-	import { setUser } from '$lib/js/userData';
+	import { setUser } from '$lib/xs/userData';
 
 	let payload = {
 		username: '',
