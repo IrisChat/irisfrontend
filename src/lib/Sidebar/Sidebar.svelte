@@ -13,6 +13,33 @@
 	__username = __username?.username;
 	const username: string = __username;
 	__username = undefined;
+
+	// Color scheme
+	import getPixels from 'get-pixels';
+	import { extractColors } from 'extract-colors';
+	let PixData__COLOURS: string = 'transparent';
+	let avatar_ = avatar;
+
+	$: if (/^(?:(ht|f)tp(s?)\:\/\/)?/.test(avatar_)) {
+		avatar_ = 'https://cors-anywhere.fly.dev/' + avatar_;
+	}
+	// Reactive statement which waits for localstorage to load
+	$: getPixels(avatar_, (err: any, pixels: any) => {
+		if (!err) {
+			const data = [...pixels.data];
+			const width = Math.round(Math.sqrt(data.length / 4));
+			const height = width;
+
+			extractColors({ data, width, height })
+				.then((data) => {
+					console.log('[FLAIR] ACCENT PALETTE', data);
+					PixData__COLOURS = data[1].hex;
+				})
+				.catch(console.log);
+		} else {
+			console.log(err);
+		}
+	});
 </script>
 
 <div class="sidebar z-50 h-screen bg-opacity-75 shadow-lg">
@@ -21,39 +48,42 @@
 flex-col bg-opacity-100 px-2"
 	>
 		<a href="/app">
-			<SidebarIcon>
+			<SidebarIcon customColor={PixData__COLOURS}>
 				<svelte:fragment slot="icon">
 					<img
 						class="rounded-xl"
-						src={avatar || defaultAvatar}
+						style="background: {PixData__COLOURS};"
+						src={avatar || "/pixel.png"}
 						alt="Profile Avatar ID"
 					/></svelte:fragment
 				>
-				<svelte:fragment slot="text">YOU {`(${username})` || ' '}</svelte:fragment>
+				<svelte:fragment slot="text"
+					>YOU {#if username}({username}){/if}</svelte:fragment
+				>
 			</SidebarIcon>
 		</a>
 		<Divider />
 
 		<a href="/room?id=100">
-			<SidebarIcon>
+			<SidebarIcon customColor={PixData__COLOURS}>
 				<svelte:fragment slot="icon">S</svelte:fragment>
 				<svelte:fragment slot="text">S</svelte:fragment>
 			</SidebarIcon>
 		</a>
-		<SidebarIcon>
+		<SidebarIcon customColor={PixData__COLOURS}>
 			<svelte:fragment slot="icon">
 				<Fa icon={faPlus} size="32" /></svelte:fragment
 			>
 			<svelte:fragment slot="text">ADD SERVER</svelte:fragment>
 		</SidebarIcon>
 
-		<SidebarIcon>
+		<SidebarIcon customColor={PixData__COLOURS}>
 			<svelte:fragment slot="icon">
 				<Fa icon={faBoltLightning} size="20" /></svelte:fragment
 			>
 			<svelte:fragment slot="text">DONATE</svelte:fragment>
 		</SidebarIcon>
-		<SidebarIcon>
+		<SidebarIcon customColor={PixData__COLOURS}>
 			<svelte:fragment slot="icon">
 				<Fa icon={faCompass} size="28" /></svelte:fragment
 			>
@@ -61,7 +91,7 @@ flex-col bg-opacity-100 px-2"
 		</SidebarIcon>
 
 		<a href="/app/settings">
-			<MetaIcon>
+			<MetaIcon customColor={PixData__COLOURS}>
 				<svelte:fragment slot="icon"><Fa icon={faCog} size="28" /></svelte:fragment>
 			</MetaIcon></a
 		>

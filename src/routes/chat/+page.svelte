@@ -199,7 +199,7 @@
 				<div class="chat-container h-4/5">
 					<div
 						bind:this={messageList_UI}
-						class="message-list h-full"
+						class="message-list h-full pr-4"
 						style="overflow: overlay; max-height: 87vh;"
 					>
 						{#each messages as message}

@@ -33,7 +33,7 @@
 		@apply relative bottom-0 mx-auto mt-2 mb-2 flex h-12 w-12 
 		cursor-pointer items-center justify-center rounded-3xl bg-tertiary 
 		text-primary shadow-lg transition-all duration-300 ease-linear 
-		hover:rounded-xl hover:bg-primary hover:text-tertiary;
+		hover:rounded-xl hover:bg-primary;
 	}
 
 	.sidebar-tooltip {
