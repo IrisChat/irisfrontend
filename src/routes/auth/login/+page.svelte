@@ -22,7 +22,7 @@
 		event.preventDefault();
 	};
 
-	function Login() {
+	async function Login() {
 		fetch(`${http_host}${API_BASE}auth/login`, {
 			headers: {
 				Accept: 'application/json',
@@ -32,7 +32,7 @@
 			body: JSON.stringify(payload)
 		})
 			.then((res) => res.json())
-			.then(function (json) {
+			.then(async (json) => {
 				if (!json.status) {
 					return toast.push(`${json.message}`, {
 						dismissable: false,
@@ -46,10 +46,12 @@
 				localStorage.setItem('UID', json.id);
 				localStorage.setItem('token', json.token);
 				// Set user info
-				setUser(json.id);
-
-				toast.push('Welcome back!');
-				window.location.href = '/app';
+				await setUser(json.id).then(() => {
+					setTimeout(() => {
+						toast.push('Welcome back!');
+						window.location.href = '/app';
+					}, 800);
+				});
 			})
 			.catch(function (res) {
 				console.log(res);
@@ -98,8 +100,8 @@
 		</div>
 		<div class="footer flex w-full basis-full flex-wrap items-center justify-center text-center">
 			<button
-				on:click={() => {
-					Login();
+				on:click={async () => {
+					await Login();
 				}}
 				class="max-w-xs basis-full rounded-md bg-secondary px-2 py-4 hover:opacity-80"
 				style="background: #0070e8;">Login</button

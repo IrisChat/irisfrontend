@@ -35,6 +35,7 @@
 		"@fortawesome/free-solid-svg-icons": "^6.2.1",
 		"@sveltejs/adapter-node": "^1.1.0",
 		"@zerodevx/svelte-toast": "^0.8.2",
+		"emitter-component": "^1.1.1",
 		"extract-colors": "^2.0.4",
 		"get-pixels": "github:IrisChat/get-pixels",
 		"node-localstorage": "^2.2.1",

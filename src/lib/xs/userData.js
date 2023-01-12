@@ -4,7 +4,7 @@ import { toast } from '@zerodevx/svelte-toast';
 /**
  * @param {any} person
  */
-export function setUser(person) {
+export async function setUser(person) {
 	fetch(`${http_host}${API_BASE}user/${person}`, {
 		headers: {
 			Accept: 'application/json',
@@ -26,8 +26,8 @@ export function setUser(person) {
 			}
 			return res.json();
 		})
-		.then(function (json) {
-			localStorage.setItem('userData', JSON.stringify(json));
+		.then(async function (json) {
+			await localStorage.setItem('userData', JSON.stringify(json));
 		})
 		.catch(function (res) {
 			console.log(res);
