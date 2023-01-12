@@ -22,11 +22,11 @@ async function handleFiles(files: FileList) {
 		}
 
 		// Read the file
-		const rf = await readFile(file);
+		const rf: any = await readFile(file);
 
 		return {
 			type: 2,
-			content: rf,
+			content: rf.toString(),
 			description: file.name,
 			size: file.size,
 			filename: file.name,
@@ -43,6 +43,6 @@ function readFile(file: File) {
 			resolve(fr.result);
 		};
 		fr.onerror = reject;
-		fr.readAsBinaryString(file);
+		fr.readAsText(file);
 	});
 }
