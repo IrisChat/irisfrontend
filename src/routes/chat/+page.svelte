@@ -26,7 +26,7 @@
 	let title = 'Iris | Chat';
 	let messageList_UI: HTMLDivElement;
 	let messages: any[] = [];
-	let msgBox: HTMLDivElement;
+	let msgBox: HTMLInputElement;
 	let person = $page.url.searchParams.get('with') || {};
 	let ws: any;
 
@@ -109,7 +109,11 @@
 		if (file) {
 			event.stopPropagation();
 			event.preventDefault();
-			await drop(event)?.then((after) => ws.emit('message', JSON.stringify(after)));
+			await drop(event)?.then((after) => {
+				if (after) {
+					ws.emit('message', JSON.stringify(after));
+				}
+			});
 
 			// Clear the messagebox
 			msgBox.value = '';
