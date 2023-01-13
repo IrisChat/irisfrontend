@@ -110,7 +110,7 @@
 			event.stopPropagation();
 			event.preventDefault();
 			await drop(event)?.then((after) => {
-				if (after) {
+				if (after != null) {
 					ws.emit('message', JSON.stringify(after));
 				}
 			});

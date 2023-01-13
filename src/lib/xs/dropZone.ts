@@ -21,7 +21,7 @@ async function handleFiles(files: FileList) {
 
 		// Read the file
 		const rf: any = await readFile(file);
-		const binaryResult = String.fromCharCode(...new Uint8Array(rf));
+		const binaryResult = Array.from(new Uint8Array(rf), (x) => String.fromCharCode(x)).join('');
 
 		return {
 			type: 2,
