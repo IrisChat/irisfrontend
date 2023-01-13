@@ -9,7 +9,7 @@
 	import { page } from '$app/stores';
 	import { setUser } from '$lib/xs/userData';
 	import { drop } from '$lib/xs/dropZone';
-	import Fa from 'svelte-fa';
+	import __preprocess from '$lib/xs/preprocessors/main';
 
 	// Read storage
 	import 'node-localstorage/register';
@@ -47,6 +47,8 @@
 
 	function showMessage(msg: any) {
 		try {
+			msg.__preprocess = true;
+			msg.content = __preprocess(msg.content);
 			messages.push(msg);
 			messages = messages; // Reactivity trigger
 		} catch (error) {
@@ -86,6 +88,8 @@
 				messages = [];
 				data = JSON.parse(data);
 				data.forEach((message: any) => {
+					message.__preprocess = true;
+					message.content = __preprocess(message.content);
 					messages.push(message);
 					messages = messages;
 				});
@@ -211,14 +215,22 @@
 								<ServerMessage>{message.content}</ServerMessage>
 							{:else if message.type === 1 && message.IAM == UID}
 								<UserMessage icon={userData.avatar} floatLeft={true}>
-									{message.content}
+									{#if message.__preprocess}
+										<div class="inline">{@html message.content}</div>
+									{:else}
+										{message.content}
+									{/if}
 									<div class="caption opacity-76 text-xs font-light">
 										{new Date(message.ts).toLocaleString()}
 									</div>
 								</UserMessage>
 							{:else if message.type === 1}
 								<UserMessage icon={person.avatar} floatLeft={false}>
-									{message.content}
+									{#if message.__preprocess}
+										<div class="inline">{@html message.content}</div>
+									{:else}
+										{message.content}
+									{/if}
 									<div class="caption opacity-76 text-xs font-light">
 										{new Date(message.ts).toLocaleString()}
 									</div>

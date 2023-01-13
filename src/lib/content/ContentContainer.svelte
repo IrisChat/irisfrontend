@@ -29,7 +29,7 @@
 		<svelte:fragment slot="title-text">{title}</svelte:fragment>
 	</TopNav>
 	<div
-		class="content flex h-screen flex-wrap items-center justify-center text-center dark:text-text"
+		class="content flex h-screen flex-wrap items-center justify-center text-center text-text"
 		style="background: url('/pattern-dark.svg');"
 	>
 		<slot name="content">
@@ -44,7 +44,7 @@
 					>
 				</TipContainer>
 
-				<a href="https://github.com/IrisChat/Iris/issues" target="_blank">
+				<a href="https://github.com/IrisChat/Iris/issues" target="_blank" rel="noreferrer">
 					<TipContainer icon={faBullhorn}>
 						<svelte:fragment slot="title">Give feedback on Iris</svelte:fragment>
 						<svelte:fragment slot="description"
@@ -53,7 +53,7 @@
 					</TipContainer></a
 				>
 
-				<a href="https://patreon.com/IrisChat" target="_blank">
+				<a href="https://patreon.com/IrisChat" target="_blank" rel="noreferrer">
 					<TipContainer icon={faBoltLightning}>
 						<svelte:fragment slot="title">Donate!</svelte:fragment>
 						<svelte:fragment slot="description"
