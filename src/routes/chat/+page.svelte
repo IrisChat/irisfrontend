@@ -205,16 +205,24 @@
 						{#each messages as message}
 							{#if message.type === 0}
 								<ServerMessage>{message.content}</ServerMessage>
-							{:else if message.IAM == UID}
+							{:else if message.type === 1 && message.IAM == UID}
 								<UserMessage icon={userData.avatar} floatLeft={true}>
 									{message.content}
 									<div class="caption opacity-76 text-xs font-light">
 										{new Date(message.ts).toLocaleString()}
 									</div>
 								</UserMessage>
-							{:else}
+							{:else if message.type === 1}
 								<UserMessage icon={person.avatar} floatLeft={false}>
 									{message.content}
+									<div class="caption opacity-76 text-xs font-light">
+										{new Date(message.ts).toLocaleString()}
+									</div>
+								</UserMessage>
+							{:else if message.type === 2}
+								<UserMessage icon={userData.avatar} floatLeft={true}>
+									{message.description}
+									{@html message.content}
 									<div class="caption opacity-76 text-xs font-light">
 										{new Date(message.ts).toLocaleString()}
 									</div>

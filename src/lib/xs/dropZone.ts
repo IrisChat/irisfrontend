@@ -1,3 +1,5 @@
+const UID = localStorage.getItem("UID");
+
 export function drop(e: any) {
 	e.stopPropagation();
 	e.preventDefault();
@@ -26,6 +28,7 @@ async function handleFiles(files: FileList) {
 
 		return {
 			type: 2,
+			IAM: UID,
 			content: String.fromCharCode(...new Uint8Array(rf)),
 			description: file.name,
 			size: file.size,

@@ -4,11 +4,11 @@
 </script>
 
 {#if floatLeft}
-	<div class="user-message flex flex-wrap items-center justify-start">
+	<div class="user-message flex flex-wrap items-start justify-start">
 		<div class="icon-wrap">
 			<img src={icon} class="w-10 rounded-full" alt="Avatar" />
 		</div>
-		<div class="whitespace-pre-wrap break-words">
+		<div class="whitespace-pre-wrap break-words items-center">
 			<div
 				class="umsg-content mx-2 my-2 max-w-md rounded bg-option bg-opacity-60 px-4 py-2 font-medium text-primary"
 			>
@@ -21,8 +21,8 @@
 		</div>
 	</div>
 {:else}
-	<div class="user-message flex flex-wrap items-center justify-end">
-		<div class="whitespace-pre-wrap break-words">
+	<div class="user-message flex flex-wrap items-start justify-end">
+		<div class="whitespace-pre-wrap break-words items-center">
 			<div
 				class="umsg-content mx-2 my-2 max-w-md rounded bg-tertiary bg-opacity-60 px-4 py-2 font-medium text-primary"
 			>
