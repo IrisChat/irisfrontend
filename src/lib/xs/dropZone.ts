@@ -18,10 +18,6 @@ export async function drop(e: any) {
 async function handleFiles(files: FileList) {
 	for (var i = 0; i < files.length; i++) {
 		const file = files[i];
-		const imageType = /image.*/;
-		if (!file.type.match(imageType)) {
-			continue;
-		}
 
 		// Read the file
 		const rf: any = await readFile(file);
