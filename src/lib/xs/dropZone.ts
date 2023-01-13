@@ -1,6 +1,6 @@
-const UID = localStorage.getItem("UID");
+const UID = localStorage.getItem('UID');
 
-export function drop(e: any) {
+export async function drop(e: any) {
 	e.stopPropagation();
 	e.preventDefault();
 	// Check if this is an URL
@@ -11,7 +11,7 @@ export function drop(e: any) {
 		console.log(url);
 		// for img file(s), read the file & draw to canvas
 	} else {
-		return handleFiles(e.dataTransfer.files);
+		return await handleFiles(e.dataTransfer.files);
 	}
 }
 // read & create an image from the image file
@@ -25,11 +25,12 @@ async function handleFiles(files: FileList) {
 
 		// Read the file
 		const rf: any = await readFile(file);
+		const binaryResult = String.fromCharCode(...new Uint8Array(rf));
 
 		return {
 			type: 2,
 			IAM: UID,
-			content: String.fromCharCode(...new Uint8Array(rf)),
+			content: binaryResult,
 			description: file.name,
 			size: file.size,
 			filename: file.name,
