@@ -136,7 +136,7 @@
 							on:click={() => (window.location.href = `/chat?with=${convo.ID}`)}
 							on:keypress={() => (window.location.href = `/chat?with=${convo.ID}`)}
 						>
-							<Conversation>
+							<Conversation status={convo.status}>
 								<svelte:fragment slot="icon">
 									<img
 										class="mt-2 mb-2 w-12 rounded-full bg-gray-700"
@@ -173,7 +173,7 @@
 						on:click={() => (window.location.href = `/chat?with=${convo.ID}`)}
 						on:keypress={() => (window.location.href = `/chat?with=${convo.ID}`)}
 					>
-						<Conversation>
+						<Conversation status={convo.status}>
 							<svelte:fragment slot="icon">
 								<img
 									class="mt-2 mb-2 w-12 rounded-full bg-gray-700"

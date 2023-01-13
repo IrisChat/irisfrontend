@@ -2,17 +2,26 @@
 	import SidebarIcon from '$lib/Sidebar/SidebarIcon.svelte';
 	import MetaIcon from '$lib/Sidebar/SidebarIcon__meta.svelte';
 	import Divider from '$lib/Divider.svelte';
+	import setStatus from '$lib/xs/Iris/status';
 	import Fa from 'svelte-fa';
-	import { faCompass, faPlus, faBoltLightning, faCog } from '@fortawesome/free-solid-svg-icons';
+	import {
+		faCompass,
+		faPlus,
+		faBoltLightning,
+		faCog,
+		faPencil,
+		faCircle
+	} from '@fortawesome/free-solid-svg-icons';
 	export let avatar: any = false;
-	import { defaultAvatar } from '$lib/xs/config.json';
+	let avatarEditor: HTMLSpanElement;
 	// Read storage
 	import 'node-localstorage/register';
 	let __username: any = localStorage.getItem('userData');
 	__username = JSON.parse(__username) || ' ';
 	__username = __username?.username;
 	const username: string = __username;
-	__username = undefined;
+	__username = undefined; // @ts-ignore
+	let userData = JSON.parse(localStorage.getItem('userData')) || {};
 
 	// Color scheme
 	import getPixels from 'get-pixels';
@@ -40,23 +49,116 @@
 			console.log(err);
 		}
 	});
+
+	function openAvatarEditor(event: any) {
+		event.preventDefault();
+		event.stopPropagation();
+		avatarEditor.style.top = event.clientY + 'px';
+		avatarEditor.style.left = event.clientX + 'px';
+		avatarEditor.classList.remove('hidden');
+	}
 </script>
 
-<div class="sidebar z-50 h-screen bg-opacity-75 shadow-lg">
+<span
+	bind:this={avatarEditor}
+	on:focusout={() => {
+		avatarEditor.classList.add('hidden');
+	}}
+	class="avatarEditor absolute z-50 m-0 flex hidden w-fit flex-wrap rounded bg-primary bg-opacity-100 px-5 py-2 text-left text-text"
+>
+	<div
+		class="creator_wrapper creator_title flex flex-1 flex-wrap items-center justify-center text-sm font-semibold"
+	>
+		<button
+			on:click={() => (window.location.href = '/app/settings')}
+			class="flex items-center justify-center rounded border-white px-4 py-2 text-text hover:border hover:opacity-80"
+		>
+			<Fa icon={faPencil} />
+			<div class="text px-2">Change Avatar</div>
+		</button>
+
+		<div class="buttonArray flex items-center justify-around">
+			<button
+				on:click={() => {
+					setStatus('online', userData);
+					userData = userData; // Trigger
+				}}
+				class="mx-2 ml-3 flex w-24 items-center justify-center rounded border border-white py-2 text-text hover:opacity-80"
+			>
+				<Fa icon={faCircle} class="text-green-400" />
+				<div class="text px-2">Online</div>
+			</button>
+			<button
+				on:click={() => {
+					setStatus('offline', userData);
+					userData = userData; // Trigger
+				}}
+				class="w-24hover:opacity-80 ml-1 mr-2 flex items-center justify-center rounded border border-white px-3 py-2 text-text hover:opacity-80"
+			>
+				<Fa icon={faCircle} class="text-yellow-400" />
+				<div class="text px-2">Offline</div>
+			</button>
+			<button
+				on:click={() => {
+					setStatus('DnD', userData);
+					userData = userData; // Trigger
+				}}
+				class="ml-1 mr-3 flex w-24 items-center justify-center rounded border border-white py-2 text-text hover:opacity-80"
+			>
+				<Fa icon={faCircle} class="text-red-400" />
+				<div class="text px-2">DnD</div>
+			</button>
+		</div>
+	</div>
+</span>
+
+<div class="sidebar z-40 h-screen bg-opacity-75 shadow-lg">
 	<div
 		class="icon-wrapper flex h-fit
 flex-col bg-opacity-100 px-2"
 	>
-		<a href="/app">
+		<a
+			href="/app"
+			on:contextmenu={(e) => {
+				openAvatarEditor(e);
+			}}
+		>
 			<SidebarIcon customColor={PixData__COLOURS}>
 				<svelte:fragment slot="icon">
-					<img
-						class="rounded-xl"
-						style="background: {PixData__COLOURS};"
-						src={avatar || "/pixel.png"}
-						alt="Profile Avatar ID"
-					/></svelte:fragment
-				>
+					<div class="iconContainer">
+						<img
+							class="rounded-xl"
+							style="background: {PixData__COLOURS};"
+							src={avatar || '/pixel.png'}
+							alt="Profile Avatar ID"
+						/>
+						{#if userData.status == 'online'}
+							<span
+								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-green-400"
+							>
+								&nbsp;
+							</span>
+						{:else if userData.status == 'offline'}
+							<span
+								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-yellow-400"
+							>
+								&nbsp;
+							</span>
+						{:else if userData.status == 'DnD'}
+							<span
+								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-red-400"
+							>
+								&nbsp;
+							</span>
+						{:else}
+							<span
+								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-gray-400"
+							>
+								&nbsp;
+							</span>
+						{/if}
+					</div>
+				</svelte:fragment>
 				<svelte:fragment slot="text"
 					>YOU {#if username}({username}){/if}</svelte:fragment
 				>
@@ -97,3 +199,13 @@ flex-col bg-opacity-100 px-2"
 		>
 	</div>
 </div>
+
+<style>
+	.avatarEditor {
+		/* border-left: inset; */
+		/* border-left-color: currentcolor; */
+		border-bottom: double;
+		border-right-width: medium;
+		overflow: hidden;
+	}
+</style>
