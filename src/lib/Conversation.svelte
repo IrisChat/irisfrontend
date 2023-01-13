@@ -10,23 +10,25 @@
 			<slot name="icon">slot=icon</slot>
 			{#if status == 'online'}
 				<span
-					class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-green-400"
+					class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-primary bg-green-400"
 				>
 					&nbsp;
 				</span>
 			{:else if status == 'offline'}
 				<span
-					class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-yellow-400"
+					class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-primary bg-yellow-400"
 				>
 					&nbsp;
 				</span>
 			{:else if status == 'DnD'}
-				<span class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-red-400">
+				<span
+					class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-primary bg-red-400"
+				>
 					&nbsp;
 				</span>
 			{:else}
 				<span
-					class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-gray-400"
+					class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-primary bg-gray-400"
 				>
 					&nbsp;
 				</span>

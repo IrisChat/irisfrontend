@@ -134,25 +134,25 @@ flex-col bg-opacity-100 px-2"
 						/>
 						{#if userData.status == 'online'}
 							<span
-								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-green-400"
+								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-primary bg-green-400"
 							>
 								&nbsp;
 							</span>
 						{:else if userData.status == 'offline'}
 							<span
-								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-yellow-400"
+								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-primary bg-yellow-400"
 							>
 								&nbsp;
 							</span>
 						{:else if userData.status == 'DnD'}
 							<span
-								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-red-400"
+								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-primary bg-red-400"
 							>
 								&nbsp;
 							</span>
 						{:else}
 							<span
-								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border border-white bg-gray-400"
+								class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-primary bg-gray-400"
 							>
 								&nbsp;
 							</span>
