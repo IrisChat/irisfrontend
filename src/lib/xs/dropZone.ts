@@ -26,7 +26,7 @@ async function handleFiles(files: FileList) {
 
 		return {
 			type: 2,
-			content: rf.toString(),
+			content: String.fromCharCode(...new Uint8Array(rf)),
 			description: file.name,
 			size: file.size,
 			filename: file.name,
@@ -43,6 +43,6 @@ function readFile(file: File) {
 			resolve(fr.result);
 		};
 		fr.onerror = reject;
-		fr.readAsText(file);
+		fr.readAsArrayBuffer(file);
 	});
 }
