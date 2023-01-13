@@ -13,3 +13,14 @@
 
 <SvelteToast {options} />
 <slot />
+
+<style>
+	:global(blockquote) {
+		margin: 0;
+		border-left: 3px solid #efefefef;
+		padding-left: 3px;
+		border-radius: 3px;
+		opacity: 80%;
+		font-weight: 800;
+	}
+</style>
