@@ -33,9 +33,6 @@
 		style="background: url('/pattern-dark.svg');"
 	>
 		<slot name="content">
-			<div class="font-base basis-full text-center text-8xl text-text">
-				Welcome to <div class="font-semibold">IRIS</div>
-			</div>
 			<div class="tips-divider flex w-fit flex-wrap items-center justify-center">
 				<TipContainer icon={faPlusCircle}>
 					<svelte:fragment slot="title">Create a server</svelte:fragment>
