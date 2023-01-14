@@ -47,8 +47,10 @@
 
 	function showMessage(msg: any) {
 		try {
+		if(msg.type != 0){
 			msg.__preprocess = true;
 			msg.content = __preprocess(msg.content);
+			}
 			messages.push(msg);
 			messages = messages; // Reactivity trigger
 			// Scroll down
