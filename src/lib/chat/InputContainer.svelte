@@ -49,7 +49,7 @@
 					<div class="flex flex-1 items-end">
 						<div
 							tabindex="-1"
-							class="rounded-md border bg-gray-600 px-2 py-2 text-2xl font-semibold"
+							class="rounded-md border px-2 py-2 text-2xl font-semibold"
 							style="flex: 1 1 auto; width: inherit"
 						>
 							<div class="relative">
