@@ -193,15 +193,20 @@
 						</div>
 
 						<div class="body flex flex-1 flex-wrap">
-							<div class="w-fit basis-full text-6xl font-bold">
+							<div class="w-fit basis-full text-6xl font-bold"  title="This is your username. We don't allow changing usernames at this time">
 								<input
 									bind:this={userName_input}
 									type="text"
 									class="username bg-transparent"
 									placeholder="Loading"
 								/>
+								<div class="id flex text-sm font-light" title="This ID will allow anyone on the server to find you">
+									<div class="prepend pr-1 font-semibold">ID:</div>
+									{userData.ID}
+								</div>
 							</div>
-							<div class="w-fit text-sm font-light">
+							<div class="aboutme flex w-fit text-sm font-light"  title="This is your bio. Use this to tell people something about yourself">
+								<div class="prepend pr-1 font-semibold">About me:</div>
 								<input
 									bind:this={aboutme_input}
 									on:change={() =>
@@ -212,7 +217,7 @@
 											aboutme_input
 										)}
 									type="text"
-									class="aboutme w-full bg-transparent"
+									class="aboutme bg-transparent"
 									placeholder="Hey there! I am using Iris."
 								/>
 							</div>
