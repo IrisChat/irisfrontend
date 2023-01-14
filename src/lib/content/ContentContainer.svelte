@@ -67,7 +67,7 @@
 					<svelte:fragment slot="description" />
 				</TipContainer>
 			</div>
-			<a href="#" class="basis-full text-option">Turn off homescreen effects</a>
+			<a href="#" class="basis-full text-tertiary">Turn off homescreen effects</a>
 		</slot>
 	</div>
 </div>

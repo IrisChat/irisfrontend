@@ -27,7 +27,7 @@
 					--color-main: 0 0 0;  /* Primary */
 					--color-primary: 28 28 28;  /* Secondary */
 					--color-secondary: 45 130 183;  /* Extra */
-					--color-tertiary: 235 138 144;  /* Extra */
+					--color-tertiary: 235 138 144;  /* Accent */
 					--color-option: 66 226 184;  /* Extra */
 					--color-text: 217 217 217;  /* Tertiary */
 				}`;
