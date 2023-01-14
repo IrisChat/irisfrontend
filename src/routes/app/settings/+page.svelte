@@ -92,12 +92,17 @@
 	// Restore settings
 	onMount(() => {
 		refreshAvatar_input.value = userData.avatar;
-		userName_input.value = userData.username; // @ts-ignore
-		userName_input.setAttribute('size', userName_input.getAttribute('value').length);
+		userName_input.value = userData.username;
 		userName_input.placeholder = 'Username';
-		aboutme_input.value = userData.about; // @ts-ignore
-		aboutme_input.setAttribute('size', aboutme_input.getAttribute('placeholder').length);
+		aboutme_input.value = userData.about;
 		themeElement.value = preferences.theme;
+		try {
+			// @ts-ignore
+			userName_input.setAttribute('size', userName_input.value.length); // @ts-ignore
+			aboutme_input.setAttribute('size', aboutme_input.value.length);
+		} catch (e) {
+			// Nothing
+		}
 	});
 </script>
 
@@ -181,7 +186,7 @@
 												refreshAvatar_input
 											);
 										}}
-										class="font-light text-option underline">Remove Avatar</a
+										class="font-light text-tertiary underline">Remove Avatar</a
 									>
 								</div>
 							</div>
@@ -196,7 +201,7 @@
 									placeholder="Loading"
 								/>
 							</div>
-							<div class="max-w-52 w-fit text-sm font-light">
+							<div class="w-fit text-sm font-light">
 								<input
 									bind:this={aboutme_input}
 									on:change={() =>
@@ -207,7 +212,7 @@
 											aboutme_input
 										)}
 									type="text"
-									class="aboutme bg-transparent"
+									class="aboutme w-full bg-transparent"
 									placeholder="Hey there! I am using Iris."
 								/>
 							</div>
