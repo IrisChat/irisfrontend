@@ -163,7 +163,7 @@
 							class="icon flex flex-1 cursor-pointer items-center justify-center px-4 py-2 text-center"
 						>
 							<div
-								class="pfpcircle h-52 w-52 rounded-full bg-blue-500 hover:opacity-90"
+								class="pfpcircle h-52 w-52 rounded-full bg-blue-500 hover:opacity-90"  title="This is your profile photo. Change it how you like"
 								on:click={() => ActionOverlay.classList.remove('hidden')}
 								on:keydown={() => ActionOverlay.classList.remove('hidden')}
 							>
