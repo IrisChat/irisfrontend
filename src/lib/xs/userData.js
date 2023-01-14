@@ -41,7 +41,7 @@ export async function setUser(person) {
 					console.log(res);
 					const json = await res.json();
 					// @ts-ignore
-					localStorage.setItem('preferences', JSON.stringify(json.preferences));
+					localStorage.setItem('preferences', json.preferences);
 				})
 				.catch(function (res) {
 					console.log(res);

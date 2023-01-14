@@ -8,6 +8,7 @@
 	import { defaultAvatar } from '$lib/xs/config.json';
 	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {}; // @ts-ignore
+	const preferences = JSON.parse(localStorage.getItem('preferences')) || {}; // @ts-ignore
 	const token = localStorage.getItem('token');
 	import { http_host, API_BASE } from '$lib/xs/config.json';
 	import ServerMessage from '$lib/content/ServerMessage.svelte';
@@ -77,7 +78,7 @@
 				console.log(res);
 				const json: object = await res.json();
 				// @ts-ignore
-				localStorage.setItem('preferences', JSON.stringify(json.preferences));
+				localStorage.setItem('preferences', json.preferences);
 				res.status == 200
 					? successSplash.classList.remove('hidden')
 					: errorSplash.classList.remove('hidden');
@@ -87,11 +88,16 @@
 				errorSplash.classList.remove('hidden');
 			});
 	}
+
+	// Restore settings
 	onMount(() => {
 		refreshAvatar_input.value = userData.avatar;
-		userName_input.value = userData.username;
+		userName_input.value = userData.username; // @ts-ignore
+		userName_input.setAttribute('size', userName_input.getAttribute('value').length);
 		userName_input.placeholder = 'Username';
-		aboutme_input.value = userData.about;
+		aboutme_input.value = userData.about; // @ts-ignore
+		aboutme_input.setAttribute('size', aboutme_input.getAttribute('placeholder').length);
+		themeElement.value = preferences.theme;
 	});
 </script>
 
@@ -213,7 +219,13 @@
 						<svelte:fragment slot="description">Choose between dark and light theme</svelte:fragment
 						>
 						<svelte:fragment slot="action">
-							<select bind:this={themeElement} on:change={saveSettings}>
+							<select
+								bind:this={themeElement}
+								on:change={() => {
+									saveSettings();
+									window.location.reload();
+								}}
+							>
 								<option value="light">Light</option>
 								<option value="dark">Dark</option>
 							</select>

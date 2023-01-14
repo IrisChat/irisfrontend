@@ -3,12 +3,12 @@
 @tailwind components;
 @layer base {
 	:root {
-		--color-main: 0 0 0;
-		--color-primary: 28 28 28;
-		--color-secondary: 45 130 183;
-		--color-tertiary: 235 138 144;
-		--color-option: 66 226 184;
-		--color-text: 217 217 217;
+		--color-main: 156 156 156; /* Primary */
+		--color-primary: 128 128 128;  /* Secondary */
+		--color-secondary: 45 130 183;  /* Extra */
+		--color-tertiary: 235 138 144;  /* Extra */
+		--color-option: 66 226 184;  /* Extra */
+		--color-text: 17 17 17;  /* Tertiary */
 	}
 }
 
