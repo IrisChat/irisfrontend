@@ -10,7 +10,7 @@
 		</div>
 		<div class="whitespace-pre-wrap break-words items-center">
 			<div
-				class="umsg-content mx-2 my-2 max-w-md rounded bg-option bg-opacity-60 px-4 py-2 font-medium text-primary"
+				class="umsg-content mx-2 my-2 max-w-md rounded bg-option bg-opacity-60 px-4 py-2 font-medium text-text"
 			>
 				<div class="flex flex-1">
 					<div class="grid text-left">
