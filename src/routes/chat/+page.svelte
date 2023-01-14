@@ -51,6 +51,8 @@
 			msg.content = __preprocess(msg.content);
 			messages.push(msg);
 			messages = messages; // Reactivity trigger
+			// Scroll down
+			messageList_UI.scroll(0, messageList_UI.scrollHeight); // Overflow a bit
 		} catch (error) {
 			console.log(error, msg);
 		}
@@ -93,6 +95,8 @@
 					messages.push(message);
 					messages = messages;
 				});
+				// Scroll down
+				messageList_UI.scroll(0, messageList_UI.scrollHeight); // Overflow a bit
 			} catch (error) {
 				console.warn('BAD_MESSAGE FROM SERVER. WILL WAIT TILL NEXT MESSAGE TO RETRY');
 			}
