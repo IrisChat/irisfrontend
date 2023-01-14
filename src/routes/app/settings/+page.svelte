@@ -163,7 +163,8 @@
 							class="icon flex flex-1 cursor-pointer items-center justify-center px-4 py-2 text-center"
 						>
 							<div
-								class="pfpcircle h-52 w-52 rounded-full bg-blue-500 hover:opacity-90"  title="This is your profile photo. Change it how you like"
+								class="pfpcircle h-52 w-52 rounded-full bg-blue-500 hover:opacity-90"
+								title="This is your profile photo. Change it how you like"
 								on:click={() => ActionOverlay.classList.remove('hidden')}
 								on:keydown={() => ActionOverlay.classList.remove('hidden')}
 							>
@@ -193,19 +194,28 @@
 						</div>
 
 						<div class="body flex flex-1 flex-wrap">
-							<div class="w-fit basis-full text-6xl font-bold"  title="This is your username. We don't allow changing usernames at this time">
+							<div
+								class="w-fit basis-full text-6xl font-bold"
+								title="This is your username. We don't allow changing usernames at this time"
+							>
 								<input
 									bind:this={userName_input}
 									type="text"
 									class="username bg-transparent"
 									placeholder="Loading"
 								/>
-								<div class="id flex text-sm font-light" title="This ID will allow anyone on the server to find you">
+								<div
+									class="id flex text-sm font-light"
+									title="This ID will allow anyone on the server to find you"
+								>
 									<div class="prepend pr-1 font-semibold">ID:</div>
 									{userData.ID}
 								</div>
 							</div>
-							<div class="aboutme flex w-fit text-sm font-light"  title="This is your bio. Use this to tell people something about yourself">
+							<div
+								class="aboutme flex w-fit text-sm font-light"
+								title="This is your bio. Use this to tell people something about yourself"
+							>
 								<div class="prepend pr-1 font-semibold">About me:</div>
 								<input
 									bind:this={aboutme_input}
@@ -233,7 +243,9 @@
 								bind:this={themeElement}
 								on:change={() => {
 									saveSettings();
-									window.location.reload();
+									setTimeout(() => {
+										window.location.reload();
+									}, 800);
 								}}
 							>
 								<option value="light">Light</option>
