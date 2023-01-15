@@ -208,7 +208,7 @@
 			<svelte:fragment slot="channels"><MainChannel /></svelte:fragment>
 		</Channelbar>
 
-		<ContentContainer title={person.username || 'Loading'} icon={faMessage}>
+		<ContentContainer title={person.username || 'Loading'} icon={faMessage} call={true}>
 			<div slot="content" class="h-screen w-full">
 				<div class="chat-container h-4/5">
 					<div

@@ -12,6 +12,7 @@
 	import { onMount } from 'svelte';
 	export let icon = faHome;
 	export let title = 'Home';
+	export let call = false;
 
 	// Read storage
 	import 'node-localstorage/register';
@@ -25,7 +26,7 @@
 </script>
 
 <div class="content-container">
-	<TopNav {icon}>
+	<TopNav {icon} {call}>
 		<svelte:fragment slot="title-text">{title}</svelte:fragment>
 	</TopNav>
 	<div

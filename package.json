@@ -39,6 +39,7 @@
 		"extract-colors": "^2.0.4",
 		"get-pixels": "github:IrisChat/get-pixels",
 		"node-localstorage": "^2.2.1",
+		"peerjs": "^1.4.7",
 		"socket.io-client": "^4.5.4",
 		"svelte-fa": "^3.0.3"
 	}
