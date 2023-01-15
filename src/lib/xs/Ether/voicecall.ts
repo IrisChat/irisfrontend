@@ -42,13 +42,13 @@ async function callUser(user: any, stream: any, host: any, reciever: any) {
 		return users;
 	});
 	// If the user is online, we try to call them
-	if (users[user]) {
+	// if (users[user]) {
 		const call = peer.call(user, stream);
 		call.on('stream', (mediaStream) => {
 			addStream(reciever, mediaStream);
 		});
 		call.on('close', () => reciever.remove());
-	} else {
-		console.log('The user is offline. Cannot call.');
-	}
+	// } else {
+		// console.log('The user is offline. Cannot call.');
+	// }
 }
