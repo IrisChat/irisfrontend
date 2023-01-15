@@ -5,21 +5,34 @@ let peer: any;
 
 export default function call(person: any, host: any, reciever: any) {
 	// Create a new connection
-    peer = new Peer(UID);
+	peer = new Peer(UID);
 	host.muted = true;
 
-	navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
-		addStream(host, stream);
+	navigator.mediaDevices
+		.getUserMedia({ video: true })
+		.then((stream) => {
+			addStream(host, stream);
 
-		peer.on('open', (id) => {
-			console.log('Opened P2P connection.');
-			callUser(person, stream, host, reciever);
+			peer.on('open', (id) => {
+				console.log('Opened P2P connection.');
+				callUser(person, stream, host, reciever);
+			});
+			peer.on('call', (call) => {
+				call.answer(stream);
+				call.on('stream', (stream) => addStream(reciever, stream));
+			});
+		})
+		.catch((error) => {
+			// Join the call without a stream
+			peer.on('open', (id) => {
+				console.log('Opened P2P connection.');
+				callUser(person, null, host, reciever);
+			});
+			peer.on('call', (call) => {
+				call.answer(null);
+				call.on('stream', (stream) => addStream(reciever, stream));
+			});
 		});
-		peer.on('call', (call) => {
-			call.answer(stream);
-			call.on('stream', (stream) => addStream(reciever, stream));
-		});
-	});
 }
 
 function addStream(video: any, stream: any) {
@@ -42,13 +55,13 @@ async function callUser(user: any, stream: any, host: any, reciever: any) {
 		return users;
 	});
 	// If the user is online, we try to call them
-	// if (users[user]) {
+	if (users[user]) {
 		const call = peer.call(user, stream);
 		call.on('stream', (mediaStream) => {
 			addStream(reciever, mediaStream);
 		});
 		call.on('close', () => reciever.remove());
-	// } else {
-		// console.log('The user is offline. Cannot call.');
-	// }
+	} else {
+		console.log('The user is offline. Cannot call.');
+	}
 }
