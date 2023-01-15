@@ -9,7 +9,7 @@ export default function call(person: any, host: any, reciever: any) {
 	host.muted = true;
 
 	navigator.mediaDevices
-		.getUserMedia({ video: true })
+		.getUserMedia({})
 		.then((stream) => {
 			addStream(host, stream);
 
