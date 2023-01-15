@@ -2,7 +2,9 @@
 	import Fa from 'svelte-fa';
 	import { faHome, faPhone } from '@fortawesome/free-solid-svg-icons';
 	import { page } from '$app/stores';
-	import voicecall from '$lib/xs/Ether/voicecall';
+	import { onMount } from 'svelte';
+
+	import voicecall, { init } from '$lib/xs/Ether/voicecall';
 	export let icon = faHome;
 
 	// Voicecall Hooks
@@ -13,6 +15,11 @@
 	let hostAudio: HTMLAudioElement;
 	let recieverAudio: HTMLAudioElement;
 	const person = $page.url.searchParams.get('with') || {};
+	const UID = localStorage.getItem('UID');
+	onMount(() => {
+		// Create a new connection
+		init(UID, hostVideo, hostAudio, recieverVideo, recieverAudio);
+	});
 </script>
 
 <div
@@ -51,15 +58,15 @@
 		</div>
 	</div>
 
-	<div class="callPane hidden h-full w-full basis-full bg-text bg-opacity-100" bind:this={callPane}>
+	<div id="callPane" class="callPane hidden h-full w-full basis-full bg-text bg-opacity-100" bind:this={callPane}>
 		<div class="callContainer flex items-center justify-around bg-text bg-opacity-90 py-4">
 			<div
 				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
 				style="width: 500px; height: 400px"
 			>
-				<video bind:this={hostVideo} width="500px" />
+				<video bind:this={hostVideo} width="500px" muted={true} />
 
-				<audio bind:this={hostAudio} src="" />
+				<audio bind:this={hostAudio} src="" muted={true}/>
 			</div>
 			<div
 				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"

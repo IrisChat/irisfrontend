@@ -1,7 +1,27 @@
 import { Peer } from 'peerjs';
 import { http_host, API_BASE } from '$lib/xs/config.json';
-const UID = localStorage.getItem('UID');
 let peer: any;
+
+export function init(id: any, host: any, hostAudio: any, reciever: any, recieverAudio: any) {
+	console.log('P2P initialized with ID #' + id);
+	// Get the peer and give the script access to the callPane
+	peer = new Peer(id, { pingInterval: 30000 });
+	
+	peer.on('open', (id) => {
+		console.log('Opened P2P connection.');
+	});
+	peer.on('call', (call) => {
+		var acceptsCall = confirm('Videocall incoming, do you want to accept it ?');
+		if (acceptsCall) {
+			navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
+				call.answer(stream); //  @ts-ignore We reference the callPane by ID
+				addStream(host, stream, hostAudio);
+				callPane.classList.remove('hidden');
+				call.on('stream', (stream) => addStream(reciever, stream, recieverAudio));
+			});
+		}
+	});
+}
 
 export default function call(
 	person: any,
@@ -10,21 +30,10 @@ export default function call(
 	reciever: any,
 	recieverAudio: any
 ) {
-	// Create a new connection
-	peer = new Peer(UID);
-	host.muted = true;
 
-	navigator.mediaDevices.getUserMedia({video: true, audio: true}).then((stream) => {
+	navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
 		addStream(host, stream, hostAudio);
-
-		peer.on('open', (id) => {
-			console.log('Opened P2P connection.');
-			callUser(person, stream, host, reciever, recieverAudio);
-		});
-		peer.on('call', (call) => {
-			call.answer(stream);
-			call.on('stream', (stream) => addStream(reciever, stream, recieverAudio));
-		});
+		callUser(person, stream, host, reciever, recieverAudio);
 	});
 }
 
