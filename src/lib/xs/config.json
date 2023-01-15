@@ -1,7 +1,7 @@
 {
     "API_BASE": "/api/v0/",
     "SOCKET_BASE": "/api/v0/conversations/socket",
-    "ws_host": "wss://iris-api-0o4v.onrender.com",
-    "http_host": "https://iris-api-0o4v.onrender.com",
+    "ws_host": "wss://ether-api.onrender.com",
+    "http_host": "https://ether-api.onrender.com",
     "defaultAvatar": "https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121233262-stock-illustration-male-default-placeholder-avatar-profile.jpg"
 }
