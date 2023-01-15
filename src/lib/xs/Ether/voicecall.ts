@@ -11,7 +11,7 @@ export default function call(
 	recieverAudio: any
 ) {
 	// Create a new connection
-	// peer = new Peer(UID);
+	peer = new Peer(UID);
 	host.muted = true;
 
 	navigator.mediaDevices.getUserMedia({video: true, audio: true}).then((stream) => {

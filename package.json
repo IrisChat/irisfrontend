@@ -5,6 +5,7 @@
 	"scripts": {
 		"start": "PORT=8080 node build/index.js",
 		"dev": "vite dev",
+		"dev-host": "vite dev --host",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
