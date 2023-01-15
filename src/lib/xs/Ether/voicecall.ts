@@ -1,11 +1,11 @@
 import { Peer } from 'peerjs';
 import { http_host, API_BASE } from '$lib/xs/config.json';
 const UID = localStorage.getItem('UID');
-const peer = new Peer(UID);
+let peer: any;
 
 export default function call(person: any, host: any, reciever: any) {
 	// Create a new connection
-
+    peer = new Peer(UID);
 	host.muted = true;
 
 	navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
