@@ -4,17 +4,19 @@
 	import { page } from '$app/stores';
 	import voicecall from '$lib/xs/Ether/voicecall';
 	export let icon = faHome;
-	
+
 	// Voicecall Hooks
 	export let call = false;
 	let callPane: HTMLDivElement;
 	let hostVideo: HTMLVideoElement;
 	let recieverVideo: HTMLVideoElement;
+	let hostAudio: HTMLAudioElement;
+	let recieverAudio: HTMLAudioElement;
 	const person = $page.url.searchParams.get('with') || {};
 </script>
 
 <div
-	class="top-navigation m-0 flex flex-wrap h-16 w-full flex-row items-center bg-opacity-60 text-text shadow-lg z-50"
+	class="top-navigation z-50 m-0 flex h-16 w-full flex-row flex-wrap items-center bg-opacity-60 text-text shadow-lg"
 >
 	<div class="titlebar flex w-full justify-around px-4">
 		<div class="pageTitle flex items-center justify-center">
@@ -27,7 +29,10 @@
 		{#if call}
 			<div class="phonecall flex items-center justify-center px-4">
 				<button
-					on:click={()=>{callPane.classList.remove("hidden");voicecall(person, hostVideo, recieverVideo)}}
+					on:click={() => {
+						callPane.classList.remove('hidden');
+						voicecall(person, hostVideo, hostAudio, recieverVideo, recieverAudio);
+					}}
 					class="rounded bg-gray-600 bg-opacity-20 px-4 py-2 hover:bg-opacity-40"
 					><Fa icon={faPhone} size="18" /></button
 				>
@@ -45,12 +50,24 @@
 			>
 		</div>
 	</div>
-	
-	<div class="callPane bg-red-900 h-full w-full basis-full" bind:this={callPane}>
-	<div class="flex callContainer">
-	<div class="rounded bg-primary"><video bind:this={hostVideo} src=""></video></div>
-	<div class="rounded bg-primary"><video bind:this={recieverVideo} src=""></video></div>
-	</div>
-	
+
+	<div class="callPane hidden h-full w-full basis-full bg-text bg-opacity-100" bind:this={callPane}>
+		<div class="callContainer flex items-center justify-around bg-text bg-opacity-90 py-4">
+			<div
+				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
+				style="width: 500px; height: 400px"
+			>
+				<video bind:this={hostVideo} width="500px" />
+
+				<audio bind:this={hostAudio} src="" />
+			</div>
+			<div
+				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
+				style="width: 500px; height: 400px"
+			>
+				<video bind:this={recieverVideo} width="500px" />
+				<audio bind:this={recieverAudio} src="" />
+			</div>
+		</div>
 	</div>
 </div>
