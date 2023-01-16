@@ -20,19 +20,23 @@
 	// Read storage
 	import 'node-localstorage/register';
 	const userData = JSON.parse(localStorage.getItem('userData')) || {};
-	getUser(person)
-		.then(function (json) {
-			person = json;
-			person = person;
-			console.log(person);
-		})
-		.catch((error) => {
-			console.error('The user could not be found', error);
-		});
+	if (call) {
+		getUser(person)
+			.then(function (json) {
+				person = json;
+				person = person;
+				console.log(person);
+			})
+			.catch((error) => {
+				console.error('The user could not be found', error);
+			});
+	}
 	const UID = localStorage.getItem('UID');
 	onMount(() => {
-		// Create a new connection
-		init(UID, hostVideo, hostAudio, recieverVideo, recieverAudio);
+		if (call) {
+			// Create a new connection
+			init(UID, hostVideo, hostAudio, recieverVideo, recieverAudio);
+		}
 	});
 </script>
 
@@ -77,7 +81,9 @@
 		class="callPane hidden h-full w-full basis-full bg-text bg-opacity-100"
 		bind:this={callPane}
 	>
-		<div class="callContainer flex flex-wrap items-center justify-around bg-text bg-opacity-90 py-4">
+		<div
+			class="callContainer flex flex-wrap items-center justify-around bg-text bg-opacity-90 py-4"
+		>
 			<div
 				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
 				style="width: 500px; height: 400px"

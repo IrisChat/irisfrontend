@@ -6,17 +6,18 @@ export function init(id: any, host: any, hostAudio: any, reciever: any, reciever
 	console.log('P2P initialized with ID #' + id);
 	// Get the peer and give the script access to the callPane
 	peer = new Peer(id, { pingInterval: 30000 });
-	peer.on('open', (id) => {
+	peer.on('open', (id: any) => {
 		console.log('Opened P2P connection.');
 	});
-	peer.on('call', (call) => {
-		var acceptsCall = confirm('Videocall incoming, do you want to accept it ?');
-		if (acceptsCall) {
+	peer.on('call', (call: any) => {
+		const acceptCall = confirm('Videocall incoming, do you want to accept it?');
+		if (acceptCall) {
 			navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
 				call.answer(stream); //  @ts-ignore We reference the callPane by ID
 				addStream(host, stream, hostAudio);
 				callPane.classList.remove('hidden');
 				call.on('stream', (stream: MediaStream) => addStream(reciever, stream, recieverAudio));
+				call.on('close', () => reciever.remove());
 			});
 		}
 	});
@@ -31,6 +32,7 @@ export default function call(
 ) {
 	navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
 		addStream(host, stream, hostAudio);
+		console.log(`Calling ${person}...`);
 		callUser(person, stream, host, reciever, recieverAudio);
 	});
 }
@@ -43,7 +45,7 @@ function addStream(video: any, stream: any, audio: any) {
 		video.classList.remove('hidden');
 	}
 	if (stream.getAudioTracks().length > 0) {
-		// do something with the audio
+		// Do something with the audio
 		audio.srcObject = stream;
 		audio.addEventListener('loadedmetadata', () => audio.play());
 		audio.classList.remove('hidden');
@@ -67,9 +69,7 @@ async function callUser(user: any, stream: any, host: any, reciever: any, reciev
 	// If the user is online, we try to call them
 	if (users[user]) {
 		const call = peer.call(user, stream);
-		call.on('stream', (mediaStream: MediaStream) => {
-			addStream(reciever, mediaStream, recieverAudio);
-		});
+		call.on('stream', (stream: MediaStream) => addStream(reciever, stream, recieverAudio));
 		call.on('close', () => reciever.remove());
 	} else {
 		alert('The user is offline. Cannot call.');
