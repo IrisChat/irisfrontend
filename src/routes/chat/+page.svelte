@@ -5,7 +5,8 @@
 	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
 	import { faMessage } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
-	import { http_host, ws_host, API_BASE, SOCKET_BASE } from '$lib/xs/config.json';
+	import { ws_host, SOCKET_BASE } from '$lib/xs/config.json';
+	import { getUser } from '$lib/xs/Ether/User/UID';
 	import { page } from '$app/stores';
 	import { setUser } from '$lib/xs/userData';
 	import { drop } from '$lib/xs/dropZone';
@@ -47,9 +48,9 @@
 
 	function showMessage(msg: any) {
 		try {
-		if(msg.type != 0){
-			msg.__preprocess = true;
-			msg.content = __preprocess(msg.content);
+			if (msg.type != 0) {
+				msg.__preprocess = true;
+				msg.content = __preprocess(msg.content);
 			}
 			messages.push(msg);
 			messages = messages; // Reactivity trigger
@@ -161,21 +162,7 @@
 		// Set user
 		setUser(UID);
 		// Fetch user
-		fetch(`${http_host}${API_BASE}user/${person}`, {
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			method: 'POST'
-		})
-			.then((res) => {
-				if (res.status != 200) {
-					console.log('Shit happened. Going back...');
-					history.back();
-				}
-
-				return res.json();
-			})
+		getUser(person)
 			.then(function (json) {
 				person = json;
 				person = person;

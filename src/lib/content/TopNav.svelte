@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 
 	import voicecall, { init } from '$lib/xs/Ether/voicecall';
+	import { getUser } from '$lib/xs/Ether/User/UID';
 	export let icon = faHome;
 
 	// Voicecall Hooks
@@ -14,7 +15,20 @@
 	let recieverVideo: HTMLVideoElement;
 	let hostAudio: HTMLAudioElement;
 	let recieverAudio: HTMLAudioElement;
-	const person = $page.url.searchParams.get('with') || {};
+	let person = $page.url.searchParams.get('with') || { ID: '' };
+
+	// Read storage
+	import 'node-localstorage/register';
+	const userData = JSON.parse(localStorage.getItem('userData')) || {};
+	getUser(person)
+		.then(function (json) {
+			person = json;
+			person = person;
+			console.log(person);
+		})
+		.catch((error) => {
+			console.error('The user could not be found', error);
+		});
 	const UID = localStorage.getItem('UID');
 	onMount(() => {
 		// Create a new connection
@@ -38,7 +52,7 @@
 				<button
 					on:click={() => {
 						callPane.classList.remove('hidden');
-						voicecall(person, hostVideo, hostAudio, recieverVideo, recieverAudio);
+						voicecall(person.ID, hostVideo, hostAudio, recieverVideo, recieverAudio);
 					}}
 					class="rounded bg-gray-600 bg-opacity-20 px-4 py-2 hover:bg-opacity-40"
 					><Fa icon={faPhone} size="18" /></button
@@ -58,22 +72,61 @@
 		</div>
 	</div>
 
-	<div id="callPane" class="callPane hidden h-full w-full basis-full bg-text bg-opacity-100" bind:this={callPane}>
+	<div
+		id="callPane"
+		class="callPane hidden h-full w-full basis-full bg-text bg-opacity-100"
+		bind:this={callPane}
+	>
 		<div class="callContainer flex items-center justify-around bg-text bg-opacity-90 py-4">
 			<div
 				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
 				style="width: 500px; height: 400px"
 			>
-				<video bind:this={hostVideo} width="500px" muted={true} />
-
-				<audio bind:this={hostAudio} src="" muted={true}/>
+				<video
+					bind:this={hostVideo}
+					width="500px"
+					muted={true}
+					on:loadedmetadata={() => {
+						hostVideo = hostVideo;
+					}}
+					class="hidden"
+				/>
+				{#if hostVideo}
+					{#if hostVideo.classList.contains('hidden')}
+						<img
+							class="rounded-full border-8 border-tertiary px-2 py-2"
+							width="150px"
+							src={userData.avatar}
+							alt={userData.username + "'s Avatar"}
+						/>
+					{/if}
+				{/if}
+				<audio bind:this={hostAudio} src="" muted={true} class="hidden" />
 			</div>
 			<div
 				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
 				style="width: 500px; height: 400px"
 			>
-				<video bind:this={recieverVideo} width="500px" />
-				<audio bind:this={recieverAudio} src="" />
+				<video
+					bind:this={recieverVideo}
+					width="500px"
+					on:loadedmetadata={() => {
+						recieverVideo = recieverVideo;
+					}}
+					class="hidden"
+				/>
+				{#if recieverVideo}
+					{#if recieverVideo.classList.contains('hidden')}
+						<img
+							class="rounded-full border-8 border-tertiary px-2 py-2"
+							width="150px"
+							src={person.avatar}
+							alt={person.username + "'s Avatar"}
+						/>
+					{/if}
+				{/if}
+
+				<audio bind:this={recieverAudio} src="" class="hidden" />
 			</div>
 		</div>
 	</div>

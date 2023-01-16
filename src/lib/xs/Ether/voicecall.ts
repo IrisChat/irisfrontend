@@ -6,7 +6,6 @@ export function init(id: any, host: any, hostAudio: any, reciever: any, reciever
 	console.log('P2P initialized with ID #' + id);
 	// Get the peer and give the script access to the callPane
 	peer = new Peer(id, { pingInterval: 30000 });
-	
 	peer.on('open', (id) => {
 		console.log('Opened P2P connection.');
 	});
@@ -17,7 +16,7 @@ export function init(id: any, host: any, hostAudio: any, reciever: any, reciever
 				call.answer(stream); //  @ts-ignore We reference the callPane by ID
 				addStream(host, stream, hostAudio);
 				callPane.classList.remove('hidden');
-				call.on('stream', (stream) => addStream(reciever, stream, recieverAudio));
+				call.on('stream', (stream: MediaStream) => addStream(reciever, stream, recieverAudio));
 			});
 		}
 	});
@@ -30,7 +29,6 @@ export default function call(
 	reciever: any,
 	recieverAudio: any
 ) {
-
 	navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
 		addStream(host, stream, hostAudio);
 		callUser(person, stream, host, reciever, recieverAudio);
@@ -42,11 +40,13 @@ function addStream(video: any, stream: any, audio: any) {
 	if (stream.getVideoTracks().length > 0) {
 		video.srcObject = stream;
 		video.addEventListener('loadedmetadata', () => video.play());
+		video.classList.remove('hidden');
 	}
 	if (stream.getAudioTracks().length > 0) {
 		// do something with the audio
 		audio.srcObject = stream;
 		audio.addEventListener('loadedmetadata', () => audio.play());
+		audio.classList.remove('hidden');
 	}
 }
 
@@ -67,11 +67,11 @@ async function callUser(user: any, stream: any, host: any, reciever: any, reciev
 	// If the user is online, we try to call them
 	if (users[user]) {
 		const call = peer.call(user, stream);
-		call.on('stream', (mediaStream) => {
+		call.on('stream', (mediaStream: MediaStream) => {
 			addStream(reciever, mediaStream, recieverAudio);
 		});
 		call.on('close', () => reciever.remove());
 	} else {
-		console.log('The user is offline. Cannot call.');
+		alert('The user is offline. Cannot call.');
 	}
 }
