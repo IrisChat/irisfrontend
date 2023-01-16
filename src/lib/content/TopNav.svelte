@@ -77,7 +77,7 @@
 		class="callPane hidden h-full w-full basis-full bg-text bg-opacity-100"
 		bind:this={callPane}
 	>
-		<div class="callContainer flex items-center justify-around bg-text bg-opacity-90 py-4">
+		<div class="callContainer flex flex-wrap items-center justify-around bg-text bg-opacity-90 py-4">
 			<div
 				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
 				style="width: 500px; height: 400px"
