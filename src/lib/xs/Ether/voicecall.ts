@@ -9,8 +9,6 @@ export function init(host: any, hostAudio: any, reciever: any, recieverAudio: an
 	// Get the peer and give the script access to the callPane
 	peer = new Peer(id, {
 		debug: 3,
-		host: "/",
-		port: 3001,
 		config: {
 			iceServers: [
 				{ urls: 'stun:stun.l.google.com:19302' },
