@@ -1,11 +1,29 @@
 import { Peer } from 'peerjs';
 import { http_host, API_BASE } from '$lib/xs/config.json';
+const UID = localStorage.getItem('UID');
 let peer: any;
 
-export function init(id: any, host: any, hostAudio: any, reciever: any, recieverAudio: any) {
+export function init(host: any, hostAudio: any, reciever: any, recieverAudio: any) {
+	const id = UID;
 	console.log('P2P initialized with ID #' + id);
 	// Get the peer and give the script access to the callPane
-	peer = new Peer(id, { pingInterval: 30000 });
+	peer = new Peer(id, {
+		debug: 3,
+		host: "/",
+		port: 3001,
+		config: {
+			iceServers: [
+				{ urls: 'stun:stun.l.google.com:19302' },
+				{ urls: 'stun:stun1.l.google.com:19302' },
+				{ urls: 'stun:stun2.l.google.com:19302' },
+				{ urls: 'stun:stun3.l.google.com:19302' },
+				{ urls: 'stun:stun4.l.google.com:19302' },
+				{ urls: 'turn:0.peerjs.com:3478', username: 'peerjs', credential: 'peerjsp' }
+			],
+			sdpSemantics: 'unified-plan',
+			iceTransportPolicy: 'relay' // <- it means using only relay server (our free turn server in this case)
+		}
+	});
 	peer.on('open', (id: any) => {
 		console.log('Opened P2P connection.');
 	});
@@ -32,7 +50,6 @@ export default function call(
 ) {
 	navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
 		addStream(host, stream, hostAudio);
-		console.log(`Calling ${person}...`);
 		callUser(person, stream, host, reciever, recieverAudio);
 	});
 }
@@ -69,6 +86,7 @@ async function callUser(user: any, stream: any, host: any, reciever: any, reciev
 	// If the user is online, we try to call them
 	if (users[user]) {
 		const call = peer.call(user, stream);
+		console.log(`Calling ${user}...`);
 		call.on('stream', (stream: MediaStream) => addStream(reciever, stream, recieverAudio));
 		call.on('close', () => reciever.remove());
 	} else {

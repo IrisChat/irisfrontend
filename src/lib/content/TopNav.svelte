@@ -31,11 +31,10 @@
 				console.error('The user could not be found', error);
 			});
 	}
-	const UID = localStorage.getItem('UID');
 	onMount(() => {
 		if (call) {
 			// Create a new connection
-			init(UID, hostVideo, hostAudio, recieverVideo, recieverAudio);
+			init(hostVideo, hostAudio, recieverVideo, recieverAudio);
 		}
 	});
 </script>
@@ -55,8 +54,8 @@
 			<div class="phonecall flex items-center justify-center px-4">
 				<button
 					on:click={() => {
-						callPane.classList.remove('hidden');
 						voicecall(person.ID, hostVideo, hostAudio, recieverVideo, recieverAudio);
+						callPane.classList.remove('hidden');
 					}}
 					class="rounded bg-gray-600 bg-opacity-20 px-4 py-2 hover:bg-opacity-40"
 					><Fa icon={faPhone} size="18" /></button
