@@ -18,6 +18,7 @@
 	let person = $page.url.searchParams.get('with') || { ID: '' };
 
 	// Read storage
+	// @audit TopNav - Fix this
 	import 'node-localstorage/register';
 	const userData = JSON.parse(localStorage.getItem('userData')) || {};
 	if (call) {

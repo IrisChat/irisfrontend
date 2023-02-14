@@ -68,6 +68,7 @@ function addStream(video: any, stream: any, audio: any) {
 }
 
 // Returns who all is online on the server
+// @audit onLineUsers - Bookmark
 function onLineUsers() {
 	return fetch(`${http_host}${API_BASE}users/online`)
 		.then((response) => response.json())
@@ -77,6 +78,7 @@ function onLineUsers() {
 		.catch((error) => console.warn(error));
 }
 
+// @todo callUser - Something is not working here
 async function callUser(user: any, stream: any, host: any, reciever: any, recieverAudio: any) {
 	const users = await onLineUsers().then((users) => {
 		return users;
