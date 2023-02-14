@@ -6,6 +6,7 @@ let peer: any;
 export function init(host: any, hostAudio: any, reciever: any, recieverAudio: any) {
 	// Keep to string to avoid complications and unreachability
 	const id = UID?.toString();
+	host.muted = true;
 	console.log('P2P initialized with ID #' + id);
 	// Get the peer and give the script access to the callPane
 	peer = new Peer(id, {
