@@ -4,7 +4,7 @@ const UID = localStorage.getItem('UID');
 let peer: any;
 
 export function init(host: any, hostAudio: any, reciever: any, recieverAudio: any) {
-	const id = UID;
+	const id = UID?.toString();
 	console.log('P2P initialized with ID #' + id);
 	// Get the peer and give the script access to the callPane
 	peer = new Peer(id, {

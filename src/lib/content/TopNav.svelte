@@ -55,7 +55,7 @@
 			<div class="phonecall flex items-center justify-center px-4">
 				<button
 					on:click={() => {
-						voicecall(person.ID, hostVideo, hostAudio, recieverVideo, recieverAudio);
+						voicecall(person.ID.toString(), hostVideo, hostAudio, recieverVideo, recieverAudio);
 						callPane.classList.remove('hidden');
 					}}
 					class="rounded bg-gray-600 bg-opacity-20 px-4 py-2 hover:bg-opacity-40"
