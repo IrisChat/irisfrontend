@@ -55,6 +55,7 @@
 			<div class="phonecall flex items-center justify-center px-4">
 				<button
 					on:click={() => {
+						// Ensure that the ID's are of the same type
 						voicecall(person.ID.toString(), hostVideo, hostAudio, recieverVideo, recieverAudio);
 						callPane.classList.remove('hidden');
 					}}
