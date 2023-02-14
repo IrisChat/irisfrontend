@@ -50,4 +50,14 @@
 		opacity: 80%;
 		font-weight: 800;
 	}
+
+	:global(::-webkit-resizer) {
+		display: initial;
+		width: 100px;
+		height: 100px;
+		/* background: url('./grid-5.svg');
+		::-webkit-resizer {
+ 		background-size: contain; */
+		background: #ff7600ed;
+	}
 </style>
