@@ -11,15 +11,15 @@ export function init(host: any, hostAudio: any, reciever: any, recieverAudio: an
 		debug: 3,
 		config: {
 			iceServers: [
-				{ urls: 'stun:stun.l.google.com:19302' },
-				{ urls: 'stun:stun1.l.google.com:19302' },
-				{ urls: 'stun:stun2.l.google.com:19302' },
-				{ urls: 'stun:stun3.l.google.com:19302' },
-				{ urls: 'stun:stun4.l.google.com:19302' },
-				{ urls: 'turn:0.peerjs.com:3478', username: 'peerjs', credential: 'peerjsp' }
+				{ url: 'stun:stun.l.google.com:19302' },
+				{ url: 'stun:stun1.l.google.com:19302' },
+				{ url: 'stun:stun2.l.google.com:19302' },
+				{ url: 'stun:stun3.l.google.com:19302' },
+				{ url: 'stun:stun4.l.google.com:19302' },
+				{ url: 'turn:0.peerjs.com:3478', username: 'peerjs', credential: 'peerjsp' }
 			],
-			sdpSemantics: 'unified-plan',
-			iceTransportPolicy: 'relay' // <- it means using only relay server (our free turn server in this case)
+			sdpSemantics: 'unified-plan'
+			// iceTransportPolicy: 'relay' // <- it means using only relay server (our free turn server in this case)
 		}
 	});
 	peer.on('open', (id: any) => {
