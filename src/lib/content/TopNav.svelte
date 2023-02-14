@@ -83,7 +83,7 @@
 		bind:this={callPane}
 	>
 		<div
-			class="callContainer flex resize flex-wrap items-center justify-around overflow-auto bg-text bg-opacity-90 py-4"
+			class="callContainer flex resize flex-wrap items-center justify-around overflow-auto overflow-y-hidden bg-text bg-opacity-90 py-4"
 		>
 			<div
 				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
