@@ -37,12 +37,12 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 				.then((stream) => {
 					call.answer(stream); //  @ts-ignore We reference the callPane by ID
 					addStream(host, stream, hostAudio); // Unhide the callpane because we need it
-					receiverELEM.classList.remove('hidden');
+					Receiver.classList.remove('hidden');
 					callPane.classList.remove('hidden');
 					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 					call.on('close', () => {
 						// receiver.remove();
-						receiverELEM.classList.add('hidden'); // Hide the callpane again as we won't need it
+						Receiver.classList.add('hidden'); // Hide the callpane again as we won't need it
 						callPane.classList.add('hidden');
 					});
 				})
@@ -52,12 +52,12 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 					const stream = new MediaStream();
 					call.answer(stream); //  @ts-ignore We reference the callPane by ID
 					addStream(host, stream, hostAudio); // Unhide the callpane because we need it
-					receiverELEM.classList.remove('hidden');
+					Receiver.classList.remove('hidden');
 					callPane.classList.remove('hidden');
 					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 					call.on('close', () => {
 						// receiver.remove(); // Hide the callpane again as we wont need it
-						receiverELEM.classList.add('hidden');
+						Receiver.classList.add('hidden');
 						callPane.classList.add('hidden');
 					});
 				});
@@ -125,7 +125,7 @@ async function callUser(user: any, stream: any, host: any, receiver: any, receiv
 		call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 		call.on('close', () => {
 			receiver.remove();
-			receiverELEM.classList.add('hidden'); // Hide the callpane again as we won't need it
+			Receiver.classList.add('hidden'); // Hide the callpane again as we won't need it
 			callPane.classList.remove('hidden');
 		});
 	} else {

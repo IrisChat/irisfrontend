@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
-	import { faHome, faPhone } from '@fortawesome/free-solid-svg-icons';
+	import { faEyeSlash, faHome, faPhone } from '@fortawesome/free-solid-svg-icons';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
@@ -11,7 +11,9 @@
 	// Voicecall Hooks
 	export let call = false;
 	let callPane: HTMLDivElement;
+	let Host: HTMLDivElement;
 	let hostVideo: HTMLVideoElement;
+	let Receiver: HTMLDivElement;
 	let receiverVideo: HTMLVideoElement;
 	let hostAudio: HTMLAudioElement;
 	let receiverAudio: HTMLAudioElement;
@@ -88,6 +90,8 @@
 			<div class="wrapper inline">
 				<div class="people flex flex-wrap items-center justify-around">
 					<div
+						id="Host"
+						bind:this={Host}
 						class="Host mx-4 my-4 flex items-center justify-center overflow-hidden rounded bg-primary"
 						style="width: 500px; height: 400px"
 					>
@@ -113,7 +117,8 @@
 						<audio bind:this={hostAudio} src="" muted={true} class="hidden" />
 					</div>
 					<div
-						id="receiverELEM"
+						id="Receiver"
+						bind:this={Receiver}
 						class="Receiver mx-4 my-4 flex items-center justify-center overflow-hidden rounded bg-primary"
 						style="width: 500px; height: 400px"
 					>
@@ -140,9 +145,18 @@
 					</div>
 				</div>
 
-				<div class="controls py-4 items-around flex justify-center">
-					<button class="rounded-full bg-red-600 px-4 py-4 text-white hover:bg-red-800" on:click={endCall}>
+				<div class="controls items-around flex justify-center py-4">
+					<button
+						class="mx-2 rounded-full bg-red-600 px-4 py-4 text-white hover:bg-red-800"
+						on:click={endCall}
+					>
 						<Fa icon={faPhone} size="18" />
+					</button>
+					<button
+						class="mx-2 rounded-full bg-blue-600 px-4 py-4 text-white hover:bg-blue-800"
+						on:click={() => Host.classList.toggle('hidden')}
+					>
+						<Fa icon={faEyeSlash} size="18" />
 					</button>
 				</div>
 			</div>
