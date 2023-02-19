@@ -111,6 +111,7 @@
 				<audio bind:this={hostAudio} src="" muted={true} class="hidden" />
 			</div>
 			<div
+			id="receiverELEM"
 				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
 				style="width: 500px; height: 400px"
 			>

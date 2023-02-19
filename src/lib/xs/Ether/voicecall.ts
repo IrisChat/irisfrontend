@@ -2,6 +2,7 @@ import { Peer } from 'peerjs';
 import { http_host, API_BASE } from '$lib/xs/config.json';
 const UID = localStorage.getItem('UID');
 let peer: any;
+let thisCall: any;
 
 export function init(host: any, hostAudio: any, receiver: any, receiverAudio: any) {
 	// Keep to string to avoid complications and unreachability
@@ -30,6 +31,7 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 	peer.on('call', (call: any) => {
 		const acceptCall = confirm('Videocall incoming, do you want to accept it?');
 		if (acceptCall) {
+		thisCall = call;
 			navigator.mediaDevices
 				.getUserMedia({ video: true, audio: true })
 				.then((stream) => {
@@ -37,7 +39,10 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 					addStream(host, stream, hostAudio);
 					callPane.classList.remove('hidden');
 					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
-					call.on('close', () => receiver.remove());
+					call.on('close', () => {
+						receiver.remove();
+						receiverELEM.parentNode.removeChild(receiverELEM);
+					});
 				})
 				.catch((e) => {
 					// This makes the video optional
@@ -47,7 +52,10 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 					addStream(host, stream, hostAudio);
 					callPane.classList.remove('hidden');
 					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
-					call.on('close', () => receiver.remove());
+					call.on('close', () => {
+						receiver.remove();
+						receiverELEM.parentNode.removeChild(receiverELEM);
+					});
 				});
 		}
 	});
@@ -108,9 +116,13 @@ async function callUser(user: any, stream: any, host: any, receiver: any, receiv
 	// If the user is online, we try to call them
 	if (users[user]) {
 		const call = peer.call(user, stream);
+		thisCall = call;
 		console.log(`Calling ${user}...`);
 		call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
-		call.on('close', () => receiver.remove());
+		call.on('close', () => {
+			receiver.remove();
+			receiverELEM.parentNode.removeChild(receiverELEM);
+		});
 	} else {
 		alert('The user is offline. Cannot call.');
 	}
