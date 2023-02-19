@@ -30,13 +30,25 @@ export function init(host: any, hostAudio: any, reciever: any, recieverAudio: an
 	peer.on('call', (call: any) => {
 		const acceptCall = confirm('Videocall incoming, do you want to accept it?');
 		if (acceptCall) {
-			navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
-				call.answer(stream); //  @ts-ignore We reference the callPane by ID
-				addStream(host, stream, hostAudio);
-				callPane.classList.remove('hidden');
-				call.on('stream', (stream: MediaStream) => addStream(reciever, stream, recieverAudio));
-				call.on('close', () => reciever.remove());
-			});
+			navigator.mediaDevices
+				.getUserMedia({ video: true, audio: true })
+				.then((stream) => {
+					call.answer(stream); //  @ts-ignore We reference the callPane by ID
+					addStream(host, stream, hostAudio);
+					callPane.classList.remove('hidden');
+					call.on('stream', (stream: MediaStream) => addStream(reciever, stream, recieverAudio));
+					call.on('close', () => reciever.remove());
+				})
+				.catch((e) => {
+					// This makes the video optional
+					console.warn(e);
+					const stream = new MediaStream();
+					call.answer(stream); //  @ts-ignore We reference the callPane by ID
+					addStream(host, stream, hostAudio);
+					callPane.classList.remove('hidden');
+					call.on('stream', (stream: MediaStream) => addStream(reciever, stream, recieverAudio));
+					call.on('close', () => reciever.remove());
+				});
 		}
 	});
 }
@@ -48,10 +60,18 @@ export default function call(
 	reciever: any,
 	recieverAudio: any
 ) {
-	navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
-		addStream(host, stream, hostAudio);
-		callUser(person, stream, host, reciever, recieverAudio);
-	});
+	navigator.mediaDevices
+		.getUserMedia({ video: true, audio: true })
+		.then((stream) => {
+			addStream(host, stream, hostAudio);
+			callUser(person, stream, host, reciever, recieverAudio);
+		})
+		.catch((e) => {
+			console.warn(e);
+			const stream = new MediaStream();
+			addStream(host, stream, hostAudio);
+			callUser(person, stream, host, reciever, recieverAudio);
+		});
 }
 
 function addStream(video: any, stream: any, audio: any) {
