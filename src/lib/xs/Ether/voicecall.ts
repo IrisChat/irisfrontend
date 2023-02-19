@@ -41,7 +41,8 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 					call.on('close', () => {
 						receiver.remove();
-						receiverELEM.parentNode.removeChild(receiverELEM);
+						receiverELEM.parentNode.removeChild(receiverELEM); // Hide the callpane again as we won't need it
+						callPane.classList.add('hidden');
 					});
 				})
 				.catch((e) => {
@@ -53,8 +54,9 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 					callPane.classList.remove('hidden');
 					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 					call.on('close', () => {
-						receiver.remove();
+						receiver.remove(); // Hide the callpane again as we wont need it
 						receiverELEM.parentNode.removeChild(receiverELEM);
+						callPane.classList.add('hidden');
 					});
 				});
 		}
@@ -121,7 +123,8 @@ async function callUser(user: any, stream: any, host: any, receiver: any, receiv
 		call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 		call.on('close', () => {
 			receiver.remove();
-			receiverELEM.parentNode.removeChild(receiverELEM);
+			receiverELEM.parentNode.removeChild(receiverELEM); // Hide the callpane again as we won't need it
+			callPane.classList.remove('hidden');
 		});
 	} else {
 		alert('The user is offline. Cannot call.');
@@ -134,7 +137,6 @@ export function endCall() {
 
 	try {
 		thisCall.close();
-	
 	} catch {}
 	thisCall = undefined;
 }
