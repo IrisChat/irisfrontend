@@ -4,7 +4,7 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
-	import voicecall, { init } from '$lib/xs/Ether/voicecall';
+	import voicecall, { init, endCall } from '$lib/xs/Ether/voicecall';
 	import { getUser } from '$lib/xs/Ether/User/UID';
 	export let icon = faHome;
 
@@ -85,56 +85,66 @@
 		<div
 			class="callContainer flex resize flex-wrap items-center justify-around overflow-auto overflow-y-hidden bg-text bg-opacity-90 py-4"
 		>
-			<div
-				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
-				style="width: 500px; height: 400px"
-			>
-				<video
-					bind:this={hostVideo}
-					width="500px"
-					muted={true}
-					on:loadedmetadata={() => {
-						hostVideo = hostVideo;
-					}}
-					class="hidden"
-				/>
-				{#if hostVideo}
-					{#if hostVideo.classList.contains('hidden')}
-						<img
-							class="rounded-full border-8 border-tertiary px-2 py-2"
-							width="150px"
-							src={userData.avatar}
-							alt={userData.username + "'s Avatar"}
+			<div class="wrapper inline">
+				<div class="people flex">
+					<div
+						class="Host mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
+						style="width: 500px; height: 400px"
+					>
+						<video
+							bind:this={hostVideo}
+							width="500px"
+							muted={true}
+							on:loadedmetadata={() => {
+								hostVideo = hostVideo;
+							}}
+							class="hidden"
 						/>
-					{/if}
-				{/if}
-				<audio bind:this={hostAudio} src="" muted={true} class="hidden" />
-			</div>
-			<div
-			id="receiverELEM"
-				class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
-				style="width: 500px; height: 400px"
-			>
-				<video
-					bind:this={receiverVideo}
-					width="500px"
-					on:loadedmetadata={() => {
-						receiverVideo = receiverVideo;
-					}}
-					class="hidden"
-				/>
-				{#if receiverVideo}
-					{#if receiverVideo.classList.contains('hidden')}
-						<img
-							class="rounded-full border-8 border-tertiary px-2 py-2"
-							width="150px"
-							src={person.avatar}
-							alt={person.username + "'s Avatar"}
+						{#if hostVideo}
+							{#if hostVideo.classList.contains('hidden')}
+								<img
+									class="rounded-full border-8 border-tertiary px-2 py-2"
+									width="150px"
+									src={userData.avatar}
+									alt={userData.username + "'s Avatar"}
+								/>
+							{/if}
+						{/if}
+						<audio bind:this={hostAudio} src="" muted={true} class="hidden" />
+					</div>
+					<div
+						id="receiverELEM"
+						class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
+						style="width: 500px; height: 400px"
+					>
+						<video
+							bind:this={receiverVideo}
+							width="500px"
+							on:loadedmetadata={() => {
+								receiverVideo = receiverVideo;
+							}}
+							class="hidden"
 						/>
-					{/if}
-				{/if}
+						{#if receiverVideo}
+							{#if receiverVideo.classList.contains('hidden')}
+								<img
+									class="rounded-full border-8 border-tertiary px-2 py-2"
+									width="150px"
+									src={person.avatar}
+									alt={person.username + "'s Avatar"}
+								/>
+							{/if}
+						{/if}
 
-				<audio bind:this={receiverAudio} src="" class="hidden" />
+						<audio bind:this={receiverAudio} src="" class="hidden" />
+					</div>
+				</div>
+
+				<div class="controls py-4 items-around flex justify-center">
+					<button class="rounded-full bg-red-600 px-4 py-4 text-white hover:bg-red-800" on:click={endCall}>
+						<Fa icon={faPhone} size="18" />
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>

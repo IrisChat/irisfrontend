@@ -31,7 +31,7 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 	peer.on('call', (call: any) => {
 		const acceptCall = confirm('Videocall incoming, do you want to accept it?');
 		if (acceptCall) {
-		thisCall = call;
+			thisCall = call;
 			navigator.mediaDevices
 				.getUserMedia({ video: true, audio: true })
 				.then((stream) => {
@@ -126,4 +126,15 @@ async function callUser(user: any, stream: any, host: any, receiver: any, receiv
 	} else {
 		alert('The user is offline. Cannot call.');
 	}
+}
+
+export function endCall() {
+	// Go back to the menu
+	if (!thisCall) return;
+
+	try {
+		thisCall.close();
+	
+	} catch {}
+	thisCall = undefined;
 }
