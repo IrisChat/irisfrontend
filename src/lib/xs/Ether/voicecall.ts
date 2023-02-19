@@ -41,7 +41,7 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 					callPane.classList.remove('hidden');
 					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 					call.on('close', () => {
-						receiver.remove();
+						// receiver.remove();
 						receiverELEM.classList.add('hidden'); // Hide the callpane again as we won't need it
 						callPane.classList.add('hidden');
 					});
@@ -56,7 +56,7 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 					callPane.classList.remove('hidden');
 					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 					call.on('close', () => {
-						receiver.remove(); // Hide the callpane again as we wont need it
+						// receiver.remove(); // Hide the callpane again as we wont need it
 						receiverELEM.classList.add('hidden');
 						callPane.classList.add('hidden');
 					});
