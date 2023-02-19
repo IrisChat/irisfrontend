@@ -3,7 +3,7 @@ import { http_host, API_BASE } from '$lib/xs/config.json';
 const UID = localStorage.getItem('UID');
 let peer: any;
 
-export function init(host: any, hostAudio: any, reciever: any, recieverAudio: any) {
+export function init(host: any, hostAudio: any, receiver: any, receiverAudio: any) {
 	// Keep to string to avoid complications and unreachability
 	const id = UID?.toString();
 	host.muted = true;
@@ -36,8 +36,8 @@ export function init(host: any, hostAudio: any, reciever: any, recieverAudio: an
 					call.answer(stream); //  @ts-ignore We reference the callPane by ID
 					addStream(host, stream, hostAudio);
 					callPane.classList.remove('hidden');
-					call.on('stream', (stream: MediaStream) => addStream(reciever, stream, recieverAudio));
-					call.on('close', () => reciever.remove());
+					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
+					call.on('close', () => receiver.remove());
 				})
 				.catch((e) => {
 					// This makes the video optional
@@ -46,8 +46,8 @@ export function init(host: any, hostAudio: any, reciever: any, recieverAudio: an
 					call.answer(stream); //  @ts-ignore We reference the callPane by ID
 					addStream(host, stream, hostAudio);
 					callPane.classList.remove('hidden');
-					call.on('stream', (stream: MediaStream) => addStream(reciever, stream, recieverAudio));
-					call.on('close', () => reciever.remove());
+					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
+					call.on('close', () => receiver.remove());
 				});
 		}
 	});
@@ -57,20 +57,20 @@ export default function call(
 	person: any,
 	host: any,
 	hostAudio: any,
-	reciever: any,
-	recieverAudio: any
+	receiver: any,
+	receiverAudio: any
 ) {
 	navigator.mediaDevices
 		.getUserMedia({ video: true, audio: true })
 		.then((stream) => {
 			addStream(host, stream, hostAudio);
-			callUser(person, stream, host, reciever, recieverAudio);
+			callUser(person, stream, host, receiver, receiverAudio);
 		})
 		.catch((e) => {
 			console.warn(e);
 			const stream = new MediaStream();
 			addStream(host, stream, hostAudio);
-			callUser(person, stream, host, reciever, recieverAudio);
+			callUser(person, stream, host, receiver, receiverAudio);
 		});
 }
 
@@ -101,7 +101,7 @@ function onLineUsers() {
 }
 
 // @todo callUser - Something is not working here
-async function callUser(user: any, stream: any, host: any, reciever: any, recieverAudio: any) {
+async function callUser(user: any, stream: any, host: any, receiver: any, receiverAudio: any) {
 	const users = await onLineUsers().then((users) => {
 		return users;
 	});
@@ -109,8 +109,8 @@ async function callUser(user: any, stream: any, host: any, reciever: any, reciev
 	if (users[user]) {
 		const call = peer.call(user, stream);
 		console.log(`Calling ${user}...`);
-		call.on('stream', (stream: MediaStream) => addStream(reciever, stream, recieverAudio));
-		call.on('close', () => reciever.remove());
+		call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
+		call.on('close', () => receiver.remove());
 	} else {
 		alert('The user is offline. Cannot call.');
 	}

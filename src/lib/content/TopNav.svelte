@@ -12,9 +12,9 @@
 	export let call = false;
 	let callPane: HTMLDivElement;
 	let hostVideo: HTMLVideoElement;
-	let recieverVideo: HTMLVideoElement;
+	let receiverVideo: HTMLVideoElement;
 	let hostAudio: HTMLAudioElement;
-	let recieverAudio: HTMLAudioElement;
+	let receiverAudio: HTMLAudioElement;
 	let person = $page.url.searchParams.get('with') || { ID: '' };
 
 	// Read storage
@@ -35,7 +35,7 @@
 	onMount(() => {
 		if (call) {
 			// Create a new connection
-			init(hostVideo, hostAudio, recieverVideo, recieverAudio);
+			init(hostVideo, hostAudio, receiverVideo, receiverAudio);
 		}
 	});
 </script>
@@ -56,7 +56,7 @@
 				<button
 					on:click={() => {
 						// Ensure that the ID's are of the same type
-						voicecall(person.ID.toString(), hostVideo, hostAudio, recieverVideo, recieverAudio);
+						voicecall(person.ID.toString(), hostVideo, hostAudio, receiverVideo, receiverAudio);
 						callPane.classList.remove('hidden');
 					}}
 					class="rounded bg-gray-600 bg-opacity-20 px-4 py-2 hover:bg-opacity-40"
@@ -115,15 +115,15 @@
 				style="width: 500px; height: 400px"
 			>
 				<video
-					bind:this={recieverVideo}
+					bind:this={receiverVideo}
 					width="500px"
 					on:loadedmetadata={() => {
-						recieverVideo = recieverVideo;
+						receiverVideo = receiverVideo;
 					}}
 					class="hidden"
 				/>
-				{#if recieverVideo}
-					{#if recieverVideo.classList.contains('hidden')}
+				{#if receiverVideo}
+					{#if receiverVideo.classList.contains('hidden')}
 						<img
 							class="rounded-full border-8 border-tertiary px-2 py-2"
 							width="150px"
@@ -133,7 +133,7 @@
 					{/if}
 				{/if}
 
-				<audio bind:this={recieverAudio} src="" class="hidden" />
+				<audio bind:this={receiverAudio} src="" class="hidden" />
 			</div>
 		</div>
 	</div>

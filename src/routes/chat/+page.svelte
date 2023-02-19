@@ -150,11 +150,11 @@
 		}
 	}
 
-	function createRID(sender: number, reciever: number) {
-		if (sender < reciever) {
-			return parseInt(`${sender}${reciever}`);
+	function createRID(sender: number, receiver: number) {
+		if (sender < receiver) {
+			return parseInt(`${sender}${receiver}`);
 		} else {
-			return parseInt(`${reciever}${sender}`);
+			return parseInt(`${receiver}${sender}`);
 		}
 	}
 
