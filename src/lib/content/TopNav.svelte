@@ -86,9 +86,9 @@
 			class="callContainer flex resize flex-wrap items-center justify-around overflow-auto overflow-y-hidden bg-text bg-opacity-90 py-4"
 		>
 			<div class="wrapper inline">
-				<div class="people flex">
+				<div class="people flex flex-wrap items-center justify-around">
 					<div
-						class="Host mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
+						class="Host mx-4 my-4 flex items-center justify-center overflow-hidden rounded bg-primary"
 						style="width: 500px; height: 400px"
 					>
 						<video
@@ -114,7 +114,7 @@
 					</div>
 					<div
 						id="receiverELEM"
-						class="mx-4 flex items-center justify-center overflow-hidden rounded bg-primary"
+						class="Receiver mx-4 my-4 flex items-center justify-center overflow-hidden rounded bg-primary"
 						style="width: 500px; height: 400px"
 					>
 						<video

@@ -36,12 +36,13 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 				.getUserMedia({ video: true, audio: true })
 				.then((stream) => {
 					call.answer(stream); //  @ts-ignore We reference the callPane by ID
-					addStream(host, stream, hostAudio);
+					addStream(host, stream, hostAudio); // Unhide the callpane because we need it
+					receiverELEM.classList.remove('hidden');
 					callPane.classList.remove('hidden');
 					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 					call.on('close', () => {
 						receiver.remove();
-						receiverELEM.parentNode.removeChild(receiverELEM); // Hide the callpane again as we won't need it
+						receiverELEM.classList.add('hidden'); // Hide the callpane again as we won't need it
 						callPane.classList.add('hidden');
 					});
 				})
@@ -50,12 +51,13 @@ export function init(host: any, hostAudio: any, receiver: any, receiverAudio: an
 					console.warn(e);
 					const stream = new MediaStream();
 					call.answer(stream); //  @ts-ignore We reference the callPane by ID
-					addStream(host, stream, hostAudio);
+					addStream(host, stream, hostAudio); // Unhide the callpane because we need it
+					receiverELEM.classList.remove('hidden');
 					callPane.classList.remove('hidden');
 					call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 					call.on('close', () => {
 						receiver.remove(); // Hide the callpane again as we wont need it
-						receiverELEM.parentNode.removeChild(receiverELEM);
+						receiverELEM.classList.add('hidden');
 						callPane.classList.add('hidden');
 					});
 				});
@@ -123,7 +125,7 @@ async function callUser(user: any, stream: any, host: any, receiver: any, receiv
 		call.on('stream', (stream: MediaStream) => addStream(receiver, stream, receiverAudio));
 		call.on('close', () => {
 			receiver.remove();
-			receiverELEM.parentNode.removeChild(receiverELEM); // Hide the callpane again as we won't need it
+			receiverELEM.classList.add('hidden'); // Hide the callpane again as we won't need it
 			callPane.classList.remove('hidden');
 		});
 	} else {
