@@ -1,4 +1,5 @@
 <script lang="ts">
+	const VERSION = '__VERSION__';
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
 	import Channelbar from '$lib/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
@@ -145,7 +146,7 @@
 			<svelte:fragment slot="channels"><MainChannel /></svelte:fragment>
 		</Channelbar>
 
-		<ContentContainer icon={faCog} title="Settings">
+		<ContentContainer icon={faCog} title={`Settings — Client v${VERSION}`}>
 			<svelte:fragment slot="content">
 				<div class="imports hidden bg-green-500 text-gray-500" />
 				<div bind:this={errorSplash} class="hidden">
