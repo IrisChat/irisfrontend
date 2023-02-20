@@ -166,7 +166,7 @@
 			<div class="convo-title opacity-35 mb-4 basis-full text-sm dark:text-text">
 				<slot name="title">This is where you contact your friends.</slot>
 			</div>
-			<div class="convo_wrap overflow-auto" style="max-height: 64vh;">
+			<div class="convo_wrap overflow-auto" style="max-height: 64vh; padding-bottom: 20px">
 				{#each conversations as convo, i}
 					<div
 						class="wrap"
