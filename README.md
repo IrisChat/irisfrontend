@@ -41,4 +41,4 @@ $ npm install
 
 4. Afterward, run the server using `npm start`
 
-If everything works, the serveroutput should read 'Iris:Server running on port [8080]'
+If everything works, the server output should read `Iris:Server running on port [8080]`
