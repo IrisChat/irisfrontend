@@ -1,4 +1,4 @@
-# Ether — Frontend
+# Iris — Frontend
 _It's a social app_
 
 
