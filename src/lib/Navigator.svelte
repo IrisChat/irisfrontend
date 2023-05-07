@@ -1,5 +1,5 @@
 <div class="w-full">
-	<div class="navbar my-16 flex justify-around rounded-2xl py-4">
+	<div class="navbar relative my-16 flex justify-around rounded-2xl py-4">
 		<a href="/"
 			><div
 				class="logo mx-8 flex justify-start text-4xl font-semibold hover:underline hover:opacity-95"
