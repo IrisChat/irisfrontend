@@ -60,8 +60,7 @@
 </script>
 
 <main
-	class="flex h-screen flex-wrap items-center justify-center bg-gray-200 text-white"
-	style="background: #0E1C36;"
+	class="login flex h-screen flex-wrap items-center justify-center bg-gray-200 text-white"
 >
 	<form
 		class="flex flex-wrap items-center justify-center"
@@ -116,3 +115,14 @@
 		<!-- <ToastContainer /> -->
 	</form>
 </main>
+
+<style>
+	.login {
+		background-color: #191B1F; /* Fallback color */
+		background-image: url('/images/login.png');
+		background-position: center;
+		/* background-size: contain; */
+		/* background-repeat: no-repeat; */
+		/* border-radius: 1vw; */
+	}
+</style>
