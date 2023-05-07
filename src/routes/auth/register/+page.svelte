@@ -166,6 +166,7 @@
 		background-color: #191b1f; /* Fallback color */
 		background-image: url('/images/register.png');
 		background-position: center;
+		background-size: cover;
 		/* background-size: contain; */
 		/* background-repeat: no-repeat; */
 		/* border-radius: 1vw; */
