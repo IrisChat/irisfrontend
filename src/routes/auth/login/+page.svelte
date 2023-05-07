@@ -174,7 +174,7 @@
 		/* border-radius: 1vw; */
 	}
 	.login::before {
-		backdrop-filter: brightness(2) saturate(3);
+		backdrop-filter: brightness(0.78) saturate(3);
 		content: '';
 		display: block;
 		position: absolute;
