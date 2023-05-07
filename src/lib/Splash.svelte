@@ -1,5 +1,41 @@
 <script lang="ts">
-// 
+	// There are six loading messages each with their own "thing"
+	const LoadingMessages = ['Pinging Your Mom', 'Loading In', 'Preparing the Application'];
+	const Random: number = Math.floor(Math.random() * LoadingMessages.length);
+	import Fa from 'svelte-fa';
+	import { faCloud } from '@fortawesome/free-solid-svg-icons';
 </script>
 
-<main></main>
+<main
+	class="flex h-screen w-full flex-col items-center justify-end overflow-hidden text-center select-none"
+	style="color: #2EC0F9"
+>
+	<div class="notification flex flex-1 flex-col items-center justify-end">
+		<div class="notification-content inline-block">
+			<div class="logo text-5xl font-semibold">IRIS</div>
+			<div class="message my-4 text-sm font-extralight">{LoadingMessages[Random]}</div>
+		</div>
+	</div>
+	<div
+		class="troubleshooting-tips flex w-full flex-col items-center justify-end py-12 text-center text-sm font-extralight first-letter:h-full"
+		style="flex: 0.75"
+	>
+		<div class="troubleshooting-tips-container inline-block">
+			<div class="troubleshooting-tips-callout">Network issues? Try some of these:</div>
+			<a href="/status" target="__blank">
+				<div
+					class="server-status-link mt-4 flex items-center justify-center font-semibold hover:underline hover:opacity-90 cursor-pointer"
+				>
+					<Fa icon={faCloud} size="20" class="mx-2 mb-1" />Server Status
+				</div></a
+			>
+		</div>
+	</div>
+</main>
+
+<style>
+	main {
+		/* Local style */
+		background: #191b1f;
+	}
+</style>

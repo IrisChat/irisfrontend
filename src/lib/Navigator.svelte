@@ -2,7 +2,7 @@
 	<div class="navbar my-16 flex justify-around rounded-2xl py-4">
 		<div class="logo mx-8 flex justify-start text-4xl font-semibold" style="flex: 1">IRIS</div>
 		<div class="flex justify-end" style="flex: 1.1">
-			<div class="navigation-elements align-center mx-4 flex w-full items-center justify-around">
+			<div class="navigation-elements mx-4 flex w-full items-center justify-around">
 				<a href="/changelog">
 					<div class="logo cursor-pointer text-base font-semibold hover:opacity-90">
 						Changelog

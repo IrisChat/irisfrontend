@@ -2,7 +2,10 @@
 	import Hero from '$lib/Hero.svelte';
 	import Fa from 'svelte-fa';
 	import { faGithub } from '@fortawesome/free-brands-svg-icons';
+	// import Splash from '$lib/Splash.svelte';
 </script>
+
+<!-- <Splash /> -->
 
 <main class="bg-white">
 	<Hero />
@@ -46,7 +49,7 @@
 	</section>
 	<footer class="flex flex-wrap items-center py-8 px-16" style="color: #E8E8E8">
 		<div class="footer-logo flex-1">
-			<div class="logo-container align-center mx-4 flex items-center">
+			<div class="logo-container mx-4 flex items-center">
 				<div class="logo flex justify-start text-4xl font-semibold">IRIS</div>
 				<div class="logo font-base mx-4 flex justify-start text-sm opacity-75">
 					Fast, secure and minimal.
