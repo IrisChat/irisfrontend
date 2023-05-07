@@ -16,7 +16,7 @@
 				{#if $page.status == 404}
 					Sorry, looks like we couldn't find that one 😅
 				{:else}
-					Looks like we messed up 😅
+					Whoops, looks like we messed up 😅
 				{/if}
 			</div>
 			<div class="my-4 text-sm font-semibold text-white">
@@ -32,7 +32,7 @@
 <style>
 	.login {
 		background-color: #191b1f; /* Fallback color */
-		background-image: url('/images/login.png');
+		background-image: url('/images/killed.jpg');
 		background-position: center;
 		/* background-size: contain; */
 		/* background-repeat: no-repeat; */
