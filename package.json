@@ -1,6 +1,6 @@
 {
 	"name": "irisfrontend",
-	"version": "1.2493",
+	"version": "1.95",
 	"private": true,
 	"scripts": {
 		"start": "PORT=8080 node build/index.js",

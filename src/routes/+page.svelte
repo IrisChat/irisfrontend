@@ -42,7 +42,7 @@
 		<div class="laptop flex flex-1 items-center justify-center text-center">
 			<img
 				src="https://user-images.githubusercontent.com/34188635/219129242-2d64aec6-641f-4f4f-af12-b4b8323e5624.png"
-				alt="Best Laptops 2023"
+				alt="Our bad UI isn't here to stay!"
 				width="410px"
 			/>
 		</div>

@@ -3,7 +3,7 @@
 	import SplashScreen from '$lib/Splash.svelte';
 </script>
 
-<Loader this={() => import('$lib/app/application.svelte')} answer={42}>
+<Loader this={() => import('$lib/app/application.svelte')}>
 	<!-- <p>some slotted content</p> -->
 
 	<p slot="fallback">

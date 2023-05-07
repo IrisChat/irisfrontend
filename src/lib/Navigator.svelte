@@ -1,6 +1,13 @@
 <div class="w-full">
 	<div class="navbar my-16 flex justify-around rounded-2xl py-4">
-		<div class="logo mx-8 flex justify-start text-4xl font-semibold" style="flex: 1">IRIS</div>
+		<a href="/"
+			><div
+				class="logo mx-8 flex justify-start text-4xl font-semibold hover:underline hover:opacity-95"
+				style="flex: 1"
+			>
+				IRIS
+			</div></a
+		>
 		<div class="flex justify-end" style="flex: 1.1">
 			<div class="navigation-elements mx-4 flex w-full items-center justify-around">
 				<a href="/changelog">

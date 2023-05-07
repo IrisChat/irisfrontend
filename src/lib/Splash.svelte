@@ -1,6 +1,6 @@
 <script lang="ts">
 	// There are six loading messages each with their own "thing"
-	const LoadingMessages = ['Pinging Your Mom', 'Loading In', 'Preparing the Application'];
+	const LoadingMessages = ['Ping-Ponging Your Mum', 'Loading In', 'Preparing the Application'];
 	const Random: number = Math.floor(Math.random() * LoadingMessages.length);
 	import Fa from 'svelte-fa';
 	import { faCloud } from '@fortawesome/free-solid-svg-icons';

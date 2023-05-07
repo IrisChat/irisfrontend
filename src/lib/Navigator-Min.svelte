@@ -4,9 +4,15 @@
 </script>
 
 <div class="w-full">
-
-	<div class="navbar my-16 flex justify-center items-center rounded-2xl py-4">
-		<div class="logo mx-8 flex justify-start text-4xl font-semibold" style="flex: 1">IRIS</div>
+	<div class="navbar my-16 flex items-center justify-center rounded-2xl py-4">
+		<a href="/"
+			><div
+				class="logo mx-8 flex justify-start text-4xl font-semibold hover:underline hover:opacity-95"
+				style="flex: 1"
+			>
+				IRIS
+			</div></a
+		>
 		<div class="flex justify-end" style="flex: 1.1">
 			<div class="navigation-elements mx-4 flex w-full items-center justify-end">
 				<div class="github-reference justify-end">

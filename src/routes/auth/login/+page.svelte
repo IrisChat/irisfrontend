@@ -5,7 +5,18 @@
 	import { setUser } from '$lib/xs/userData';
 	import NavigatorMin from '$lib/Navigator-Min.svelte';
 	import Fa from 'svelte-fa';
-	import { faUser, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
+	import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+	import { onMount } from 'svelte';
+	let content: HTMLDivElement;
+
+	onMount(() => {
+		const token: any = localStorage.getItem('token');
+		console.log(token);
+		if (token) {
+			content.innerHTML = '&nbsp;';
+			location = '/app';
+		}
+	});
 
 	let payload = {
 		username: '',
@@ -63,7 +74,7 @@
 </script>
 
 <main class="login h-screen w-full overflow-hidden text-white">
-	<div class="content mx-16 flex flex-wrap items-center justify-center">
+	<div bind:this={content} class="content mx-16 flex flex-wrap items-center justify-center">
 		<NavigatorMin />
 		<div class="data-collection flex w-full flex-wrap items-center justify-center">
 			<!--- Originallly: #191B1F -->
@@ -111,7 +122,8 @@
 								<input
 									class="h-6 w-full rounded-sm bg-transparent px-2 text-base opacity-50 focus:outline-0"
 									style="color: #525359"
-									type="password" autocomplete="current-password"
+									type="password"
+									autocomplete="current-password"
 									placeholder="supersecretphrase123"
 									name="password"
 									on:change={(event) => handleChange(event)}
@@ -127,8 +139,8 @@
 								on:click={async () => {
 									await Login();
 								}}
-								class="create-account-button text-md max-w-xs rounded-xl px-8 py-3 font-semibold hover:opacity-80"
-								style="background: #2C70C0;">Create Account</button
+								class="create-account-button text-md max-w-xs rounded-xl px-16 py-3 font-semibold hover:opacity-80"
+								style="background: #2C70C0;">Login</button
 							>
 							<button
 								on:click={() => {
