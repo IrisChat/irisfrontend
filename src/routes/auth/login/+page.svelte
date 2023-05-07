@@ -173,4 +173,13 @@
 		/* background-repeat: no-repeat; */
 		/* border-radius: 1vw; */
 	}
+	.login::before {
+		backdrop-filter: brightness(2) saturate(3);
+		content: '';
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+	}
 </style>
