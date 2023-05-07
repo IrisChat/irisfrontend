@@ -2,6 +2,8 @@
 	import { http_host, API_BASE } from '$lib/xs/config.json';
 	import { toast } from '@zerodevx/svelte-toast';
 	import NavigatorMin from '$lib/Navigator-Min.svelte';
+	import Fa from 'svelte-fa';
+	import { faUser, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 
 	let payload = {
 		email: '',
@@ -51,73 +53,111 @@
 	}
 </script>
 
-<main
-	class="register w-full text-white"
->
+<main class="register h-screen w-full overflow-hidden text-white">
 	<div class="content mx-16 flex flex-wrap items-center justify-center">
 		<NavigatorMin />
-		<form
-			class="flex flex-wrap items-center justify-center"
-			on:submit={(event) => handleSubmit(event)}
-		>
-			<div class="invisiblewrap flex w-full basis-full flex-wrap items-center justify-center">
-				<div class="smartwrapper flex max-w-fit basis-full flex-wrap items-center justify-center">
-					<div
-						class="field email my-4 mx-4 flex max-w-xl basis-full flex-wrap items-center justify-center rounded bg-gray-800 bg-opacity-80 px-2 py-2"
-					>
-						<label for="email" class="basis-full px-2">Email</label>
-						<input
-							class="h-8 w-full rounded-sm bg-gray-800 bg-opacity-20 px-2"
-							type="email"
-							placeholder="Email"
-							name="email"
-							on:change={(event) => handleChange(event)}
-						/>
+		<div class="data-collection flex w-full flex-wrap items-center justify-center">
+			<!--- Originallly: #191B1F -->
+			<div class="signup-card rounded-xl py-8 px-16 backdrop-opacity-50">
+				<div class="credential-input-view">
+					<div class="headline-greeting my-3 mt-7 inline-block text-left">
+						<div class="text-md font-semibold uppercase" style="color: #0EC4DD">ARE YOU NEW?</div>
+						<div class="my-2 text-5xl font-semibold text-white">Create a new account!</div>
+						<div class="my-4 text-sm font-semibold text-white">
+							Already have an account? <a
+								href="/auth"
+								class="hover:underline"
+								style="color: #0094FF">Log in</a
+							>
+						</div>
 					</div>
+					<form class="credential-form-field" on:submit={(event) => handleSubmit(event)}>
+						<div
+							class="field username my-4 flex items-center justify-center rounded-2xl px-2 py-1"
+							style="background: #21222B"
+						>
+							<div class="username-widget inline-block flex-1">
+								<label for="username" class="basis-full px-2 text-xs" style="color: #525359"
+									>Username</label
+								>
+								<input
+									class="h-6 w-full rounded-sm bg-transparent px-2 text-base opacity-50 focus:outline-0"
+									style="color: #525359"
+									type="text"
+									placeholder="Array0x"
+									name="username"
+									on:change={(event) => handleChange(event)}
+								/>
+							</div>
+							<Fa icon={faUser} size="16" class="mx-2 mb-1" />
+						</div>
+						<div
+							class="field email-address my-4 flex items-center justify-center rounded-2xl px-2 py-1"
+							style="background: #21222B"
+						>
+							<div class="email-widget inline-block flex-1">
+								<label for="email" class="basis-full px-2 text-xs" style="color: #525359"
+									>Email Address</label
+								>
+								<input
+									class="h-6 w-full rounded-sm bg-transparent px-2 text-base opacity-50 focus:outline-0"
+									style="color: #525359"
+									type="email"
+									placeholder="you@mail.com"
+									name="email"
+									on:change={(event) => handleChange(event)}
+								/>
+							</div>
+							<Fa icon={faEnvelope} size="16" class="mx-2 mb-1" />
+						</div>
+						<div
+							class="field password my-4 flex items-center justify-center rounded-2xl px-2 py-1"
+							style="background: #21222B"
+						>
+							<div class="password-widget inline-block flex-1">
+								<label for="password" class="basis-full px-2 text-xs" style="color: #525359"
+									>Password</label
+								>
+								<input
+									class="h-6 w-full rounded-sm bg-transparent px-2 text-base opacity-50 focus:outline-0"
+									style="color: #525359"
+									type="password"
+									placeholder="supersecretphrase123"
+									name="password"
+									on:change={(event) => handleChange(event)}
+								/>
+							</div>
+							<Fa icon={faKey} size="16" class="mx-2 mb-1" />
+						</div>
 
-					<div
-						class="field username my-4 mx-4 flex w-80 max-w-xl basis-full flex-wrap items-center justify-center rounded bg-gray-800 bg-opacity-80 px-2 py-2"
-					>
-						<label for="username" class="basis-full px-2">Username</label>
-						<input
-							class="h-8 w-full rounded-sm bg-gray-800 bg-opacity-20 px-2"
-							type="text"
-							placeholder="Array0x"
-							name="username"
-							on:change={(event) => handleChange(event)}
-						/>
-					</div>
+						<div
+							class="action-buttons flex w-full flex-wrap items-center justify-between text-center"
+						>
+							<button
+								on:click={() => {
+									Register();
+								}}
+								class="create-account-button text-md max-w-xs rounded-xl px-8 py-3 font-semibold hover:opacity-80"
+								style="background: #2C70C0;">Create Account</button
+							>
+							<button
+								on:click={() => {
+									// RegisterWithGoogle();
+								}}
+								class="google-signin-button flex max-w-xs items-center rounded-xl py-2 pl-1 pr-10 text-sm font-semibold hover:opacity-80"
+								style="background: #191B1F; border: 1px solid #363A43"
+							>
+								<div class="google-icon mx-2 rounded-xl bg-white py-2 px-2">
+									<img src="/images/google-g.svg" alt="Google" />
+								</div>
+								Sign in with Google</button
+							>
+						</div>
+					</form>
 				</div>
 			</div>
-			<div
-				class="field password my-4 mx-4 flex w-80 max-w-xl basis-full flex-wrap items-center justify-center rounded bg-gray-800 bg-opacity-80 px-2 py-2"
-			>
-				<label for="password" class="basis-full px-2">Password</label>
-				<input
-					class="h-8 w-full rounded-sm bg-gray-800 bg-opacity-20 px-2"
-					type="password"
-					placeholder="supersecretphrase123"
-					name="password"
-					on:change={(event) => handleChange(event)}
-				/>
-			</div>
-			<div class="footer flex w-full basis-full flex-wrap items-center justify-center text-center">
-				<button
-					on:click={() => {
-						Register();
-					}}
-					class="max-w-xs basis-full rounded-md bg-secondary px-2 py-4 hover:opacity-80"
-					style="background: #0070e8;">Create Account</button
-				>
-				<div class="my-4 flex basis-full flex-wrap items-center justify-center">
-					<span class="basis-full">Already have an Account? </span>
-					<a href="/auth/login" class="font-base text-blue-400 underline hover:text-blue-500">
-						<span>Login</span>
-					</a>
-				</div>
-			</div>
-			<!-- <ToastContainer /> -->
-		</form>
+			<div class="dummy flex-1">&nbsp;</div>
+		</div>
 	</div>
 </main>
 
