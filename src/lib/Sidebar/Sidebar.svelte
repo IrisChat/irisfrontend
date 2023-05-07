@@ -30,7 +30,7 @@
 	let avatar_ = avatar;
 
 	$: if (/^(?:(ht|f)tp(s?)\:\/\/)?/.test(avatar_)) {
-		avatar_ = 'https://cors-anywhere.fly.dev/' + avatar_;
+		avatar_ = 'https://cors.zimjs.com/' + avatar_;
 	}
 	// Reactive statement which waits for localstorage to load
 	$: getPixels(avatar_, (err: any, pixels: any) => {

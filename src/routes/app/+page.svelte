@@ -1,34 +1,12 @@
 <script lang="ts">
-	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
-	import Channelbar from '$lib/Channelbar.svelte';
-	import ContentContainer from '$lib/content/ContentContainer.svelte';
-	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
-	// @ts-ignore
-	const userData = JSON.parse(localStorage.getItem('userData')) || {};
+	import Loader from '$lib/Loader.svelte';
+	import SplashScreen from '$lib/Splash.svelte';
 </script>
 
-<main>
-	<div class="flex">
-		<Sidebar avatar={userData.avatar} />
-		<Channelbar>
-			<svelte:fragment slot="title">Direct Messages</svelte:fragment>
-			<svelte:fragment slot="channels"><MainChannel /></svelte:fragment>
-		</Channelbar>
+<Loader this={() => import('$lib/app/application.svelte')} answer={42}>
+	<!-- <p>some slotted content</p> -->
 
-		<ContentContainer />
-	</div>
-</main>
-
-<style>
-	:global(.channel-bar) {
-		display: block;
-	}
-	:global(.content-container) {
-		display: none;
-	}
-	@media (min-width: 768px) {
-		:global(.content-container) {
-			display: block;
-		}
-	}
-</style>
+	<p slot="fallback">
+		<SplashScreen />
+	</p>
+</Loader>
