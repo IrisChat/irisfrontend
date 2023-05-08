@@ -2,11 +2,13 @@
 	import Hero from '$lib/Hero.svelte';
 	import Fa from 'svelte-fa';
 	import { faGithub } from '@fortawesome/free-brands-svg-icons';
+	import GitHubCorner from '$lib/GitHubCorner.svelte';
 	// import Splash from '$lib/Splash.svelte';
 </script>
 
 <!-- <Splash /> -->
 
+<GitHubCorner/>
 <main class="bg-white">
 	<Hero />
 	<section class="section-one mx-16 flex flex-wrap items-center justify-center py-52 text-left">
