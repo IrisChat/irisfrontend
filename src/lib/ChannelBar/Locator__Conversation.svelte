@@ -40,6 +40,7 @@
 						);
 
 						setTimeout(() => {
+							localStorage.clear(); // Clear the localStorage
 							window.location.href = '/auth';
 						}, 3250);
 					}
