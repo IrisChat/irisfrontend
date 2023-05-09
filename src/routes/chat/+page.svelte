@@ -67,6 +67,7 @@
 		ws.on('disconnect', function (s: any) {
 			console.log('Disconnected from global handler.'); // In the event that this ever happens.
 			msgBox.value = "You can't send messages here";
+			input_placeholder.innerHTML = "You can't send messages here";
 			msgBox.disabled = true;
 		});
 		ws.on('connect', () => {
