@@ -64,8 +64,14 @@
 	// Init
 
 	async function init(ws: any) {
+		ws.on('disconnect', function (s: any) {
+			console.log('Disconnected from global handler.'); // In the event that this ever happens.
+			msgBox.value = "You can't send messages here";
+			msgBox.disabled = true;
+		});
 		ws.on('connect', () => {
 			console.log(`Connection opened with id ${ws.id}!`);
+			msgBox.disabled = false;
 			// @ts-ignore
 			const Message = new msgFMT(0, null, token, UID);
 			ws.emit('join-room', JSON.stringify(Message)); // Login
