@@ -131,7 +131,13 @@
 							</div>
 							<Fa icon={faKey} size="16" class="mx-2 mb-1" />
 						</div>
-
+						<div class="my-4 text-sm font-semibold text-white">
+							<a
+								href="/auth/reset"
+								class="hover:underline"
+								style="color: #0094FF">Forgot Password?</a
+							>
+						</div>
 						<div
 							class="action-buttons flex w-full flex-wrap items-center justify-between text-center"
 						>
