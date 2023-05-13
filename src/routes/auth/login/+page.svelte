@@ -71,6 +71,12 @@
 				console.log(res);
 			});
 	}
+
+	async function fetchNotification() {
+		return await fetch(`${http_host}${API_BASE}user/global/notifications`).then((response) =>
+			response.json()
+		);
+	}
 </script>
 
 <main class="login h-screen w-full overflow-hidden text-white">
@@ -89,6 +95,28 @@
 								class="hover:underline"
 								style="color: #0094FF">Sign up</a
 							>
+						</div>
+						<div class="notification bg-gray-800 max-w-lg">
+							{#await fetchNotification() then response}
+								{#if response.type == 'NOTIFY'}
+									<div class="border border-blue-300 px-4 pb-8 pt-4">
+										<div class="font-semibold text-2xl">NOTIFICATION</div>
+										<br class="pb-4 font-light" />{@html response.body}
+									</div>
+								{:else if response.type == 'ALERT'}
+									<div class="border border-red-300 px-4 pb-8 pt-4">
+										<div class="font-semibold text-2xl">ALERT</div>
+										<br class="pb-4 text-red-400 font-light" />{@html response.body}
+									</div>
+									{:else if response.type == 'WARN'}
+									<div class="border border-yellow-300 px-4 pb-8 pt-4">
+										<div class="font-semibold text-2xl">WARNING</div>
+										<br class="pb-4 text-red-400 font-light" />{@html response.body}
+									</div>
+								{:else}
+									<div class="hidden" />
+								{/if}
+							{/await}
 						</div>
 					</div>
 					<form class="credential-form-field" on:submit={(event) => handleSubmit(event)}>
@@ -132,10 +160,8 @@
 							<Fa icon={faKey} size="16" class="mx-2 mb-1" />
 						</div>
 						<div class="my-4 text-sm font-semibold text-white">
-							<a
-								href="/auth/reset"
-								class="hover:underline"
-								style="color: #0094FF">Forgot Password?</a
+							<a href="/auth/reset" class="hover:underline" style="color: #0094FF"
+								>Forgot Password?</a
 							>
 						</div>
 						<div
