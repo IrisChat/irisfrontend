@@ -140,7 +140,7 @@
 							<Conversation status={convo.status}>
 								<svelte:fragment slot="icon">
 									<img
-										class="mt-2 mb-2 w-12 rounded-full bg-gray-700"
+										class="mt-2 mb-2 h-12 w-12 rounded-full bg-gray-700"
 										src={convo.avatar || defaultAvatar}
 										alt="Profile Avatar"
 									/>
@@ -177,7 +177,7 @@
 						<Conversation status={convo.status}>
 							<svelte:fragment slot="icon">
 								<img
-									class="mt-2 mb-2 w-12 rounded-full bg-gray-700"
+									class="mt-2 mb-2 h-12 w-12 rounded-full bg-gray-700"
 									src={convo.avatar || defaultAvatar}
 									alt="Profile Avatar"
 								/>

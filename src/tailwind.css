@@ -4,11 +4,11 @@
 @layer base {
 	:root {
 		--color-main: 156 156 156; /* Primary */
-		--color-primary: 128 128 128;  /* Secondary */
-		--color-secondary: 45 130 183;  /* Extra */
-		--color-tertiary: 235 138 144;  /* Accent */
-		--color-option: 66 226 184;  /* Extra */
-		--color-text: 17 17 17;  /* Tertiary */
+		--color-primary: 128 128 128; /* Secondary */
+		--color-secondary: 45 130 183; /* Extra */
+		--color-tertiary: 235 138 144; /* Accent */
+		--color-option: 66 226 184; /* Extra */
+		--color-text: 17 17 17; /* Tertiary */
 	}
 }
 
@@ -23,7 +23,7 @@
 @layer components {
 	.sidebar-icon {
 		@apply relative mx-auto mt-2 mb-2 
-    flex h-12 w-12 cursor-pointer items-center  
+    flex h-12 h-12 w-12 cursor-pointer items-center  
   justify-center rounded-3xl text-green-500 shadow-lg
     transition-all duration-300
     ease-linear hover:rounded-xl hover:text-gray-200 dark:bg-primary;

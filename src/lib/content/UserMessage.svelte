@@ -6,7 +6,7 @@
 {#if floatLeft}
 	<div class="user-message flex flex-wrap items-start justify-start">
 		<div class="icon-wrap">
-			<img src={icon} class="w-10 rounded-full" alt="Avatar" />
+			<img src={icon} class="h-10 w-10 rounded-full" alt="Avatar" />
 		</div>
 		<div class="items-center whitespace-pre-wrap break-words">
 			<div
@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<div class="icon-wrap">
-			<img src={icon} class="w-10 rounded-full" alt="Avatar" />
+			<img src={icon} class="h-10 w-10 rounded-full" alt="Avatar" />
 		</div>
 	</div>
 {/if}
