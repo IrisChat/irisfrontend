@@ -125,9 +125,9 @@ flex-col bg-opacity-100 px-2"
 		>
 			<SidebarIcon customColor={PixData__COLOURS}>
 				<svelte:fragment slot="icon">
-					<div class="iconContainer">
+					<div class="iconContainer h-full w-full">
 						<img
-							class="rounded-xl"
+							class="rounded-xl h-full w-full"
 							style="background: {PixData__COLOURS};"
 							src={avatar || '/pixel.png'}
 							alt="Profile Avatar ID"

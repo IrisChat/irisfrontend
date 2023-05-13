@@ -172,7 +172,7 @@
 								<img
 									src={userData.avatar || defaultAvatar}
 									alt="{userData.username + "'s" || 'User'} Avatar"
-									class="rounded-full"
+									class="rounded-full h-full w-full"
 								/>
 								<div class="remove_avatar py-2">
 									<a
