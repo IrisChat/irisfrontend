@@ -183,7 +183,7 @@
 								/>
 							</svelte:fragment>
 							<svelte:fragment slot="header-text"
-								>{convo.username || 'Deleted User'}
+								><div class="font-semibold">{convo.username || 'Deleted User'}</div>
 								<div class="aboutme text-sm font-light">
 									{#if convo.about != undefined}
 										{#if convo.about.length > 60}
