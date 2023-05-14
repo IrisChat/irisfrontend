@@ -108,7 +108,7 @@
 							{#if hostVideo.classList.contains('hidden')}
 								<img
 									class="rounded-full border-8 border-tertiary px-2 py-2"
-									width="150px"
+									style="width: 150px; height: 150px;"
 									src={userData.avatar}
 									alt={userData.username + "'s Avatar"}
 								/>
@@ -134,7 +134,7 @@
 							{#if receiverVideo.classList.contains('hidden')}
 								<img
 									class="rounded-full border-8 border-tertiary px-2 py-2"
-									width="150px"
+									style="width: 150px; height: 150px;"
 									src={person.avatar}
 									alt={person.username + "'s Avatar"}
 								/>
