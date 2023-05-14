@@ -5,7 +5,8 @@
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
 	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
 	import SettingsElement from '$lib/content/SettingsElement.svelte';
-	import { faBrush, faCog } from '@fortawesome/free-solid-svg-icons';
+	import { faBrush, faCog,faImage, faImages } from '@fortawesome/free-solid-svg-icons';
+	import faSparkles from "./icons/faSparkles"
 	import { defaultAvatar } from '$lib/xs/config.json';
 	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {}; // @ts-ignore
@@ -24,8 +25,14 @@
 
 	class Preferences {
 		theme: string = '';
-		constructor(theme: string) {
+		cbackground: string = '';
+		coverlay: string = '';
+		hfx: string = '';
+		constructor(theme: string, cbackground: string, coverlay: string, hfx: string) {
 			this.theme = theme;
+			this.cbackground = cbackground;
+			this.coverlay = coverlay;
+			this.hfx = hfx;
 		}
 	}
 
@@ -62,10 +69,16 @@
 			});
 	}
 
-	let themeElement: any;
+	let themeElement: HTMLSelectElement;
+	let cbackgroundElement: HTMLInputElement;
+	let cbackgroundOverlayElement: HTMLSelectElement;
+	let hfxElement: HTMLSelectElement;
 	function saveSettings() {
 		// Make a POST request to the API to save the settings
 		const theme = themeElement.value;
+		const cbackground = cbackgroundElement.value;
+		const coverlay = cbackgroundOverlayElement.value;
+		const hfx = hfxElement.value;
 		fetch(`${http_host}${API_BASE}user/preferences/`, {
 			headers: {
 				Accept: 'application/json',
@@ -73,7 +86,7 @@
 				'Content-Type': 'application/json'
 			},
 			method: 'POST',
-			body: JSON.stringify(new Preferences(theme))
+			body: JSON.stringify(new Preferences(theme, cbackground, coverlay, hfx))
 		})
 			.then(async (res) => {
 				console.log(res);
@@ -97,6 +110,9 @@
 		userName_input.placeholder = 'Username';
 		aboutme_input.value = userData.about;
 		themeElement.value = preferences.theme;
+		cbackgroundElement.value = preferences.cbackground;
+		cbackgroundOverlayElement.value = preferences.coverlay;
+		hfxElement.value = preferences.hfx;
 		try {
 			// @ts-ignore
 			userName_input.setAttribute('size', userName_input.value.length); // @ts-ignore
@@ -237,6 +253,7 @@
 							</div>
 						</div>
 						<!-- ProfileEditor ENDS -->
+						<!--- Theme selection element STARTS -->
 						<SettingsElement icon={faBrush}>
 							<svelte:fragment slot="title">Theme</svelte:fragment>
 							<svelte:fragment slot="description"
@@ -244,6 +261,7 @@
 							>
 							<svelte:fragment slot="action">
 								<select
+									class="rounded-sm border border-white bg-transparent px-4 py-2"
 									bind:this={themeElement}
 									on:change={() => {
 										saveSettings();
@@ -252,11 +270,77 @@
 										}, 800);
 									}}
 								>
-									<option value="light">Light</option>
+									<option value="light" selected>Light</option>
 									<option value="dark">Dark</option>
 								</select>
 							</svelte:fragment>
 						</SettingsElement>
+						<!--- Theme selection element ENDS -->
+						<!--- Chat background selection STARTS -->
+						<SettingsElement icon={faImage}>
+							<svelte:fragment slot="title">Chat Background</svelte:fragment>
+							<svelte:fragment slot="description"
+								>Choose the background you want to use in chats
+							</svelte:fragment>
+							<svelte:fragment slot="action">
+								<input
+									class="rounded-sm border border-white bg-transparent px-4 py-2"
+									type="text"
+									bind:this={cbackgroundElement}
+									on:change={() => {
+										saveSettings();
+										setTimeout(() => {
+											window.location.reload();
+										}, 800);
+									}}
+								/>
+							</svelte:fragment>
+						</SettingsElement>
+						<!-- Chat background selection element ENDS -->
+						<!-- Chat background overlay selection element STARTS -->
+						<SettingsElement icon={faImages}>
+							<svelte:fragment slot="title">Chat Background Overlay</svelte:fragment>
+							<svelte:fragment slot="description"
+								>Enable the pattern overlay on the chat</svelte:fragment
+							>
+							<svelte:fragment slot="action">
+								<select
+									class="rounded-sm border border-white bg-transparent px-4 py-2"
+									bind:this={cbackgroundOverlayElement}
+									on:change={() => {
+										saveSettings();
+										setTimeout(() => {
+											window.location.reload();
+										}, 800);
+									}}
+								>
+									<option value="true">Yes</option>
+									<option value="false">No</option>
+								</select>
+							</svelte:fragment>
+						</SettingsElement>
+						<!-- Chat background overlay selection element ENDS -->
+						<!-- Homescreen effects selection element STARTS -->
+						<SettingsElement icon={faSparkles}>
+							<svelte:fragment slot="title">Homescreen Effects</svelte:fragment>
+							<svelte:fragment slot="description">Enable homescreen effects</svelte:fragment>
+							<svelte:fragment slot="action">
+								<select
+									class="rounded-sm border border-white bg-transparent px-4 py-2"
+									bind:this={hfxElement}
+									on:change={() => {
+										saveSettings();
+										setTimeout(() => {
+											window.location.reload();
+										}, 800);
+									}}
+								>
+									<option value="true">Yes</option>
+									<option value="false">No</option>
+								</select>
+							</svelte:fragment>
+						</SettingsElement>
+						<!-- Homescreen effects selection element ENDS -->
 					</div>
 				</div></svelte:fragment
 			>

@@ -13,28 +13,49 @@
 	export let icon = faHome;
 	export let title = 'Home';
 	export let call = false;
+	let content: HTMLDivElement;
+	let content_container: HTMLDivElement;
+	let tipCollection: HTMLDivElement;
 
 	// Read storage
 	import 'node-localstorage/register';
 	// Skip server compilation
 	onMount(() => {
+		const preferences = JSON.parse(localStorage.getItem('preferences') || '{}');
 		if (localStorage.getItem('token') == null) {
 			console.log('Shit happened. Redirecting to login...');
 			window.location.href = '/auth';
 		}
+		if (preferences.cbackground) {
+			if (preferences.coverlay == 'false') {
+				content.style.background = `url(${preferences.cbackground})`;
+			}
+			content_container.style.background = `url(${preferences.cbackground})`;
+		}
+		if (preferences.hfx == 'false') {
+			try {
+				tipCollection.classList.add('hidden');
+			} catch (e) {
+				console.info('Not on homescreen.');
+			}
+		}
 	});
 </script>
 
-<div class="content-container">
+<div bind:this={content_container} class="content-container">
 	<TopNav {icon} {call}>
 		<svelte:fragment slot="title-text">{title}</svelte:fragment>
 	</TopNav>
 	<div
+		bind:this={content}
 		class="content flex h-screen flex-wrap items-center justify-center text-center text-text"
 		style="background: url('/pattern-dark.svg');"
 	>
 		<slot name="content">
-			<div class="tips-divider flex w-fit flex-wrap items-center justify-center">
+			<div
+				bind:this={tipCollection}
+				class="tips-divider flex w-fit flex-wrap items-center justify-center"
+			>
 				<TipContainer icon={faPlusCircle}>
 					<svelte:fragment slot="title">Create a server</svelte:fragment>
 					<svelte:fragment slot="description"
@@ -65,7 +86,7 @@
 					<svelte:fragment slot="description" />
 				</TipContainer>
 			</div>
-			<a href="#" class="basis-full text-tertiary">Turn off homescreen effects</a>
+			<!-- <a href="#" class="basis-full text-tertiary">Turn off homescreen effects</a> -->
 		</slot>
 	</div>
 </div>
