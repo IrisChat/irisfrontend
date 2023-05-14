@@ -5,7 +5,7 @@
 </script>
 
 <div
-class="settings-element mr-4 my-4 flex items-center justify-center rounded-md bg-secondary bg-opacity-10 py-4 pl-2 pr-4 text-left hover:opacity-80"
+class="settings-element mr-4 my-4 flex w-full items-center justify-center rounded-md bg-secondary bg-opacity-10 py-4 pl-2 pr-4 text-left hover:opacity-80"
 >
 <div class="icon flex flex-1 items-center justify-center px-4 py-2">
 		<Fa {icon} size="32" />

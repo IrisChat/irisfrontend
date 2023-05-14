@@ -155,7 +155,7 @@
 				<div bind:this={successSplash} class="hidden">
 					<ServerMessage background="green-500" text="white">Saved Successfully!</ServerMessage>
 				</div>
-				<div slot="settings" class="h-screen w-full">
+				<div slot="settings" class="h-screen">
 					<!-- ProfileEditor -->
 					<div
 						class="ProfileEditor settings-element my-4 mr-4 flex w-full items-center justify-center rounded-md bg-secondary bg-opacity-10 py-4 pl-2 pr-4 text-left hover:bg-opacity-20"
