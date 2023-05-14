@@ -155,105 +155,109 @@
 				<div bind:this={successSplash} class="hidden">
 					<ServerMessage background="green-500" text="white">Saved Successfully!</ServerMessage>
 				</div>
-				<div slot="settings" class="h-screen">
-					<!-- ProfileEditor -->
-					<div
-						class="ProfileEditor settings-element my-4 mr-4 flex w-full items-center justify-center rounded-md bg-secondary bg-opacity-10 py-4 pl-2 pr-4 text-left hover:bg-opacity-20"
-					>
-						<div
-							class="icon flex flex-1 cursor-pointer items-center justify-center px-4 py-2 text-center"
-						>
-							<div
-								class="pfpcircle h-52 w-52 rounded-full bg-blue-500 hover:opacity-90"
-								title="This is your profile photo. Change it how you like"
-								on:click={() => ActionOverlay.classList.remove('hidden')}
-								on:keydown={() => ActionOverlay.classList.remove('hidden')}
-							>
-								<img
-									src={userData.avatar || defaultAvatar}
-									alt="{userData.username + "'s" || 'User'} Avatar"
-									class="rounded-full h-full w-full"
-								/>
-								<div class="remove_avatar py-2">
-									<a
-										href="#"
-										on:click={() => {
-											refreshAvatar_input.value = '';
-											refreshData(
-												`${http_host}${API_BASE}user/avatar/`,
-												{
-													avatar: refreshAvatar_input.value
-												},
-												'avatar',
-												refreshAvatar_input
-											);
-										}}
-										class="font-light text-tertiary underline">Remove Avatar</a
-									>
-								</div>
-							</div>
-						</div>
 
-						<div class="body flex flex-1 flex-wrap">
+				<div slot="settings" class="settings-container flex w-full items-center justify-center">
+					<div class="h-screen">
+						<!-- ProfileEditor -->
+						<div
+							class="ProfileEditor settings-element my-4 mr-4 flex w-full items-center justify-center rounded-md bg-secondary bg-opacity-10 py-4 pl-2 pr-4 text-left hover:bg-opacity-20"
+						>
 							<div
-								class="w-fit basis-full text-6xl font-bold"
-								title="This is your username. We don't allow changing usernames at this time"
+								class="icon flex flex-1 cursor-pointer items-center justify-center px-4 py-2 text-center"
 							>
-								<input
-									bind:this={userName_input}
-									type="text"
-									class="username bg-transparent"
-									placeholder="Loading"
-								/>
 								<div
-									class="id flex text-sm font-light"
-									title="This ID will allow anyone on the server to find you"
+									class="pfpcircle h-52 w-52 rounded-full bg-blue-500 hover:opacity-90"
+									title="This is your profile photo. Change it how you like"
+									on:click={() => ActionOverlay.classList.remove('hidden')}
+									on:keydown={() => ActionOverlay.classList.remove('hidden')}
 								>
-									<div class="prepend pr-1 font-semibold">ID:</div>
-									{userData.ID}
+									<img
+										src={userData.avatar || defaultAvatar}
+										alt="{userData.username + "'s" || 'User'} Avatar"
+										class="h-full w-full rounded-full"
+									/>
+									<div class="remove_avatar py-2">
+										<a
+											href="#"
+											on:click={() => {
+												refreshAvatar_input.value = '';
+												refreshData(
+													`${http_host}${API_BASE}user/avatar/`,
+													{
+														avatar: refreshAvatar_input.value
+													},
+													'avatar',
+													refreshAvatar_input
+												);
+											}}
+											class="font-light text-tertiary underline">Remove Avatar</a
+										>
+									</div>
 								</div>
 							</div>
-							<div
-								class="aboutme flex w-fit text-sm font-light"
-								title="This is your bio. Use this to tell people something about yourself"
-							>
-								<div class="prepend pr-1 font-semibold">About me:</div>
-								<input
-									bind:this={aboutme_input}
-									on:change={() =>
-										refreshData(
-											`${http_host}${API_BASE}user/about/`,
-											{ aboutme: aboutme_input.value },
-											'about',
-											aboutme_input
-										)}
-									type="text"
-									class="aboutme bg-transparent"
-									placeholder="Hey there! I am using Iris."
-								/>
+
+							<div class="body flex flex-1 flex-wrap">
+								<div
+									class="w-fit basis-full text-6xl font-bold"
+									title="This is your username. We don't allow changing usernames at this time"
+								>
+									<input
+										bind:this={userName_input}
+										type="text"
+										class="username bg-transparent"
+										placeholder="Loading"
+									/>
+									<div
+										class="id flex text-sm font-light"
+										title="This ID will allow anyone on the server to find you"
+									>
+										<div class="prepend pr-1 font-semibold">ID:</div>
+										{userData.ID}
+									</div>
+								</div>
+								<div
+									class="aboutme flex w-fit text-sm font-light"
+									title="This is your bio. Use this to tell people something about yourself"
+								>
+									<div class="prepend pr-1 font-semibold">About me:</div>
+									<input
+										bind:this={aboutme_input}
+										on:change={() =>
+											refreshData(
+												`${http_host}${API_BASE}user/about/`,
+												{ aboutme: aboutme_input.value },
+												'about',
+												aboutme_input
+											)}
+										type="text"
+										class="aboutme bg-transparent"
+										placeholder="Hey there! I am using Iris."
+									/>
+								</div>
 							</div>
 						</div>
-					</div>
-					<!-- ProfileEditor ENDS -->
-					<SettingsElement icon={faBrush}>
-						<svelte:fragment slot="title">Theme</svelte:fragment>
-						<svelte:fragment slot="description">Choose between dark and light theme</svelte:fragment
-						>
-						<svelte:fragment slot="action">
-							<select
-								bind:this={themeElement}
-								on:change={() => {
-									saveSettings();
-									setTimeout(() => {
-										window.location.reload();
-									}, 800);
-								}}
+						<!-- ProfileEditor ENDS -->
+						<SettingsElement icon={faBrush}>
+							<svelte:fragment slot="title">Theme</svelte:fragment>
+							<svelte:fragment slot="description"
+								>Choose between dark and light theme</svelte:fragment
 							>
-								<option value="light">Light</option>
-								<option value="dark">Dark</option>
-							</select>
-						</svelte:fragment>
-					</SettingsElement>
+							<svelte:fragment slot="action">
+								<select
+									bind:this={themeElement}
+									on:change={() => {
+										saveSettings();
+										setTimeout(() => {
+											window.location.reload();
+										}, 800);
+									}}
+								>
+									<option value="light">Light</option>
+									<option value="dark">Dark</option>
+								</select>
+							</svelte:fragment>
+						</SettingsElement>
+					</div>
 				</div></svelte:fragment
 			>
 		</ContentContainer>
