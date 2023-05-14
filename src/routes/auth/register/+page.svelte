@@ -43,9 +43,11 @@
 						}
 					});
 				}
-				toast.push('Account Created. Redirecting to login page.');
-				localStorage.setItem('token', json.token);
-				window.location.href = '/auth/login';
+				toast.push(`${json.message}`);
+				// localStorage.setItem('token', json.token);
+				setTimeout(() => {
+					window.location.href = '/auth/login';
+				}, 3000);
 			})
 			.catch(function (res) {
 				console.log(res);
