@@ -2,7 +2,7 @@
 	import SuperChat from '$lib/SuperChat.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
 	import { faContactCard, faList } from '@fortawesome/free-solid-svg-icons';
-	import Channelbar from '$lib/Channelbar.svelte';
+	import Channelbar from '$lib/ChannelBar/Channelbar.svelte';
 	import ChannelTemplate from '$lib/ChannelTemplate.svelte';
 
 	import Locator from '$lib/Locator.svelte';

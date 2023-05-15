@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
-	import Channelbar from '$lib/Channelbar.svelte';
+	import Channelbar from '$lib/ChannelBar/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
 	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
 	import { faMessage } from '@fortawesome/free-solid-svg-icons';

@@ -1,12 +1,13 @@
 <script lang="ts">
 	const VERSION = '__VERSION__';
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
-	import Channelbar from '$lib/Channelbar.svelte';
+	import Channelbar from '$lib/ChannelBar/Collapsed/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
-	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
+	import MainChannel from '$lib/ChannelBar/Collapsed/MainChannel.svelte';
 	import SettingsElement from '$lib/content/SettingsElement.svelte';
-	import { faBrush, faCog,faImage, faImages } from '@fortawesome/free-solid-svg-icons';
-	import faSparkles from "./icons/faSparkles"
+	import { faBrush, faCog, faImage, faImages, faMessage } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
+	import faSparkles from './icons/faSparkles';
 	import { defaultAvatar } from '$lib/xs/config.json';
 	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {}; // @ts-ignore
@@ -158,7 +159,7 @@
 	<div class="flex">
 		<Sidebar avatar={userData.avatar} />
 		<Channelbar>
-			<svelte:fragment slot="title">Direct Messages</svelte:fragment>
+			<svelte:fragment slot="title"><Fa icon={faMessage} size="20" /></svelte:fragment>
 			<svelte:fragment slot="channels"><MainChannel /></svelte:fragment>
 		</Channelbar>
 
