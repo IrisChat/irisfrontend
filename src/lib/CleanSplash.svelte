@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
 	import { faCloud } from '@fortawesome/free-solid-svg-icons';
-
 </script>
 
 <main
@@ -10,11 +9,11 @@
 >
 	<div class="notification flex flex-1 flex-col items-center justify-end">
 		<div class="notification-content inline-block">
-			<div class="logo text-5xl font-semibold">Please wait...</div>
+			<div class="logo text-3xl font-extralight">Please wait...</div>
 		</div>
 	</div>
 	<div
-		class="troubleshooting-tips flex w-full flex-col items-center justify-end py-12 text-center text-sm font-extralight first-letter:h-full"
+		class="troubleshooting-tips flex w-full flex-col items-center justify-end py-12 text-center text-sm font-extralight opacity-90 first-letter:h-full"
 		style="flex: 0.75"
 	>
 		<div class="troubleshooting-tips-container inline-block">
