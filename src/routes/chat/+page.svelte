@@ -3,10 +3,10 @@
 	import CleanSplashScreen from '$lib/CleanSplash.svelte';
 </script>
 
-<Loader this={() => import('$lib/app/chat.svelte')}>
+<Loader timer={550} this={() => import('$lib/app/chat.svelte')}>
 	<!-- <p>some slotted content</p> -->
 
 	<p slot="fallback">
-		<CleanSplashScreen />
+		<CleanSplashScreen/>
 	</p>
 </Loader>
