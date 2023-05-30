@@ -55,7 +55,9 @@
 			messages.push(msg);
 			messages = messages; // Reactivity trigger
 			// Scroll down
-			messageList_UI.scroll(0, messageList_UI.scrollHeight); // Overflow a bit
+			setTimeout(() => {
+				messageList_UI.scroll(0, messageList_UI.scrollHeight + 9999999); // Overflow a bit
+			}, 100); // Requires timeout for some reason
 		} catch (error) {
 			console.log(error, msg);
 		}
@@ -202,7 +204,12 @@
 			<svelte:fragment slot="channels"><MainChannel /></svelte:fragment>
 		</Channelbar>
 
-		<ContentContainer title={person.username || 'Loading'} subtitle={person.about || 'Loading about...'} noIcon={true} call={true}>
+		<ContentContainer
+			title={person.username || 'Loading'}
+			subtitle={person.about || 'Loading about...'}
+			noIcon={true}
+			call={true}
+		>
 			<div slot="content" class="h-screen w-full">
 				<div class="chat-container h-4/5">
 					<div
