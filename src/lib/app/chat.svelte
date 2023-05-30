@@ -1,12 +1,9 @@
-
-
-
 <script lang="ts">
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
 	import Channelbar from '$lib/ChannelBar/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
 	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
-	import { faMessage } from '@fortawesome/free-solid-svg-icons';
+	// import { faMessage } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
 	import { ws_host, SOCKET_BASE } from '$lib/xs/config.json';
 	import { getUser } from '$lib/xs/Ether/User/UID';
@@ -205,7 +202,7 @@
 			<svelte:fragment slot="channels"><MainChannel /></svelte:fragment>
 		</Channelbar>
 
-		<ContentContainer title={person.username || 'Loading'} icon={faMessage} call={true}>
+		<ContentContainer title={person.username || 'Loading'} subtitle={person.about || 'Loading about...'} noIcon={true} call={true}>
 			<div slot="content" class="h-screen w-full">
 				<div class="chat-container h-4/5">
 					<div

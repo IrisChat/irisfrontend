@@ -1,15 +1,21 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
-	import { faEyeSlash, faHome, faPhone } from '@fortawesome/free-solid-svg-icons';
+	import {
+		faEyeSlash,
+		faHome,
+		faPhone,
+		type IconDefinition
+	} from '@fortawesome/free-solid-svg-icons';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
 	import voicecall, { init, endCall } from '$lib/xs/Ether/voicecall';
 	import { getUser } from '$lib/xs/Ether/User/UID';
-	export let icon = faHome;
+	export let icon: IconDefinition = faHome;
+	export let noIcon: boolean = false;
 
 	// Voicecall Hooks
-	export let call = false;
+	export let call: boolean = false;
 	let callPane: HTMLDivElement;
 	let Host: HTMLDivElement;
 	let hostVideo: HTMLVideoElement;
@@ -47,10 +53,17 @@
 >
 	<div class="titlebar flex w-full justify-around px-4">
 		<div class="pageTitle flex items-center justify-center">
-			<Fa {icon} size="18" />
-			<h5 class="title-text">
-				<slot name="title-text">Home</slot>
-			</h5>
+			{#if !noIcon}
+				<Fa {icon} size="18" />
+			{/if}
+			<div class="status-holder ml-2 inline">
+				<h5 class="title-header text-xl font-semibold">
+					<slot name="title-text">Home</slot>
+				</h5>
+				<h1 class="subtitle text-sm font-light">
+					<slot name="subtitle-text" />
+				</h1>
+			</div>
 		</div>
 		<div class="spacer flex-1">&nbsp;</div>
 		{#if call}

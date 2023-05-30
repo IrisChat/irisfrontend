@@ -7,11 +7,16 @@
 		faBullhorn,
 		faHome,
 		faPlusCircle,
-		faBoltLightning
+		faBoltLightning,
+
+		type IconDefinition
+
 	} from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
-	export let icon = faHome;
-	export let title = 'Home';
+	export let icon: IconDefinition = faHome;
+	export let title: string = 'Home';
+	export let subtitle: string = '';
+	export let noIcon: boolean = false;
 	export let call = false;
 	let content: HTMLDivElement;
 	let content_container: HTMLDivElement;
@@ -43,8 +48,9 @@
 </script>
 
 <div bind:this={content_container} class="content-container">
-	<TopNav {icon} {call}>
+	<TopNav {icon} {call} {noIcon}>
 		<svelte:fragment slot="title-text">{title}</svelte:fragment>
+		<svelte:fragment slot="subtitle-text">{subtitle}</svelte:fragment>
 	</TopNav>
 	<div
 		bind:this={content}
