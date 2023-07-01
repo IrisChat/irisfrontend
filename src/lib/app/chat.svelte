@@ -57,7 +57,7 @@
 			// Scroll down
 			setTimeout(() => {
 				messageList_UI.scroll(0, messageList_UI.scrollHeight + 9999999); // Overflow a bit
-			}, 100); // Requires timeout for some reason
+			}, 100); // Requires timeout for some reason --- TODO: Use reactivity instead
 		} catch (error) {
 			console.log(error, msg);
 		}
