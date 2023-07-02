@@ -205,7 +205,7 @@
 			<div class="block h-full w-full">
 				<div class="header-wrapper mb-8 flex h-fit w-full">
 					<div
-						class="header border-b flex h-fit w-full flex-1 items-center justify-center border-NORD2 bg-NORD3 px-4 text-base font-medium text-NORD8"
+						class="header flex h-fit w-full flex-1 items-center justify-center border-b border-NORD2 bg-NORD3 px-4 text-base font-medium text-NORD8"
 					>
 						<MessageUI
 							username={person.username || 'Loading'}
@@ -276,31 +276,34 @@
 					{/each}
 				</div>
 			</div>
-			<div class="w-7/12 fixed bottom-14 flex justify-center items-center"><div
-				class="chat-form rounded-full font-normal h-12 text-base border-NORD8 bg-NORD1 text-NORD8 flex items-center border text-left focus:outline-none" style="width: 90%;"
-			>
-				<div class="flex w-full h-full items-center">
-					<div
-						class="input_container flex select-text items-center w-full overflow-y-auto overflow-x-hidden break-words"
-						contenteditable="true"
-						role="textbox"
-						spellcheck="true"
-						title="Type a message"
-						style="user-select: text; white-space: pre-wrap; word-break: break-word; max-height: 100px"
-					>
-						<input
-							bind:this={msgBox}
-							class="focus:outline-none z-20 h-full w-full  bg-transparent px-4 py-2" placeholder="Type a message..."
-							on:dragover={(e) => e.preventDefault}
-							on:drop={(e) => sendMsg(e, true)}
-							on:keydown={(e) => {
-								sendMsg(e, false);
-							
-							}}
-						/>
+			<div class="fixed bottom-14 flex w-7/12 items-center justify-center">
+				<div
+					class="chat-form flex h-12 items-center rounded-full border border-NORD8 bg-NORD1 text-left text-base font-normal text-NORD8 focus:outline-none"
+					style="width: 90%;"
+				>
+					<div class="flex h-full w-full items-center">
+						<div
+							class="input_container flex w-full select-text items-center overflow-y-auto overflow-x-hidden break-words"
+							contenteditable="true"
+							role="textbox"
+							spellcheck="true"
+							title="Type a message"
+							style="user-select: text; white-space: pre-wrap; word-break: break-word; max-height: 100px"
+						>
+							<input
+								bind:this={msgBox}
+								class="z-20 h-full w-full bg-transparent  px-4 py-2 focus:outline-none"
+								placeholder="Type a message..."
+								on:dragover={(e) => e.preventDefault}
+								on:drop={(e) => sendMsg(e, true)}
+								on:keydown={(e) => {
+									sendMsg(e, false);
+								}}
+							/>
+						</div>
 					</div>
 				</div>
-			</div></div>
+			</div>
 		</div>
 	</svelte:fragment>
 	<!-- <svelte:fragment slot="participant_panel"
