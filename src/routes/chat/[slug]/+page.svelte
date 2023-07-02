@@ -1,11 +1,14 @@
 <script lang="ts">
-	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
-	import Channelbar from '$lib/ChannelBar/Channelbar.svelte';
-	import ContentContainer from '$lib/content/ContentContainer.svelte';
-	import MainChannel from '$lib/ChannelBar/MainChannel.svelte';
-	// import { faMessage } from '@fortawesome/free-solid-svg-icons';
+	import UniversalLayout from '$lib/app/universal_layout.svelte';
+	import FloatingNavigation from '$lib/app/FloatingNavigation.svelte';
+	import DefaultGutter from '$lib/app/Defaults/DefaultGutter.svelte';
+	import DefaultSideBar from '$lib/app/Defaults/DefaultSideBar.svelte';
+	import Message from '$lib/app/InteractiveModal/Message.svelte';
+	import MessageUI from '$lib/app/Message.svelte';
+
+	/*********** REFACTOR */
 	import { onMount } from 'svelte';
-	import { ws_host, SOCKET_BASE } from '$lib/xs/config.json';
+	import { ws_host, SOCKET_BASE, defaultAvatar } from '$lib/xs/config.json';
 	import { getUser } from '$lib/xs/Ether/User/UID';
 	import { page } from '$app/stores';
 	import { setUser } from '$lib/xs/userData';
@@ -14,11 +17,8 @@
 
 	// Read storage
 	import 'node-localstorage/register';
-	import ServerMessage from '$lib/content/ServerMessage.svelte';
-	import UserMessage from '$lib/content/UserMessage.svelte';
 	// Socket.io
 	import { io } from 'socket.io-client';
-	import InputContainer from '$lib/chat/InputContainer.svelte';
 
 	// @ts-ignore
 	const userData = JSON.parse(localStorage.getItem('userData')) || {};
@@ -28,7 +28,7 @@
 	let messageList_UI: HTMLDivElement;
 	let messages: any[] = [];
 	let msgBox: HTMLInputElement;
-	let person = $page.url.searchParams.get('with') || {};
+	let person = $page.params.slug || {};
 	let ws: any;
 
 	class msgFMT {
@@ -69,7 +69,6 @@
 		ws.on('disconnect', function (s: any) {
 			console.log('Disconnected from global handler.'); // In the event that this ever happens.
 			msgBox.value = "You can't send messages here";
-			input_placeholder.innerHTML = "You can't send messages here";
 			msgBox.disabled = true;
 		});
 		ws.on('connect', () => {
@@ -190,114 +189,126 @@
 				console.log(res);
 			});
 	});
+	/*********** [END]:REFACTOR */
 </script>
 
 <svelte:head>
 	<title>{title}</title>
 </svelte:head>
-<main>
-	<div class="flex">
-		<Sidebar avatar={userData.avatar} />
-
-		<Channelbar>
-			<svelte:fragment slot="title">Direct Messages</svelte:fragment>
-			<svelte:fragment slot="channels"><MainChannel /></svelte:fragment>
-		</Channelbar>
-
-		<ContentContainer
-			title={person.username || 'Loading'}
-			subtitle={person.about || 'Loading about...'}
-			noIcon={true}
-			call={true}
-		>
-			<div slot="content" class="h-screen w-full">
-				<div class="chat-container h-4/5">
+<UniversalLayout>
+	<svelte:fragment slot="gutter"><DefaultGutter /></svelte:fragment>
+	<svelte:fragment slot="sidebar">
+		<DefaultSideBar /></svelte:fragment
+	>
+	<svelte:fragment slot="interaction_pane"
+		><div class="node-container relative flex h-full w-full bg-NORD2 text-center">
+			<div class="block h-full w-full">
+				<div class="header-wrapper mb-8 flex h-fit w-full">
 					<div
-						bind:this={messageList_UI}
-						class="message-list h-full pr-4"
-						style="overflow: overlay; max-height: 87vh;"
+						class="header border-b flex h-fit w-full flex-1 items-center justify-center border-NORD2 bg-NORD3 px-4 text-base font-medium text-NORD8"
 					>
-						{#each messages as message}
-							{#if message.type === 0}
-								<ServerMessage>{message.content}</ServerMessage>
-							{:else if message.type === 1 && message.IAM == UID}
-								<UserMessage icon={userData.avatar} floatLeft={true}>
-									{#if message.__preprocess}
-										<div class="inline">{@html message.content}</div>
-									{:else}
-										{message.content}
-									{/if}
-									<div class="caption opacity-76 text-xs font-light">
-										{new Date(message.ts).toLocaleString()}
-									</div>
-								</UserMessage>
-							{:else if message.type === 1}
-								<UserMessage icon={person.avatar} floatLeft={false}>
-									{#if message.__preprocess}
-										<div class="inline">{@html message.content}</div>
-									{:else}
-										{message.content}
-									{/if}
-									<div class="caption opacity-76 text-xs font-light">
-										{new Date(message.ts).toLocaleString()}
-									</div>
-								</UserMessage>
-							{:else if message.type === 2 && message.IAM == UID}
-								<UserMessage icon={userData.avatar} floatLeft={true}>
-									{message.description}
-									{@html message.content}
-									<div class="caption opacity-76 text-xs font-light">
-										{new Date(message.ts).toLocaleString()}
-									</div>
-								</UserMessage>
-							{:else if message.type === 2}
-								<UserMessage icon={person.avatar} floatLeft={false}>
-									{message.description}
-									{@html message.content}
-									<div class="caption opacity-76 text-xs font-light">
-										{new Date(message.ts).toLocaleString()}
-									</div>
-								</UserMessage>
-							{/if}
-						{/each}
+						<MessageUI
+							username={person.username || 'Loading'}
+							preview={person.about || 'Loading about me...'}
+							status={person.status}
+							icon={person.avatar || defaultAvatar}
+							notification={false}
+						/>
 					</div>
 				</div>
-
 				<div
-					class="chat-form relative bottom-0 flex w-full items-center border-t border-tertiary bg-main pl-2 text-left text-text outline-none focus:outline-none"
+					bind:this={messageList_UI}
+					class="chatList block h-full w-full overflow-y-auto overflow-x-hidden pb-48"
 				>
-					<InputContainer>
-						<div
-							class="input_container flex select-text items-center overflow-y-auto  overflow-x-hidden break-words"
-							contenteditable="true"
-							role="textbox"
-							spellcheck="true"
-							title="Type a message"
-							style="user-select: text; white-space: pre-wrap; word-break: break-word; max-height: 100px"
-						>
-							<input
-								bind:this={msgBox}
-								class="focus-zero z-20 h-full w-full rounded-sm bg-transparent px-2 py-2 text-xl font-semibold text-text "
-								on:dragover={(e) => e.preventDefault}
-								on:drop={(e) => sendMsg(e, true)}
-								on:keydown={(e) => {
-									sendMsg(e, false);
-									input_placeholder.innerHTML = '';
-								}}
-							/>
-						</div>
-					</InputContainer>
+					{#each messages as message}
+						{#if message.type === 0}
+							<Message content={message.content} icon="/wait.svg" username="WebSocket"
+								><svelte:fragment slot="notification">{new Date().toLocaleString()}</svelte:fragment
+								></Message
+							>
+						{:else if message.type === 1 && message.IAM == UID}
+							<Message icon={userData.avatar} username={userData.username || 'Loading'}>
+								<svelte:fragment slot="content">
+									{#if message.__preprocess}
+										<div class="inline">{@html message.content}</div>
+									{:else}
+										{message.content}
+									{/if}
+								</svelte:fragment>
+								<div slot="notification">
+									{new Date(message.ts).toLocaleString()}
+								</div>
+							</Message>
+						{:else if message.type === 1}
+							<Message icon={person.avatar} username={person.username || 'Loading'}>
+								<svelte:fragment slot="content">
+									{#if message.__preprocess}
+										<div class="inline">{@html message.content}</div>
+									{:else}
+										{message.content}
+									{/if}
+								</svelte:fragment>
+								<div slot="notification">
+									{new Date(message.ts).toLocaleString()}
+								</div>
+							</Message>
+						{:else if message.type === 2 && message.IAM == UID}
+							<Message icon={userData.avatar}>
+								<svelte:fragment slot="content">
+									{message.description}
+									{@html message.content}
+								</svelte:fragment>
+								<div slot="notification">
+									{new Date(message.ts).toLocaleString()}
+								</div>
+							</Message>
+						{:else if message.type === 2}
+							<Message icon={person.avatar}>
+								<svelte:fragment slot="content">
+									{message.description}
+									{@html message.content}
+								</svelte:fragment>
+								<div slot="notification">
+									{new Date(message.ts).toLocaleString()}
+								</div>
+							</Message>
+						{/if}
+					{/each}
 				</div>
 			</div>
-		</ContentContainer>
-	</div>
-</main>
-
-<style>
-	:global(body) {
-		overflow: hidden;
-	}
-	.focus-zero:focus {
-		outline: none;
-	}
-</style>
+			<div class="w-7/12 fixed bottom-14 flex justify-center items-center"><div
+				class="chat-form rounded-full font-normal h-12 text-base border-NORD8 bg-NORD1 text-NORD8 flex items-center border text-left focus:outline-none" style="width: 90%;"
+			>
+				<div class="flex w-full h-full items-center">
+					<div
+						class="input_container flex select-text items-center w-full overflow-y-auto overflow-x-hidden break-words"
+						contenteditable="true"
+						role="textbox"
+						spellcheck="true"
+						title="Type a message"
+						style="user-select: text; white-space: pre-wrap; word-break: break-word; max-height: 100px"
+					>
+						<input
+							bind:this={msgBox}
+							class="focus:outline-none z-20 h-full w-full  bg-transparent px-4 py-2" placeholder="Type a message..."
+							on:dragover={(e) => e.preventDefault}
+							on:drop={(e) => sendMsg(e, true)}
+							on:keydown={(e) => {
+								sendMsg(e, false);
+							
+							}}
+						/>
+					</div>
+				</div>
+			</div></div>
+		</div>
+	</svelte:fragment>
+	<!-- <svelte:fragment slot="participant_panel"
+		><div class="node-container flex h-full w-full bg-NORD2 text-center">
+			&nbsp;
+		</div></svelte:fragment
+	> -->
+	<svelte:fragment slot="navigation_overlay">
+		<FloatingNavigation avatar={userData.avatar || '/pixel.png'} /></svelte:fragment
+	>
+</UniversalLayout>

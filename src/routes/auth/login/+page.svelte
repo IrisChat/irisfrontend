@@ -3,7 +3,7 @@
 	import { toast } from '@zerodevx/svelte-toast';
 	import 'node-localstorage/register';
 	import { setUser } from '$lib/xs/userData';
-	import NavigatorMin from '$lib/Navigator-Min.svelte';
+	import NavigatorMin from '$lib/Global/Navigator-Min.svelte';
 	import Fa from 'svelte-fa';
 	import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';

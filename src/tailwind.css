@@ -3,229 +3,46 @@
 @tailwind components;
 @layer base {
 	:root {
-		--color-main: 237 242 245; /* Primary */
-		--color-primary: 221 229 235; /* Secondary */
-		--color-secondary: 45 130 183; /* Extra */
-		--color-tertiary: 197 204 209; /* Accent */
-		--color-option: 221 229 235; /* Extra */
-		--color-text: 31 32 33; /* Tertiary */
-		
-		/** Dark theme **/
-		/* --color-main-dark: 3 17 46; */
-	}
-}
+		/* [NordTheme](https://nordtheme.com/docs/colors-and-palettes)
+	   "Polar Night", adapted and modified for IrisChat
+	   */
+		/* Dark -- Light */
+		--NORD0: 31 35 43;
+		--NORD1: 46 52 64; /* #2E3440 */
+		--NORD2: 50 56 71; /* #323847 */
+		--NORD3: 59 66 82; /* #3B4252 */
+		--NORD4: 67 76 94; /* #434C5E */
+		--NORD5: 76 86 106;
+		--NORD6: 127 140 165;
+		--NORD7: 166 174 188; /* #A6AEBC */
+		--NORD8: 236 239 244; /* #ECEFF4 */
+		/* Snowy white */
 
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
+/* Mixed -- ExtraColors */
+--NORDEXTRA0: 76 86 106; /* #4C566A */
 
-@layer components {
-	.sidebar-icon {
-		@apply relative mx-auto mt-2 mb-2 
-    flex h-12 h-12 w-12 cursor-pointer items-center  
-  justify-center rounded-3xl text-green-500 shadow-lg
-    transition-all duration-300
-    ease-linear hover:rounded-xl hover:text-gray-200 dark:bg-primary;
-	}
-	.sidebar-icon__meta {
-		@apply relative bottom-0 mx-auto mt-2 mb-2 flex h-12 w-12 
-		cursor-pointer items-center justify-center rounded-3xl bg-tertiary 
-		text-primary shadow-lg transition-all duration-300 ease-linear 
-		hover:rounded-xl hover:bg-primary;
-	}
-
-	.sidebar-tooltip {
-		@apply absolute left-14 m-2 w-auto min-w-max origin-left scale-0 rounded-md
-    bg-gray-900 p-2 
-    text-xs font-bold 
-    text-white shadow-md transition-all duration-100;
-	}
-
-	.sidebar-hr {
-		@apply mx-2 rounded-full 
-    border border-gray-200 bg-gray-200 dark:border-gray-800
-    dark:bg-gray-800;
-	}
-
-	.top-navigation-icon {
-		@apply mr-3
-    ml-4 cursor-pointer
-    text-gray-500 transition duration-300 
-    ease-in-out 
-    hover:text-pink-400;
-	}
-
-	.top-navigation-icon:first {
-		@apply ml-auto mr-4;
-	}
-
-	.title-hashtag {
-		@apply my-auto ml-2 text-lg font-semibold 
-    tracking-wider text-gray-500;
-	}
-
-	.title-text {
-		@apply my-auto mr-auto ml-2 text-xl font-semibold 
-    tracking-wider text-text text-opacity-80 
-    transition duration-300 ease-in-out;
-	}
-
-	.search {
-		@apply ml-0 mr-0 flex h-9 
-    w-1/5 items-center
-    justify-start
-    rounded-md bg-gray-400 px-2 text-gray-500 
-    shadow-md transition
-    duration-300 ease-in-out dark:bg-gray-600;
-	}
-
-	.search-input {
-		@apply w-full rounded bg-transparent
-    pl-1 font-sans 
-    font-semibold  text-gray-500
-    placeholder-gray-500 outline-none;
-	}
-
-	.content-container {
-		@apply m-0 flex 
-    h-full
-    w-full
-    flex-col overflow-hidden;
-	}
-
-	.post {
-		@apply m-0
-    flex w-full cursor-pointer flex-row
-    items-center justify-evenly py-4
-    px-8;
-	}
-
-	.post-selected {
-		@apply bg-green-400 shadow-md
-    dark:bg-gray-900;
-	}
-
-	.post-content {
-		@apply ml-auto 
-    flex w-4/5 flex-col 
-    justify-start;
-	}
-
-	.post-text {
-		@apply mr-auto whitespace-normal text-left text-lg 
-    text-gray-800 dark:text-white;
-	}
-
-	.post-owner {
-		@apply mr-2 cursor-pointer text-left font-semibold text-gray-800 dark:text-white;
-	}
-
-	.avatar-wrapper {
-		@apply m-0 ml-auto mb-auto
-    flex 
-    w-12 flex-col items-center;
-	}
-
-	.avatar {
-		@apply mx-0
-    mb-auto mt-0 
-    h-full w-12
-    flex-none cursor-pointer 
-    rounded-full bg-gray-100 object-cover 
-    shadow-md;
-	}
-
-	.timestamp {
-		@apply ml-2 text-left text-xs font-semibold text-gray-500 dark:text-gray-600;
-	}
-
-	.bottom-bar {
-		@apply fixed -left-80 right-8 bottom-2 
-    flex h-12 flex-row items-center 
-    justify-between rounded-lg 
-    bg-gray-400 px-2 shadow-lg
-    dark:bg-gray-600;
-	}
-
-	.bottom-bar-input {
-		@apply ml-0 mr-auto
-    w-full cursor-text 
-    bg-transparent font-semibold
-    text-gray-500  placeholder-gray-500 outline-none
-    dark:text-gray-400;
-	}
-
-	.channel-bar {
-		@apply m-0 h-auto w-96;
-	}
-
-	.channel-container {
-		@apply m-0 flex flex-col items-center 
-    justify-start p-1;
-	}
-
-	.channel-block {
-		@apply m-0 flex h-16 
-    items-center 
-    justify-center p-0;
-	}
-
-	.channel-block-text {
-		@apply my-auto mr-auto ml-4 
-    align-middle text-lg 
-    font-bold tracking-wider text-gray-600 dark:text-gray-400;
-	}
-
-	.dropdown {
-		@apply m-0 w-full px-2 pb-2
-    transition duration-300 ease-in-out;
-	}
-
-	.dropdown-header {
-		@apply mx-0 flex cursor-pointer flex-wrap
-    items-center justify-evenly
-    text-gray-500;
-	}
-
-	.dropdown-header-text {
-		@apply cursor-default  text-lg 
-    font-semibold text-gray-500
-    text-opacity-90;
-	}
-
-	.dropdown-header-text-selected {
-		@apply text-lg font-bold text-blue-500 text-opacity-90;
-	}
-
-	.dropdown-selection {
-		@apply mt-1 mr-auto ml-2 flex
-    cursor-pointer flex-row items-center
-    justify-evenly transition duration-300
-    ease-in-out;
-	}
-
-	.dropdown-selection-text {
-		@apply mr-auto cursor-pointer font-semibold
-    tracking-wide 
-    text-gray-500 transition duration-300 
-    ease-in-out hover:text-pink-500
-    dark:hover:text-gray-500;
+		/* Mixed -- Frost */
+		--NORDFROST0: 142 164 207; /* #8EA4CF */
+		--NORDFROST1: 191 97 106; /* #BF616A */
 	}
 }
 
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-	background-color: #2b2b2b;
-	border-left: 1px solid #3e3e3e;
-	width: 0.65rem;
+	background-color: #6b6b6b;
+	width: 0.35rem;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #6b6b6b;
-	border-radius: 10px;
+	background: #d8dee9;
+	border-radius: 2px;
+}
+/* The tree is inverted */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }

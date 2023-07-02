@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Navigation from '$lib/Navigator.svelte';
+	import Navigation from '$lib/Global/Navigator.svelte';
 </script>
 
 <section style="color: #E8E8E8">

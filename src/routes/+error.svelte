@@ -1,5 +1,5 @@
 <script lang="ts">
-	import NavigatorMin from '$lib/Navigator-Min.svelte';
+	import NavigatorMin from '$lib/Global/Navigator-Min.svelte';
 	import { page } from '$app/stores';
 	let error_apology: HTMLDivElement;
 

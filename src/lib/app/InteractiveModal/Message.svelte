@@ -1,0 +1,33 @@
+<script lang="ts">
+	export let icon: string = '/pixel.png';
+	export let username: string = '';
+	export let content: string = '';
+</script>
+
+<!---
+			            @params 'icon' User Icon
+					            'username' Username of who contacted you
+					            'content' The content of the message [NOTE: Could either be passed in as an ARGUMENT or SLOT]
+					            'status' User status
+					    @slotParams 'notification' Last message timestamp/amount of unread message count
+					-->
+<div
+	class="conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md py-4 px-2 hover:bg-NORD4"
+>
+	<div class="icon-wrap flex items-center text-left">
+		<img class="rounded-full" width="40px" height="40px" src={icon} alt={username} />
+	</div>
+	<div class="details-block block flex-1 text-left text-base font-medium leading-relaxed text-NORD8 mx-4">
+		<div class="flex usernameTimestampCombo"> {username} 	<div class="message-notification mx-2 mb-4 block font-normal h-full text-xs text-NORD4">
+            <slot name="notification">slot=notification</slot>
+        </div></div>
+		<div class="max-w-48 break-all text-xs font-normal text-NORD8"> <!--- We don't truncate these texts, but we break everything in sight -->
+			{#if content}
+				{content}
+			{:else}
+				<slot name="content" />
+			{/if}
+		</div>
+	</div>
+
+</div>

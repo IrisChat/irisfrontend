@@ -5,12 +5,18 @@ module.exports = {
 		extend: {
 			colors: {
 				// Using modern `rgb`
-				main: 'rgb(var(--color-main) / var(--tw-bg-opacity))',
-				primary: 'rgb(var(--color-primary) / var(--tw-bg-opacity))',
-				secondary: 'rgb(var(--color-secondary) / var(--tw-bg-opacity))',
-				tertiary: 'rgb(var(--color-tertiary) / var(--tw-bg-opacity))',
-				option: 'rgb(var(--color-option) / var(--tw-bg-opacity))',
-				text: 'rgb(var(--color-text) / var(--tw-bg-opacity))',
+				NORD0: 'rgb(var(--NORD0) / var(--tw-bg-opacity))',
+				NORD1: 'rgb(var(--NORD1) / var(--tw-bg-opacity))',
+				NORD2: 'rgb(var(--NORD2) / var(--tw-bg-opacity))',
+				NORD3: 'rgb(var(--NORD3) / var(--tw-bg-opacity))',
+				NORD4: 'rgb(var(--NORD4) / var(--tw-bg-opacity))',
+				NORD5: 'rgb(var(--NORD5) / var(--tw-bg-opacity))',
+				NORD6: 'rgb(var(--NORD6) / var(--tw-bg-opacity))',
+				NORD7: 'rgb(var(--NORD7) / var(--tw-bg-opacity))',
+				NORD8: 'rgb(var(--NORD8) / var(--tw-bg-opacity))',
+				NORDFROST0: 'rgb(var(--NORDFROST0) / var(--tw-bg-opacity))',
+				NORDFROST1: 'rgb(var(--NORDFROST1) / var(--tw-bg-opacity))',
+				NORDEXTRA0: 'rgb(var(--NORDEXTRA0) / var(--tw-bg-opacity))'
 			}
 		}
 	},

@@ -35,6 +35,7 @@
 		"@fortawesome/free-brands-svg-icons": "^6.4.0",
 		"@fortawesome/free-solid-svg-icons": "^6.4.0",
 		"@sveltejs/adapter-node": "^1.1.0",
+		"@tabler/icons-svelte": "^2.23.0",
 		"@zerodevx/svelte-toast": "^0.8.2",
 		"emitter-component": "^1.1.1",
 		"extract-colors": "^2.0.4",

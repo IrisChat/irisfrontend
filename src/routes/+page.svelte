@@ -1,8 +1,8 @@
 <script>
-	import Hero from '$lib/Hero.svelte';
+	import Hero from '$lib/Landing/Hero.svelte';
 	import Fa from 'svelte-fa';
 	import { faGithub } from '@fortawesome/free-brands-svg-icons';
-	import GitHubCorner from '$lib/GitHubCorner.svelte';
+	import GitHubCorner from '$lib/Global/GitHubCorner.svelte';
 	// import Splash from '$lib/Splash.svelte';
 </script>
 

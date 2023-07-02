@@ -2,7 +2,7 @@
 	import { http_host, API_BASE } from '$lib/xs/config.json';
 	import { toast } from '@zerodevx/svelte-toast';
 	import 'node-localstorage/register';
-	import NavigatorMin from '$lib/Navigator-Min.svelte';
+	import NavigatorMin from '$lib/Global/Navigator-Min.svelte';
 	import Fa from 'svelte-fa';
 	import { faUser } from '@fortawesome/free-solid-svg-icons';
 	import { page } from '$app/stores';

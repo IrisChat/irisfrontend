@@ -1,12 +1,5 @@
 <script lang="ts">
-	import Loader from '$lib/Loader.svelte';
-	import CleanSplashScreen from '$lib/CleanSplash.svelte';
+	import { onMount } from 'svelte';
+	// This should render the friends list page in the future
+	onMount(() => history.back()); // Lol
 </script>
-
-<Loader timer={550} this={() => import('$lib/app/chat.svelte')}>
-	<!-- <p>some slotted content</p> -->
-
-	<p slot="fallback">
-		<CleanSplashScreen/>
-	</p>
-</Loader>
