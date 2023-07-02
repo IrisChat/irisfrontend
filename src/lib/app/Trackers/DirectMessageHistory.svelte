@@ -108,6 +108,7 @@
 					username={convo.username || 'Deleted User'}
 					preview={convo.about}
 					status={convo.status}
+					size={25}
 				>
 					<svelte:fragment slot="notification">10:35PM</svelte:fragment></Message
 				>
