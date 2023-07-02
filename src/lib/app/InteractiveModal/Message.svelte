@@ -17,11 +17,17 @@
 	<div class="icon-wrap flex items-center text-left">
 		<img class="rounded-full" width="40px" height="40px" src={icon} alt={username} />
 	</div>
-	<div class="details-block block flex-1 text-left text-base font-medium leading-relaxed text-NORD8 mx-4">
-		<div class="flex usernameTimestampCombo"> {username} 	<div class="message-notification mx-2 mb-4 block font-normal h-full text-xs text-NORD4">
-            <slot name="notification">slot=notification</slot>
-        </div></div>
-		<div class="max-w-48 break-all text-xs font-normal text-NORD8"> <!--- We don't truncate these texts, but we break everything in sight -->
+	<div
+		class="details-block mx-4 block flex-1 text-left text-base font-medium leading-relaxed text-NORD8"
+	>
+		<div class="usernameTimestampCombo flex">
+			<div class="hover:underline">{username}</div>
+			<div class="message-notification mx-2 mb-4 block h-full text-xs font-normal text-NORD4">
+				<slot name="notification">slot=notification</slot>
+			</div>
+		</div>
+		<div class="max-w-48 break-all text-xs font-normal text-NORD8">
+			<!--- We don't truncate these texts, but we break everything in sight -->
 			{#if content}
 				{content}
 			{:else}
@@ -29,5 +35,4 @@
 			{/if}
 		</div>
 	</div>
-
 </div>
