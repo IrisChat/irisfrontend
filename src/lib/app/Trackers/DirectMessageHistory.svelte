@@ -59,7 +59,7 @@
 		}
 		pollContacts();
 		// Fit input box to placeholder size
-		creator_input.setAttribute('size', creator_input.getAttribute('placeholder').length);
+		// creator_input.setAttribute('size', creator_input.getAttribute('placeholder').length);
 		setInterval(() => {
 			pollContacts();
 		}, 15000);
