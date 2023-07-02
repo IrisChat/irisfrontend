@@ -11,6 +11,9 @@
 		}
 	};
 
+	// Read storage
+	import 'node-localstorage/register';
+
 	onMount(() => {
 		// Preference watcher
 		let preferences: any = localStorage.getItem('preferences');
