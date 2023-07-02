@@ -14,7 +14,7 @@
 <div
 	class="conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md py-4 px-2 hover:bg-NORD4"
 >
-	<div class="icon-wrap flex items-center text-left">
+	<div class="icon-wrap flex items-start text-left">
 		<img
 			class="rounded-full border border-NORD4"
 			style="height: 40px; width: 40px"
