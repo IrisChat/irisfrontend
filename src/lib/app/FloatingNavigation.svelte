@@ -10,7 +10,9 @@
 		-->
 
 <div class="node-container flex h-full w-full items-center justify-center bg-NORD2 text-center">
-	<div class="user-profile-image mx-2 cursor-pointer rounded-full bg-red-800 hover:opacity-90">
+	<div
+		class="user-profile-image mx-2 cursor-pointer rounded-full border border-NORD4 hover:opacity-90"
+	>
 		<img class="w-9" src={avatar} alt="Profile Avatar ID" />
 	</div>
 	<div class="guild-selection h-full w-full">
