@@ -12,7 +12,7 @@
 					    @slotParams 'notification' Last message timestamp/amount of unread message count
 					-->
 <div
-	class="conversation my-2 flex w-full cursor-pointer select-none rounded-md py-4 px-2 hover:bg-NORD4"
+	class="conversation my-2 flex w-full mx-4 cursor-pointer select-none rounded-md py-4 px-2 hover:bg-NORD4"
 >
 	<div class="icon-wrap text-left">
 		<img
