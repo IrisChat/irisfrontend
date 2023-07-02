@@ -96,7 +96,7 @@
 								style="color: #0094FF">Sign up</a
 							>
 						</div>
-						<div class="notification bg-gray-800 max-w-lg">
+						<div class="notification max-w-lg bg-gray-800">
 							{#await fetchNotification() then response}
 								{#if response.type == 'NOTIFY'}
 									<div class="border border-blue-300 px-4 pb-8 pt-4">
@@ -108,7 +108,7 @@
 										<div class="font-semibold text-2xl">ALERT</div>
 										<br class="pb-4 text-red-400 font-light" />{@html response.body}
 									</div>
-									{:else if response.type == 'WARN'}
+								{:else if response.type == 'WARN'}
 									<div class="border border-yellow-300 px-4 pb-8 pt-4">
 										<div class="font-semibold text-2xl">WARNING</div>
 										<br class="pb-4 text-red-400 font-light" />{@html response.body}

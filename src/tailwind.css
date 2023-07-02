@@ -18,8 +18,8 @@
 		--NORD8: 236 239 244; /* #ECEFF4 */
 		/* Snowy white */
 
-/* Mixed -- ExtraColors */
---NORDEXTRA0: 76 86 106; /* #4C566A */
+		/* Mixed -- ExtraColors */
+		--NORDEXTRA0: 76 86 106; /* #4C566A */
 
 		/* Mixed -- Frost */
 		--NORDFROST0: 142 164 207; /* #8EA4CF */

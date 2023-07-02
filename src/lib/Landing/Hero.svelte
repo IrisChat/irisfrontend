@@ -6,13 +6,15 @@
 	<div class="hero w-full pb-20 text-center">
 		<div class="content mx-16 flex flex-wrap items-center justify-center">
 			<Navigation />
-			<div class="section-zero flex w-full flex-wrap items-center justify-center text-left text-white">
+			<div
+				class="section-zero flex w-full flex-wrap items-center justify-center text-left text-white"
+			>
 				<div class="headline flex-1 items-center justify-center">
 					<div class="headline-container mx-8 inline-block">
 						<div class="break-words text-5xl font-light" style="width: 557px">
 							It's time to ditch Discord. Iris is here.
 						</div>
-						<div class="text-md break-words opacity-75 py-4" style="width: 514px">
+						<div class="text-md break-words py-4 opacity-75" style="width: 514px">
 							Iris is an open-source Discord alternative. It's a new, fast and secure way of
 							connecting.
 						</div>

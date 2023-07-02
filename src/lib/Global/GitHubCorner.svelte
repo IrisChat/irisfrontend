@@ -1,6 +1,10 @@
 <!-- Credits go to https://tholman.com/github-corners/ -->
 
-<a href="https://github.com/IrisChat" target="__blank" class="github-corner" aria-label="View source on GitHub"
+<a
+	href="https://github.com/IrisChat"
+	target="__blank"
+	class="github-corner"
+	aria-label="View source on GitHub"
 	><svg
 		width="80"
 		height="80"

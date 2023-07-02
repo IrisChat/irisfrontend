@@ -15,7 +15,12 @@
 	class="conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md py-4 px-2 hover:bg-NORD4"
 >
 	<div class="icon-wrap flex items-center text-left">
-		<img class="rounded-full border border-NORD4" style="height: 40px; width: 40px" src={icon} alt={username} />
+		<img
+			class="rounded-full border border-NORD4"
+			style="height: 40px; width: 40px"
+			src={icon}
+			alt={username}
+		/>
 	</div>
 	<div
 		class="details-block mx-4 block flex-1 text-left text-base font-medium leading-relaxed text-NORD8"

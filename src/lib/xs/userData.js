@@ -28,7 +28,7 @@ export async function setUser(person) {
 		})
 		.then(async function (json) {
 			await localStorage.setItem('userData', JSON.stringify(json));
-			const token = localStorage.getItem("token");
+			const token = localStorage.getItem('token');
 			fetch(`${http_host}${API_BASE}user/preferences/`, {
 				headers: {
 					Accept: 'application/json',
@@ -60,4 +60,3 @@ export async function setUser(person) {
 			console.log(res);
 		});
 }
-

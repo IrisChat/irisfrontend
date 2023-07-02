@@ -5,12 +5,12 @@
 </script>
 
 <div
-	class="generic-more-element my-4 flex h-fit w-fit cursor-pointer text-NORD7 hover:text-NORD6 select-none"
+	class="generic-more-element my-4 flex h-fit w-fit cursor-pointer select-none text-NORD7 hover:text-NORD6"
 	on:click={() => {
 		clicked = clicked ? false : true;
 		clicked = clicked;
 	}}
-	 on:keydown={() => {
+	on:keydown={() => {
 		clicked = clicked ? false : true;
 		clicked = clicked;
 	}}
@@ -22,9 +22,11 @@
 			<IconChevronDown stroke={1} size={20} />
 		{/if}
 	</div>
-	<div class="content text-sm font-normal">	{#if clicked}
-      LESS
-    {:else}
-        MORE
-    {/if}</div>
+	<div class="content text-sm font-normal">
+		{#if clicked}
+			LESS
+		{:else}
+			MORE
+		{/if}
+	</div>
 </div>

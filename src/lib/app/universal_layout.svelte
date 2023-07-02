@@ -9,7 +9,8 @@
 	import 'node-localstorage/register';
 	import { onMount } from 'svelte';
 
-	onMount(() => { // Redirect to login if the token expired or nonexistent
+	onMount(() => {
+		// Redirect to login if the token expired or nonexistent
 		if (localStorage.getItem('token') == null) {
 			console.log('Shit happened. Redirecting to login...');
 			window.location.href = '/auth';

@@ -8,7 +8,7 @@
 
 <!-- <Splash /> -->
 
-<GitHubCorner/>
+<GitHubCorner />
 <main class="bg-white">
 	<Hero />
 	<section class="section-one mx-16 flex flex-wrap items-center justify-center py-52 text-left">

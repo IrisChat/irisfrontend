@@ -18,9 +18,8 @@
 
 <UniversalLayout>
 	<svelte:fragment slot="gutter"><DefaultGutter /></svelte:fragment>
-	<svelte:fragment slot="sidebar"
-		>
-		<DefaultSideBar/></svelte:fragment
+	<svelte:fragment slot="sidebar">
+		<DefaultSideBar /></svelte:fragment
 	>
 	<!-- <svelte:fragment slot="interaction_pane">&nbsp;</svelte:fragment> -->
 	<!-- <svelte:fragment slot="participant_panel"

@@ -1,7 +1,7 @@
 {
-    "API_BASE": "/api/v0/",
-    "SOCKET_BASE": "/api/v0/conversations/socket",
-    "ws_host": "ws://127.0.0.1:8080",
-    "http_host": "http://127.0.0.1:8080",
-    "defaultAvatar": "https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121233262-stock-illustration-male-default-placeholder-avatar-profile.jpg"
+	"API_BASE": "/api/v0/",
+	"SOCKET_BASE": "/api/v0/conversations/socket",
+	"ws_host": "ws://127.0.0.1:8080",
+	"http_host": "http://127.0.0.1:8080",
+	"defaultAvatar": "https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121233262-stock-illustration-male-default-placeholder-avatar-profile.jpg"
 }

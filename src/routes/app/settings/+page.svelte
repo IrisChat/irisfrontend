@@ -1,3 +1,29 @@
+<!---					</div>
+				</div></svelte:fragment
+			>
+		</ContentContainer>
+	</div>
+</main>
+
+<style>
+	:global(.channel-bar) {
+		display: block;
+	}
+	:global(.content-container) {
+		display: none;
+	}
+	@media (min-width: 768px) {
+		:global(.content-container) {
+			display: block;
+		}
+	}
+</style> -->
+<script lang="ts">
+	import { onMount } from 'svelte';
+	// This should render the friends list page in the future
+	onMount(() => history.back()); // Lol
+</script>
+
 <!-- <script lang="ts">
 	const VERSION = '__VERSION__';
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
@@ -176,7 +202,7 @@
 				<div slot="settings" class="settings-container flex w-full items-center justify-center">
 					<div class="h-screen">
 						<!-- ProfileEditor -->
-			<!--			<div
+<!--			<div
 							class="ProfileEditor settings-element my-4 mr-4 flex w-full items-center justify-center rounded-md bg-secondary bg-opacity-10 py-4 pl-2 pr-4 text-left hover:bg-opacity-20"
 						>
 							<div
@@ -254,8 +280,8 @@
 							</div>
 						</div>
 						<!-- ProfileEditor ENDS -->
-						<!--- Theme selection element STARTS -->
-		<!--				<SettingsElement icon={faBrush}>
+<!--- Theme selection element STARTS -->
+<!--				<SettingsElement icon={faBrush}>
 							<svelte:fragment slot="title">Theme</svelte:fragment>
 							<svelte:fragment slot="description"
 								>Choose between dark and light theme</svelte:fragment
@@ -277,8 +303,8 @@
 							</svelte:fragment>
 						</SettingsElement>
 						<!--- Theme selection element ENDS -->
-						<!--- Chat background selection STARTS -->
-		<!--				<SettingsElement icon={faImage}>
+<!--- Chat background selection STARTS -->
+<!--				<SettingsElement icon={faImage}>
 							<svelte:fragment slot="title">Chat Background</svelte:fragment>
 							<svelte:fragment slot="description"
 								>Choose the background you want to use in chats
@@ -298,8 +324,8 @@
 							</svelte:fragment>
 						</SettingsElement>
 						<!-- Chat background selection element ENDS -->
-						<!-- Chat background overlay selection element STARTS -->
-			<!--			<SettingsElement icon={faImages}>
+<!-- Chat background overlay selection element STARTS -->
+<!--			<SettingsElement icon={faImages}>
 							<svelte:fragment slot="title">Chat Background Overlay</svelte:fragment>
 							<svelte:fragment slot="description"
 								>Enable the pattern overlay on the chat</svelte:fragment
@@ -321,8 +347,8 @@
 							</svelte:fragment>
 						</SettingsElement>
 						<!-- Chat background overlay selection element ENDS -->
-						<!-- Homescreen effects selection element STARTS -->
-		<!--				<SettingsElement icon={faSparkles}>
+<!-- Homescreen effects selection element STARTS -->
+<!--				<SettingsElement icon={faSparkles}>
 							<svelte:fragment slot="title">Homescreen Effects</svelte:fragment>
 							<svelte:fragment slot="description">Enable homescreen effects</svelte:fragment>
 							<svelte:fragment slot="action">
@@ -342,29 +368,3 @@
 							</svelte:fragment>
 						</SettingsElement>
 						<!-- Homescreen effects selection element ENDS -->
-<!---					</div>
-				</div></svelte:fragment
-			>
-		</ContentContainer>
-	</div>
-</main>
-
-<style>
-	:global(.channel-bar) {
-		display: block;
-	}
-	:global(.content-container) {
-		display: none;
-	}
-	@media (min-width: 768px) {
-		:global(.content-container) {
-			display: block;
-		}
-	}
-</style> -->
-
-<script lang="ts">
-	import { onMount } from 'svelte';
-	// This should render the friends list page in the future
-	onMount(() => history.back()); // Lol
-</script>

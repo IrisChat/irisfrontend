@@ -264,7 +264,7 @@
 				</div>
 
 				<div
-					class="chat-form relative bottom-0 flex w-full items-center border-t border-tertiary bg-main pl-2 text-left text-text outline-none focus:outline-none"
+					class="chat-form border-tertiary bg-main text-text relative bottom-0 flex w-full items-center border-t pl-2 text-left outline-none focus:outline-none"
 				>
 					<InputContainer>
 						<div
@@ -277,7 +277,7 @@
 						>
 							<input
 								bind:this={msgBox}
-								class="focus-zero z-20 h-full w-full rounded-sm bg-transparent px-2 py-2 text-xl font-semibold text-text "
+								class="focus-zero text-text z-20 h-full w-full rounded-sm bg-transparent px-2 py-2 text-xl font-semibold "
 								on:dragover={(e) => e.preventDefault}
 								on:drop={(e) => sendMsg(e, true)}
 								on:keydown={(e) => {
