@@ -5,6 +5,8 @@
 	import DefaultSideBar from '$lib/app/Defaults/DefaultSideBar.svelte';
 	import Message from '$lib/app/InteractiveModal/Message.svelte';
 	import MessageUI from '$lib/app/Message.svelte';
+	import IconMessageSearch from '@tabler/icons-svelte/dist/svelte/icons/IconMessageSearch.svelte';
+	import IconPlus from '@tabler/icons-svelte/dist/svelte/icons/IconPlus.svelte';
 
 	/*********** REFACTOR */
 	import { onMount } from 'svelte';
@@ -29,6 +31,8 @@
 	let messages: any[] = [];
 	let msgBox: HTMLInputElement;
 	let person = $page.params.slug || {};
+	let stackParticipants: boolean = false;
+	let participants: any[] = [];
 	let ws: any;
 
 	class msgFMT {
@@ -63,8 +67,12 @@
 		}
 	}
 
-	// Init
+	function revealParticipants(msg: any) {
+		participants = msg?.participants || [];
+		console.log('Current Participants', participants);
+	}
 
+	// Init
 	async function init(ws: any) {
 		ws.on('disconnect', function (s: any) {
 			console.log('Disconnected from global handler.'); // In the event that this ever happens.
@@ -90,6 +98,11 @@
 
 		ws.on('server-message', async (data: any) => {
 			try {
+				if (!stackParticipants) {
+					// This is the first message
+					revealParticipants(JSON.parse(data));
+					stackParticipants = true;
+				}
 				showMessage(JSON.parse(data));
 			} catch (error) {
 				console.warn('BAD_MESSAGE FROM SERVER. WILL WAIT TILL NEXT MESSAGE TO RETRY');
@@ -306,11 +319,52 @@
 			</div>
 		</div>
 	</svelte:fragment>
-	<!-- <svelte:fragment slot="participant_panel"
-		><div class="node-container flex h-full w-full bg-NORD2 text-center">
-			&nbsp;
+	<svelte:fragment slot="participant_panel"
+		><div class="node-container block h-full w-full bg-NORD2 text-center px-6">
+			<div
+				class="mb-4 flex h-20 w-full items-center justify-around text-2xl text-NORD7 hover:bg-NORD4"
+			>
+				<div class="hot-space" />
+				<div class="title flex items-center justify-center text-center">
+					<IconMessageSearch stroke="1.25" class="mx-2" /> PARTICIPANTS
+				</div>
+				<div class="hot-space" />
+			</div>
+			<div class="participant-container rounded-md border border-NORD4">
+				{#each participants as participantID}
+					{#await getUser(participantID)}
+						<MessageUI
+							username="Loading"
+							preview="Loading about me..."
+							status="offline"
+							icon={defaultAvatar}
+							notification={false}
+						/>
+					{:then participant}
+						<MessageUI
+							username={participant.username}
+							preview={participant.about || 'Loading about me...'}
+							status={participant.status}
+							icon={participant.avatar || defaultAvatar}
+							notification={false}
+						/>
+					{/await}
+				{/each}
+			</div>
+			<div
+			class="add-someone-else my-2 flex h-fit w-full cursor-pointer items-center rounded-md py-4 px-2 text-NORD7 hover:bg-NORD4 hover:text-NORD6 border border-NORD3"
+		>
+			<div class=" icon flex items-center justify-center ">
+				<div
+		class="add-someone my-2 cursor-pointer rounded-md border border-dotted border-NORD5 p-1 hover:bg-NORD2"
+	>
+		<IconPlus stroke={2} size="20" />
+	</div>
+			</div>
+			<div class="content mx-4 text-sm font-medium text-NORD8">ADD SOMEONE ELSE</div>
+		</div>
 		</div></svelte:fragment
-	> -->
+	>
 	<svelte:fragment slot="navigation_overlay">
 		<FloatingNavigation avatar={userData.avatar || '/pixel.png'} /></svelte:fragment
 	>
