@@ -5,6 +5,7 @@
 	export let status: string = 'offline';
 	export let notification: Boolean = true;
 	export let size: number = 40;
+        export let space: number = 52;
 </script>
 
 <!---
@@ -18,7 +19,7 @@
 <div
 	class="conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md py-4 px-2 hover:bg-NORD4"
 >
-	<div class="icon-wrap flex items-center text-left">
+	<div class="icon-wrap flex items-center text-left" style={width:' + space + 'px;'}>
 		<div class="icon_wrap relative mr-4 rounded-full">
 			<!-- CSS hack lol-->
 			<img
