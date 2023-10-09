@@ -20,7 +20,7 @@
 	class="conversation my-2 flex w-full cursor-pointer select-none items-center rounded-md py-4 px-2 hover:bg-NORD4"
 >
 	<div class="icon-wrap flex items-center text-left" style={'width:' + space + 'px;'}>
-		<div class="icon_wrap relative mr-4 rounded-full">
+		<div class="icon_wrap relative mr-4 rounded-full" style={'width:' + space + 'px;'}>
 			<!-- CSS hack lol-->
 			<img
 				class="rounded-full"
