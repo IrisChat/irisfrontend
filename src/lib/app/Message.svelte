@@ -57,7 +57,7 @@
 	</div>
 	<div class="details-block block flex-1 text-left text-base font-medium leading-4 text-NORD8">
 		{username}
-		<div class="w-56 truncate text-xs font-normal text-NORD8">
+		<div class="w-fit truncate text-xs font-normal text-NORD8">
 			{preview}
 		</div>
 	</div>
