@@ -1,5 +1,5 @@
 <script lang="ts">
-	const VERSION = '__VERSION__';
+	const VERSION = __VERSION__;
 	import Sidebar from '$lib/Sidebar/Sidebar.svelte';
 	import Channelbar from '$lib/ChannelBar/Collapsed/Channelbar.svelte';
 	import ContentContainer from '$lib/content/ContentContainer.svelte';
