@@ -30,7 +30,8 @@
 	let messageList_UI: HTMLDivElement;
 	let messages: any[] = [];
 	let msgBox: HTMLInputElement;
-	let person = $page.params.slug || {};
+	let person = $page.params.slug || {}; // Soon-to-be user object
+	const RID = person; // Our room ID
 	let stackParticipants: boolean = false;
 	let participants: any[] = [];
 	let ws: any;
@@ -182,6 +183,7 @@
 	onMount(() => {
 		// Set user
 		setUser(UID);
+		person = person.toString().replace(UID?.toString(), "");
 		// Fetch user
 		getUser(person)
 			.then(function (json) {
@@ -193,7 +195,7 @@
 				// ws = io(ws_host + `?RID=${person.ID}&guild=false`); // Get websocket and open a connection to a conversation_room.
 				ws = io(ws_host, {
 					path: SOCKET_BASE, // @ts-ignore
-					query: { RID: person.ID }
+					query: { RID }
 				}); // Get websocket and open a connection to a conversation_room.
 				// This is a conversation and not a guild so we hardcode guild as being false
 				init(ws); // Initialize client
