@@ -12,7 +12,7 @@
 </script>
 
 <div class="node-container flex h-full w-full bg-NORD2 text-center">
-	<div class="m-4 block h-full w-full">
+	<div class="m-4 block h-full overflow-y-auto w-full">
 		<div class="header-wrapper mb-8 flex h-fit w-full">
 			<div
 				class="searchbar mr-1 flex h-fit w-full flex-1 items-center justify-center rounded-md border border-NORD7 bg-NORD3 px-2 py-2 text-base font-medium text-NORD8"
