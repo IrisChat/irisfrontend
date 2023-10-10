@@ -31,7 +31,7 @@
 			{/if}
 			{#if sidebar}
 				<div
-					class="sidebar lg:h-full"
+					class="sidebar lg:min-w-1/4 lg:h-full"
 				>
 					<slot name="sidebar">SIDEBAR</slot>
 				</div>
